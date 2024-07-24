@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.pravera.flutter_activity_recognition-merged_res-12:/layout/custom_dialog.xml",
+        "source": "com.pravera.flutter_activity_recognition-core-1.6.0-5:/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "com.pravera.flutter_activity_recognition-merged_res-12:/layout/notification_template_part_chronometer.xml",
+        "source": "com.pravera.flutter_activity_recognition-core-1.6.0-5:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "com.pravera.flutter_activity_recognition-merged_res-12:/layout/notification_template_part_time.xml",
+        "source": "com.pravera.flutter_activity_recognition-core-1.6.0-5:/layout/notification_template_part_time.xml"
+    }
+]

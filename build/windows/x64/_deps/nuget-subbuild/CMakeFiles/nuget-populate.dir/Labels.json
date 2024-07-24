@@ -1,0 +1,49 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/nuget-populate"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/8eeb3c9fd1ecb889778e58de7455ba93/nuget-populate.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/c1eaefa92bd58621d6b79a97fd814617/nuget-populate-complete.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-build.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-configure.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-copyfile.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-download.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-install.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-mkdir.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-patch.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-test.rule"
+		},
+		{
+			"file" : "D:/Projects/Gym App Ezeeclub/EzeeClub/build/windows/x64/_deps/nuget-subbuild/CMakeFiles/cca57bb3d011bae2c1827e67dfdcd261/nuget-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"nuget-populate"
+		],
+		"name" : "nuget-populate"
+	}
+}

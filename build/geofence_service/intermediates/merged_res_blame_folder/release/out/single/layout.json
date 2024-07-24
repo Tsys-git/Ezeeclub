@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.pravera.geofence_service-merged_res-14:/layout/notification_template_part_chronometer.xml",
+        "source": "com.pravera.geofence_service-core-1.6.0-5:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "com.pravera.geofence_service-merged_res-14:/layout/notification_template_part_time.xml",
+        "source": "com.pravera.geofence_service-core-1.6.0-5:/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "com.pravera.geofence_service-merged_res-14:/layout/custom_dialog.xml",
+        "source": "com.pravera.geofence_service-core-1.6.0-5:/layout/custom_dialog.xml"
+    }
+]

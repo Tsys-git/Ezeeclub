@@ -1,0 +1,14 @@
+com.pravera.flutter_activity_recognition-jetified-window-1.0.0-beta04-0 C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\res
+com.pravera.flutter_activity_recognition-jetified-annotation-experimental-1.1.0-1 C:\Users\Delux\.gradle\caches\transforms-3\3f24deeb77977edbb47db48461b9f6aa\transformed\jetified-annotation-experimental-1.1.0\res
+com.pravera.flutter_activity_recognition-jetified-window-java-1.0.0-beta04-2 C:\Users\Delux\.gradle\caches\transforms-3\3fe57bd5d3c2ce0f0ac71f2b847a1090\transformed\jetified-window-java-1.0.0-beta04\res
+com.pravera.flutter_activity_recognition-jetified-play-services-basement-18.1.0-3 C:\Users\Delux\.gradle\caches\transforms-3\87507e19e7d2614fd40df1da2f62e7c8\transformed\jetified-play-services-basement-18.1.0\res
+com.pravera.flutter_activity_recognition-jetified-play-services-base-18.1.0-4 C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\res
+com.pravera.flutter_activity_recognition-core-1.6.0-5 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
+com.pravera.flutter_activity_recognition-main-6 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_activity_recognition-3.1.0\android\src\main\res
+com.pravera.flutter_activity_recognition-release-7 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_activity_recognition-3.1.0\android\src\release\res
+com.pravera.flutter_activity_recognition-pngs-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\generated\res\pngs\release
+com.pravera.flutter_activity_recognition-resValues-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\generated\res\resValues\release
+com.pravera.flutter_activity_recognition-rs-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\generated\res\rs\release
+com.pravera.flutter_activity_recognition-mergeReleaseResources-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.pravera.flutter_activity_recognition-mergeReleaseResources-12 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.pravera.flutter_activity_recognition-merged_res-13 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_res\release

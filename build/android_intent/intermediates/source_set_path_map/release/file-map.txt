@@ -1,0 +1,12 @@
+io.flutter.plugins.androidintent.android_intent-jetified-window-1.0.0-beta04-0 C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\res
+io.flutter.plugins.androidintent.android_intent-jetified-annotation-experimental-1.1.0-1 C:\Users\Delux\.gradle\caches\transforms-3\3f24deeb77977edbb47db48461b9f6aa\transformed\jetified-annotation-experimental-1.1.0\res
+io.flutter.plugins.androidintent.android_intent-jetified-window-java-1.0.0-beta04-2 C:\Users\Delux\.gradle\caches\transforms-3\3fe57bd5d3c2ce0f0ac71f2b847a1090\transformed\jetified-window-java-1.0.0-beta04\res
+io.flutter.plugins.androidintent.android_intent-core-1.6.0-3 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
+io.flutter.plugins.androidintent.android_intent-main-4 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\android_intent-2.0.2\android\src\main\res
+io.flutter.plugins.androidintent.android_intent-release-5 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\android_intent-2.0.2\android\src\release\res
+io.flutter.plugins.androidintent.android_intent-pngs-6 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\generated\res\pngs\release
+io.flutter.plugins.androidintent.android_intent-resValues-7 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\generated\res\resValues\release
+io.flutter.plugins.androidintent.android_intent-rs-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\generated\res\rs\release
+io.flutter.plugins.androidintent.android_intent-mergeReleaseResources-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.flutter.plugins.androidintent.android_intent-mergeReleaseResources-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.flutter.plugins.androidintent.android_intent-merged_res-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\intermediates\merged_res\release

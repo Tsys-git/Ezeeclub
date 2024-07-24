@@ -1,0 +1,108 @@
+
+#FF5722
+1.SaveAttendance 
+            - param.put("MemberNo", session.getAuthority());
+            - param.put("BranchNo", session.getBr());
+
+2.GetAttendanceRewards
+            - param.put("MemberNo", session.getAuthority());
+            - param.put("BranchNo", session.getBr());
+
+ 3.GetCalendarDetails
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+            param.put("Month", mMonth);
+            param.put("Year", mYear);
+
+4.ChangePassword
+            param.put("MemberNo",session.getAuthority());
+            param.put("BranchNo", session.getBr());
+            param.put("NewPassword", pass);
+ 
+5.SaveMessage(chatting)
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+            param.put("EmployeeNo", "1");
+            param.put("Message", msgnew);
+            param.put("Date_Time", formattedDate);
+
+6.GetPlanDetails (done)
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+     
+7.GetHealthDetails (no response : Empty)
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+     
+8.GetMeasureDetails(no response : empty)
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+     
+9.GetNotification (null)
+            param.put("MemberNo", sessionManager.getAuthority());
+            param.put("BranchNo", sessionManager.getBr());
+
+10. UserLogin(Done)
+            user name and password
+
+14/06/204
+
+11 . plan details information in brief as per plan name .
+12. upcoming sessions or activities.
+
+13. on SocketException (if user is not connected to the internet) 
+    {
+      showSnackBar(
+          context,
+          'No Internet connection . Ensure that your internet is on..',
+          Colors.red);
+      throw Exception('No Internet connection');
+    }
+
+
+
+    Widget _showBranchData(String branchName)
+ {
+    Map<String, double> dataMap = {
+    "Sale Amount": _conversionDataByBranch[branchName]['SalesAmount'],
+    "Sale Amount": _conversionDataByBranch[branchName]['BalancedAmount'], ,
+   
+  };
+    print(_conversionDataByBranch[branchName]);
+    return Container(
+      child:PieChart(dataMap: dataMap) 
+    );
+  }
+
+
+  17-06-2024
+
+      GetWorkOut
+        - param.put("MemberNo", sessionManager.getAuthority());
+        - param.put("BranchNo", sessionManager.getBr());
+      
+      GetDiet
+        - param.put("MemberNo", sessionManager.getAuthority());
+        - param.put("BranchNo", sessionManager.getBr());
+
+      GetPTSessions
+        - param.put("MemberNo", sessionManager.getAuthority());
+        - param.put("BranchNo", sessionManager.getBr());
+
+      GetCalendarDetails
+        'MemberNo': memberNo,
+        'BranchNo': branchNo,
+        "Month": "4",
+        "Year": "2023",
+        
+      
+<xs:element name="GetCalendarDetails">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="MemberNo" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BranchNo" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Month" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Year" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>

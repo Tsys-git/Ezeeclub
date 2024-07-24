@@ -1,0 +1,256 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.ezeeclub"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="34" />
+9-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" /> <!-- for intenet -->
+11-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:3:17-78
+11-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:3:34-76
+12    <uses-permission android:name="android.permission.CAMERA" /> <!-- for scan the qr code -->
+12-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:4:21-81
+12-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:4:38-78
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- for location -->
+13-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:5:17-93
+13-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:5:34-90
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- for attendace via wifi connection -->
+14-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:6:17-88
+14-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:6:34-85
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- for attendace via wifi connection -->
+15-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:7:17-91
+15-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:7:34-88
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- for attendace via geofencing -->
+16-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:8:17-91
+16-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:8:34-88
+17    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- for attendace via geofencing -->
+17-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:9:17-97
+17-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:9:34-94
+18    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+18-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:10:17-90
+18-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:10:34-88
+19
+20    <!--
+21         Required to query activities that can process text, see:
+22         https://developer.android.com/training/package-visibility and
+23         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+24
+25         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+26    -->
+27    <queries>
+27-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:53:5-58:15
+28        <intent>
+28-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:54:9-57:18
+29            <action android:name="android.intent.action.PROCESS_TEXT" />
+29-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:55:13-72
+29-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:55:21-70
+30
+31            <data android:mimeType="text/plain" />
+31-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:56:13-50
+31-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:56:19-48
+32        </intent>
+33    </queries>
+34    <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+35    <uses-feature
+35-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
+36        android:name="android.hardware.camera"
+36-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
+37        android:required="false" />
+37-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
+38    <uses-feature
+38-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+39        android:name="android.hardware.camera.front"
+39-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+40        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+40-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+41    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+42    <uses-feature
+42-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
+43        android:name="android.hardware.camera.autofocus"
+43-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
+44        android:required="false" />
+44-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
+45    <uses-feature
+45-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+46        android:name="android.hardware.camera.flash"
+46-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+47        android:required="false" />
+47-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+48    <uses-feature
+48-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+49        android:name="android.hardware.screen.landscape"
+49-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+50        android:required="false" />
+50-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+51    <uses-feature
+51-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+52        android:name="android.hardware.wifi"
+52-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+53        android:required="false" /> <!-- for step count and attendace via location -->
+53-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+54    <application
+55        android:name="android.app.Application"
+55-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:15:9-42
+56        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+56-->[androidx.core:core:1.7.0] C:\Users\Delux\.gradle\caches\transforms-3\008a3dd6ded4806b9a1a48d13a4d3670\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+57        android:icon="@mipmap/ic_launcher"
+57-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:16:9-43
+58        android:label="ezeeclub" >
+58-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:14:9-33
+59        <activity
+59-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:17:9-39:20
+60            android:name="com.example.ezeeclub.MainActivity"
+60-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:19:13-41
+61            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+61-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:24:13-163
+62            android:exported="true"
+62-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:20:13-36
+63            android:hardwareAccelerated="true"
+63-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:25:13-47
+64            android:launchMode="singleTop"
+64-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:21:13-43
+65            android:taskAffinity=""
+65-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:22:13-36
+66            android:theme="@style/LaunchTheme"
+66-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:23:13-47
+67            android:windowSoftInputMode="adjustResize" >
+67-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:26:13-55
+68
+69            <!--
+70                 Specifies an Android theme to apply to this Activity as soon as
+71                 the Android process has started. This theme is visible to the user
+72                 while the Flutter UI initializes. After that, this theme continues
+73                 to determine the Window background behind the Flutter UI.
+74            -->
+75            <meta-data
+75-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:31:13-34:17
+76                android:name="io.flutter.embedding.android.NormalTheme"
+76-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:32:15-70
+77                android:resource="@style/NormalTheme" />
+77-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:33:15-52
+78
+79            <intent-filter>
+79-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:35:13-38:29
+80                <action android:name="android.intent.action.MAIN" />
+80-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:36:17-68
+80-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:36:25-66
+81
+82                <category android:name="android.intent.category.LAUNCHER" />
+82-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:37:17-76
+82-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:37:27-74
+83            </intent-filter>
+84        </activity>
+85        <!--
+86             Don't delete the meta-data below.
+87             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+88        -->
+89        <meta-data
+89-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:42:9-44:33
+90            android:name="flutterEmbedding"
+90-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:43:13-44
+91            android:value="2" />
+91-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:44:13-30
+92
+93        <service
+93-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:13:9-17:72
+94            android:name="com.pravera.fl_location.service.LocationServicesStatusIntentService"
+94-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-95
+95            android:enabled="true"
+95-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-35
+96            android:exported="false"
+96-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-37
+97            android:permission="android.permission.BIND_JOB_SERVICE" />
+97-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-69
+98
+99        <receiver
+99-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:11:9-15:47
+100            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentReceiver"
+100-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-110
+101            android:enabled="true"
+101-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-35
+102            android:exported="true" />
+102-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-36
+103
+104        <service
+104-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:17:9-21:72
+105            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentService"
+105-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:18:13-109
+106            android:enabled="true"
+106-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-35
+107            android:exported="false"
+107-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-37
+108            android:permission="android.permission.BIND_JOB_SERVICE" />
+108-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-69
+109
+110        <uses-library
+110-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+111            android:name="androidx.window.extensions"
+111-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+112            android:required="false" />
+112-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+113        <uses-library
+113-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+114            android:name="androidx.window.sidecar"
+114-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+115            android:required="false" />
+115-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+116
+117        <activity
+117-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+118            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+118-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+119            android:clearTaskOnLaunch="true"
+119-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+120            android:screenOrientation="sensorLandscape"
+120-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+121            android:stateNotNeeded="true"
+121-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+122            android:theme="@style/zxing_CaptureTheme"
+122-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+123            android:windowSoftInputMode="stateAlwaysHidden" />
+123-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+124        <activity
+124-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+125            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+125-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+126            android:exported="false"
+126-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+127            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+127-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+128
+129        <meta-data
+129-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\87507e19e7d2614fd40df1da2f62e7c8\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+130            android:name="com.google.android.gms.version"
+130-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\87507e19e7d2614fd40df1da2f62e7c8\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+131            android:value="@integer/google_play_services_version" />
+131-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Delux\.gradle\caches\transforms-3\87507e19e7d2614fd40df1da2f62e7c8\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+132
+133        <provider
+133-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+134            android:name="androidx.startup.InitializationProvider"
+134-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+135            android:authorities="com.example.ezeeclub.androidx-startup"
+135-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+136            android:exported="false" >
+136-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+137            <meta-data
+137-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+138                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+138-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+139                android:value="androidx.startup" />
+139-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+140            <meta-data
+140-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Delux\.gradle\caches\transforms-3\de8967fdfc3da41303a33a2eb1041839\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+141                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+141-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Delux\.gradle\caches\transforms-3\de8967fdfc3da41303a33a2eb1041839\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+142                android:value="androidx.startup" />
+142-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Delux\.gradle\caches\transforms-3\de8967fdfc3da41303a33a2eb1041839\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+143        </provider>
+144    </application>
+145
+146</manifest>

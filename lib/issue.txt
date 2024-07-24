@@ -1,0 +1,3 @@
+memeberNo (while login ) and memberBrNo(return in the member search by branch no) are not same thats why data is not fetched properly.
+
+create a new api endpoint for fetch the member details by memeberNo and branch member Branch No.

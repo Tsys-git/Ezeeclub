@@ -1,0 +1,29 @@
+25/06/2024
+
+1.what to do today (yesterday was ..... day) listtile
+2.steps and calories counter in row Widget
+3.track your progress and diet plan in row inside the card 
+4.should you drinin enough water  > know the benefits > click on the button
+5.gym quetos daily updatin chaning (gpt or gemini api implementation)
+6.upcoming events
+7.what new in the gym 
+
+26/06/2024
+
+8.feedback 
+9. gym playlist 
+10.membership benefits
+
+
+
+
+pt records and workout. done 
+
+
+track your progress > measurrements
+video and 
+
+flutter code for that diff widgetds 
+combined code 
+
+gym illustrator online free

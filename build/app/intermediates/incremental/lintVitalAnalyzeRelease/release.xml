@@ -1,0 +1,40 @@
+<variant
+    name="release"
+    package="com.example.ezeeclub"
+    minSdkVersion="21"
+    targetSdkVersion="34"
+    shrinking="true"
+    mergedManifest="D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\merged_manifest\release\AndroidManifest.xml"
+    proguardFiles="build\intermediates\default_proguard_files\global\proguard-android.txt-7.3.0;C:\Users\Delux\dev\flutter\packages\flutter_tools\gradle\flutter_proguard_rules.pro;proguard-rules.pro"
+    partialResultsDir="D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\lint_vital_partial_results\release\out"
+    desugaredMethodsFiles="C:\Users\Delux\.gradle\caches\transforms-3\9d620b341c5ab23aa5c6f2e3de1dee11\transformed\D8BackportedDesugaredMethods.txt">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifest="src\main\AndroidManifest.xml"
+        javaDirectories="src\main\java;src\main\kotlin"
+        resDirectories="src\main\res"
+        assetsDirectories="src\main\assets"/>
+    <sourceProvider
+        manifest="src\release\AndroidManifest.xml"
+        javaDirectories="src\release\java;src\release\kotlin"
+        resDirectories="src\release\res"
+        assetsDirectories="src\release\assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <manifestPlaceholders>
+    <placeholder
+        name="applicationName"
+        value="android.app.Application" />
+  </manifestPlaceholders>
+  <mainArtifact
+      classOutputs="D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\javac\release\classes;D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\tmp\kotlin-classes\release;D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\kotlinToolingMetadata;build\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\R.jar"
+      applicationId="com.example.ezeeclub"
+      generatedSourceFolders="D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\generated\ap_generated_sources\release\out;D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\generated\aidl_source_output_dir\release\out;D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\generated\source\buildConfig\release;D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\generated\renderscript_source_output_dir\release\out"
+      generatedResourceFolders="build\generated\res\rs\release;build\generated\res\resValues\release">
+  </mainArtifact>
+</variant>

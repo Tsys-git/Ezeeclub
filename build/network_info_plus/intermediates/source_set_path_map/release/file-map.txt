@@ -1,0 +1,12 @@
+dev.fluttercommunity.plus.network_info.network_info_plus-jetified-window-1.0.0-beta04-0 C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\res
+dev.fluttercommunity.plus.network_info.network_info_plus-jetified-annotation-experimental-1.1.0-1 C:\Users\Delux\.gradle\caches\transforms-3\3f24deeb77977edbb47db48461b9f6aa\transformed\jetified-annotation-experimental-1.1.0\res
+dev.fluttercommunity.plus.network_info.network_info_plus-jetified-window-java-1.0.0-beta04-2 C:\Users\Delux\.gradle\caches\transforms-3\3fe57bd5d3c2ce0f0ac71f2b847a1090\transformed\jetified-window-java-1.0.0-beta04\res
+dev.fluttercommunity.plus.network_info.network_info_plus-core-1.6.0-3 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
+dev.fluttercommunity.plus.network_info.network_info_plus-main-4 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\network_info_plus-5.0.3\android\src\main\res
+dev.fluttercommunity.plus.network_info.network_info_plus-release-5 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\network_info_plus-5.0.3\android\src\release\res
+dev.fluttercommunity.plus.network_info.network_info_plus-pngs-6 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\pngs\release
+dev.fluttercommunity.plus.network_info.network_info_plus-resValues-7 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\resValues\release
+dev.fluttercommunity.plus.network_info.network_info_plus-rs-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\rs\release
+dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\merged.dir
+dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+dev.fluttercommunity.plus.network_info.network_info_plus-merged_res-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\merged_res\release

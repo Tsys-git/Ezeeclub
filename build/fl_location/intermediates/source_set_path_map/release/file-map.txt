@@ -1,0 +1,14 @@
+com.pravera.fl_location-jetified-window-1.0.0-beta04-0 C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\res
+com.pravera.fl_location-jetified-annotation-experimental-1.1.0-1 C:\Users\Delux\.gradle\caches\transforms-3\3f24deeb77977edbb47db48461b9f6aa\transformed\jetified-annotation-experimental-1.1.0\res
+com.pravera.fl_location-jetified-window-java-1.0.0-beta04-2 C:\Users\Delux\.gradle\caches\transforms-3\3fe57bd5d3c2ce0f0ac71f2b847a1090\transformed\jetified-window-java-1.0.0-beta04\res
+com.pravera.fl_location-jetified-play-services-basement-18.1.0-3 C:\Users\Delux\.gradle\caches\transforms-3\87507e19e7d2614fd40df1da2f62e7c8\transformed\jetified-play-services-basement-18.1.0\res
+com.pravera.fl_location-jetified-play-services-base-18.1.0-4 C:\Users\Delux\.gradle\caches\transforms-3\8ff4ae646293c0018ce3963780f95363\transformed\jetified-play-services-base-18.1.0\res
+com.pravera.fl_location-core-1.6.0-5 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
+com.pravera.fl_location-main-6 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\fl_location-3.1.0\android\src\main\res
+com.pravera.fl_location-release-7 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\fl_location-3.1.0\android\src\release\res
+com.pravera.fl_location-pngs-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\generated\res\pngs\release
+com.pravera.fl_location-resValues-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\generated\res\resValues\release
+com.pravera.fl_location-rs-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\generated\res\rs\release
+com.pravera.fl_location-mergeReleaseResources-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.pravera.fl_location-mergeReleaseResources-12 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.pravera.fl_location-merged_res-13 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_res\release
