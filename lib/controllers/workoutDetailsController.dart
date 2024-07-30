@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:ezeeclub/consts/appConsts.dart';
 import 'package:ezeeclub/models/workout.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WorkoutDetailsController {
+  UrlSetting urlSetting = UrlSetting();
   Future<WorkoutDetails> getWorkoutDetails(
       String memberNo, String branchNo) async {
-    final uri = Uri.parse("${AppConsts.url}/GetWorkOut");
+    await urlSetting.initialize();
+    Uri? uri = urlSetting.getWorkout;
 
     final Map<String, String> headers = {"Content-Type": "Application/json"};
 
@@ -17,7 +21,7 @@ class WorkoutDetailsController {
     };
     try {
       final http.Response response = await http.post(
-        uri,
+        uri!,
         headers: headers,
         body: json.encode(data),
       );

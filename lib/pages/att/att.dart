@@ -1,22 +1,21 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../permissions/permissions.dart';
 
-class AttendaceScreen extends StatefulWidget {
-  const AttendaceScreen({Key? key}) : super(key: key);
+class AttendanceScreen extends StatefulWidget {
+  const AttendanceScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _AttendaceScreenState();
+  State<StatefulWidget> createState() => _AttendanceScreenState();
 }
 
-class _AttendaceScreenState extends State<AttendaceScreen> {
+class _AttendanceScreenState extends State<AttendanceScreen> {
   final _locationStreamController = StreamController<Location>();
   final PermissionService permissionService = PermissionService();
   final _activityStreamController = StreamController<Activity>();
@@ -25,12 +24,7 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
   bool inside = false;
 
   final DateTime now = DateTime.now();
-  int presentDaysCount = 0;
-  Map<String, bool> calendar = {
-    "20/07/2024": true,
-    "21/07/2024": true,
-    "22/07/2024": false,
-  };
+  Map<String, bool> calendar = {};
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -41,13 +35,14 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
   // Create a [Geofence] list.
   final List<Geofence> _geofenceList = [
     Geofence(
-        id: 'TSYSINFO',
-        latitude: 18.481501526569087,
-        longitude: 73.82656168704091,
-        radius: [
-          GeofenceRadius(id: 'radius_10m', length: 100),
-        ],
-        data: "gym location"),
+      id: 'TSYSINFO',
+      latitude: 18.481501526569087,
+      longitude: 73.82656168704091,
+      radius: [
+        GeofenceRadius(id: 'radius_10m', length: 10),
+      ],
+      data: "gym location",
+    ),
     Geofence(
       id: 'Home Dahitane',
       latitude: 18.5455092031544,
@@ -64,6 +59,7 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
   void initState() {
     super.initState();
     checkAndRequestPermissions();
+    _loadAttendanceData();
   }
 
   void _onLocationChanged(Location location) {
@@ -136,6 +132,37 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
     }
   }
 
+  Future<void> _loadAttendanceData() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? savedAttendance = prefs.getStringList('attendance');
+    setState(() {
+      calendar = (savedAttendance ?? [])
+          .asMap()
+          .map((index, value) => MapEntry(value, true));
+      print(calendar);
+      // Add today's date if not already present
+      String todayString = DateFormat('dd/MM/yyyy').format(DateTime.now());
+      if (!calendar.containsKey(todayString)) {
+        calendar[todayString] = false;
+      }
+    });
+  }
+
+  Future<void> _saveAttendanceData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Ensure today's date is included in the attendance data
+    String todayString = DateFormat('dd/MM/yyyy').format(DateTime.now());
+    if (!calendar.containsKey(todayString)) {
+      calendar[todayString] = false;
+    }
+
+    await prefs.setStringList(
+      'attendance',
+      calendar.keys.toList(),
+    );
+  }
+
   Widget _buildCustomDialog(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -144,7 +171,7 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           child: Container(
-            height: width * 1,
+            height: width * 1.2,
             padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +186,7 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
                   'Enable Location',
                   style: TextStyle(
                       fontSize: width * 0.1, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
@@ -314,15 +341,17 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
                         defaultBuilder: (context, day, focusedDay) {
                           final dayString =
                               DateFormat('dd/MM/yyyy').format(day);
+                          final today =
+                              DateFormat('dd/MM/yyyy').format(focusedDay);
+                              
                           bool? isPresent = calendar[dayString];
                           Color backgroundColor;
-
                           if (isPresent == true) {
                             backgroundColor = Colors.green;
-                          } else if (isPresent == false) {
-                            backgroundColor = Colors.red;
+                          } else if (isPresent == false || today != dayString) {
+                            backgroundColor = Colors.blue;
                           } else {
-                            backgroundColor = Colors.transparent;
+                            backgroundColor = Colors.red;
                           }
 
                           return Container(
@@ -364,6 +393,7 @@ class _AttendaceScreenState extends State<AttendaceScreen> {
                                       .format(DateTime.now());
                                   calendar[todayString] = true;
                                 });
+                                _saveAttendanceData();
                                 print(calendar);
                                 showDialog(
                                   context: context,

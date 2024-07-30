@@ -8,6 +8,7 @@ class StepController extends GetxController {
   RxInt stepCount = 0.obs;
   late StreamSubscription<StepCount> _stepCountSubscription;
   late Pedometer _pedometer;
+  int _previousStepCount = 0;
 
   @override
   void onInit() {
@@ -18,18 +19,23 @@ class StepController extends GetxController {
 
   void _startPedometer() {
     _pedometer = Pedometer();
-    _stepCountSubscription =
-        Pedometer.stepCountStream.listen((StepCount event) {
-      stepCount.value = event.steps;
+    _stepCountSubscription = Pedometer.stepCountStream.listen((StepCount event) {
+      // Calculate steps difference
+      int steps = event.steps - _previousStepCount;
+      _previousStepCount = event.steps;
+      if (steps > 0) {
+        stepCount.value += steps;
+      }
     });
   }
 
   void _resetStepsAtMidnight() {
     Timer.periodic(Duration(minutes: 60), (timer) async {
       DateTime now = DateTime.now();
-      if (now.hour == 3 && now.minute > 0 && now.second > 0) {
+      if (now.hour == 0 && now.minute == 0 && now.second == 0) {
         await _saveDailyStepCount();
         stepCount.value = 0;
+        _previousStepCount = 0; // Reset previous step count
       }
     });
   }
@@ -47,12 +53,10 @@ class StepController extends GetxController {
           day = day.add(Duration(days: 1))) {
         String key = 'stepCount_${day.year}_${day.month}_${day.day}';
         int steps = prefs.getInt(key) ?? 0;
-        weeklyData
-            .add(StepCountData(date: day.toIso8601String(), steps: steps));
+        weeklyData.add(StepCountData(date: day.toIso8601String(), steps: steps));
       }
     } catch (e) {
       print('Error fetching weekly step counts: $e');
-      // Handle error as per your application's requirements
     }
 
     return weeklyData;
@@ -67,7 +71,6 @@ class StepController extends GetxController {
       await prefs.setInt(key, stepCount.value);
     } catch (e) {
       print('Error saving daily step count: $e');
-      // Handle error as per your application's requirements
     }
   }
 

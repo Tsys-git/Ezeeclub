@@ -1,17 +1,26 @@
 import 'dart:convert';
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:ezeeclub/models/dietplanmodel.dart';
 import 'package:http/http.dart' as http;
 import 'package:ezeeclub/consts/appConsts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dietplancontroller {
+  UrlSetting urlSetting = UrlSetting();
   Future<Dietplan?> getdietplan(String memberNo, String branchNo) async {
-    Uri uri = Uri.parse("${AppConsts.url}/GetDiet");
+    await urlSetting.initialize();
+
+    Uri? uri = urlSetting.getDiet;
     final Map<String, String> headers = {"Content-Type": "application/json"};
-    final Map<String, String> data = {"MemberNo": memberNo, "BranchNo": branchNo};
+    final Map<String, String> data = {
+      "MemberNo": memberNo,
+      "BranchNo": branchNo
+    };
 
     try {
-      final http.Response response = await http.post(uri, headers: headers, body: json.encode(data));
-      
+      final http.Response response =
+          await http.post(uri!, headers: headers, body: json.encode(data));
+
       if (response.statusCode == 200) {
         // If the server returns a successful response
         final jsonResponse = json.decode(response.body);

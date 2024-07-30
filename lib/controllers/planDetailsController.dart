@@ -1,22 +1,26 @@
 import 'dart:convert';
 
-import 'package:ezeeclub/consts/appConsts.dart';
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:http/http.dart' as http;
-import 'package:ezeeclub/models/Plan.dart'; // Import your Plan model
+import 'package:ezeeclub/models/Plan.dart';
 
 class Plandetailscontroller {
+  UrlSetting urlSetting = UrlSetting();
   Future<Plan> getPlanDetails(String memberNo, String branchNo) async {
-    final Uri uri = Uri.parse("${AppConsts.url}/GetPlanDetails");
-    final Map<String, String> headers = {
-      'Content-Type': 'application/json',
-    };
-    final Map<String, dynamic> data = {
-      "MemberNo": memberNo,
-      "BranchNo": branchNo,
-    };
+    await urlSetting.initialize();
+
     try {
+      Uri? uri = urlSetting.getPlanDetails;
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+      final Map<String, dynamic> data = {
+        "MemberNo": memberNo,
+        "BranchNo": branchNo,
+      };
+
       final http.Response response =
-          await http.post(uri, headers: headers, body: json.encode(data));
+          await http.post(uri!, headers: headers, body: json.encode(data));
       //print(response.body);
 
       if (response.statusCode == 200) {

@@ -3,8 +3,6 @@ import 'package:ezeeclub/controllers/attendanceController.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 // Screen widget for managing gym routines
 class GymRoutineScreen extends StatefulWidget {
   const GymRoutineScreen({super.key});
@@ -22,7 +20,6 @@ class _GymRoutineScreenState extends State<GymRoutineScreen> {
   void initState() {
     super.initState();
     _initSharedPreferences();
-    at.fetchAttendanceData();
   }
 
   // Initialize SharedPreferences instance and load saved routines

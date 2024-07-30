@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:http/http.dart' as http;
 
 class NotificationController {
+  UrlSetting urlSetting = UrlSetting();
   Future<void> fetchNotification(memberNo, branchNo) async {
-    final Uri url = Uri.parse(
-        'http://oneabovefit.ezeeclub.net/MobileAppService.svc/getNotification');
+    final Uri? url = urlSetting.getNotification;
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -16,7 +17,7 @@ class NotificationController {
 
     try {
       final http.Response response = await http.post(
-        url,
+        url!,
         headers: headers,
         body: json.encode(data),
       );

@@ -1,26 +1,64 @@
+import 'dart:convert';
 import 'dart:io';
-import 'package:ezeeclub/pages/Auth/forgotPass.dart';
+
+import 'package:ezeeclub/models/User.dart';
+import 'package:ezeeclub/pages/HomeScreenMember.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../../models/User.dart';
-import '../HomeScreenMember.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginController extends GetxController {
+import '../../consts/userLogin.dart';
+import '../splashsreen.dart';
+
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  var isLoading = false.obs;
-  var loginScreenUserName = "".obs;
-  var userid = "".obs;
-  var userpass = "".obs;
+  bool isLoading = false;
+  bool isObscureText = true;
+  bool isLoggedIn = false;
+
+  void togglePasswordVisibility() {
+    setState(() {
+      isObscureText = !isObscureText;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(); // Check login status when screen initializes
+  }
+
+  Future<void> checkLoginStatus() async {
+    await UserLogin().restoreLoginState(); // Ensure login state is restored
+    setState(() {
+      isLoggedIn = UserLogin().isLoggedIn; // Update isLoggedIn state
+    });
+
+    if (isLoggedIn) {
+      // If logged in, navigate to Dashboard
+    }
+  }
+
   void login(BuildContext context) async {
-    isLoading(true);
+    setState(() {
+      isLoading = true;
+    });
+
     final String username = usernameController.text;
     final String password = passwordController.text;
+    String? storedUrl;
 
-    final Uri url = Uri.parse(
-        'http://oneabovefit.ezeeclub.net/MobileAppService.svc/UserLogin');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    storedUrl = prefs.getString('app_url');
+
+    final Uri url = Uri.parse('http://${storedUrl}/UserLogin');
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -28,7 +66,7 @@ class LoginController extends GetxController {
       'UserName': username,
       'Password': password,
     };
-    print(username);
+
     try {
       final http.Response response = await http.post(
         url,
@@ -37,10 +75,9 @@ class LoginController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonResponse = json.decode(response.body);
+        final dynamic jsonResponse = json.decode(response.body);
         print(jsonResponse);
-
-        if (jsonResponse.isNotEmpty) {
+        if (jsonResponse != null) {
           final Map<String, dynamic> userData = jsonResponse[0];
           final String fullName = userData['MemberName'] ?? 'Not Available';
           final String email = userData['Email'] ?? 'Not Available';
@@ -51,9 +88,6 @@ class LoginController extends GetxController {
           final String memStatus =
               userData['Membershipstatus'] ?? 'Not Available';
           final String branchNo = userData['BranchNo'] ?? '1';
-          loginScreenUserName(fullName);
-          userid(username);
-          userpass(password);
           print(branchNo);
 
           print(fullName);
@@ -67,42 +101,43 @@ class LoginController extends GetxController {
             mem_status: memStatus,
             BranchNo: branchNo,
           );
-
-          // if (fullName != 'Not Available') {
-          //   if (username.startsWith('E')) {
-          //     Get.offAll(() => DashboardScreen());
-          //     showSnackBar(context, 'Employee Login successful', Colors.green);
-          //   } else {
-          //     Get.off(() => HomeScreenMember(usermodel: userModel));
-          //     showSnackBar(context, 'Member Login successful', Colors.green);
-          //   }
-          // } else {
-          //   showSnackBar(context,
-          //       'Incorrect Username or Password\nPlease check it.', Colors.red);
-          // }
-          if (fullName != 'Not Available') {
+          if (fullName != "Not Available") {
             Get.off(() => HomeScreenMember(usermodel: userModel));
             showSnackBar(context, 'Member Login successful', Colors.green);
-          } else {
-            showSnackBar(context, 'Member Login Unsuccessful', Colors.red);
           }
+        } else {
+          showSnackBar(
+            context,
+            'Login failed. Invalid credentials.',
+            Colors.red,
+          );
         }
       } else {
-        showSnackBar(context, 'Login failed', Colors.red);
+        showSnackBar(
+          context,
+          'Login failed. Status code: ${response.statusCode}',
+          Colors.red,
+        );
         print('Login failed. Status code: ${response.statusCode}');
       }
     } on SocketException {
       showSnackBar(
-          context,
-          'No Internet connection . Ensure that your internet is on..',
-          Colors.red);
-
+        context,
+        'No Internet connection. Ensure that your internet is on.\nOr check the url setup is done properly ',
+        Colors.red,
+      );
       throw Exception('No Internet connection');
     } catch (error) {
-      showSnackBar(context, 'Error during login: $error', Colors.red);
+      showSnackBar(
+        context,
+        'Error during login: $error',
+        Colors.red,
+      );
       print('Error during login: $error');
     } finally {
-      isLoading(false);
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -115,62 +150,73 @@ class LoginController extends GetxController {
       ),
     );
   }
-}
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final LoginController _controller = Get.put(LoginController());
-  bool isObscureText = true; // To toggle password visibility
-  void togglePasswordVisibility() {
-    if (isObscureText) {
-      print("Password vissibility 1.....");
-    } else {
-      print("Password vissibility 0.....");
-    }
-
-    setState(() {
-      isObscureText = !isObscureText;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    //final double height = MediaQuery.of(context).size.height;
+    final double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Center(
-        child: Container(
-         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue.shade400.withOpacity(0.5),
-              Colors.blue.shade900.withOpacity(0.5),
-            ],
-           
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Login", style: TextStyle(fontSize: 24)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Row(
+                    children: [
+                      // Image.asset(
+                      //   "assets/confirm.png",
+                      //   height: 30,
+                      //   width: 30,
+                      //   color: Colors.white,
+                      // ),
+                      SizedBox(width: 20),
+                      Text('Confirmation', style: TextStyle(fontSize: 24)),
+                    ],
+                  ),
+                  content: Text('Are you sure you want to release the URL?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        releaseUrl(); // Call the method to release URL
+                        Get.off(() =>
+                            SplashScreen()); // Navigate back to SplashScreen
+                      },
+                      child: Text('Yes'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                      child: Text('No'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            icon: Icon(Icons.delete),
           ),
-          shape: BoxShape.rectangle,
-        ),            child: Padding(
+        ],
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Image.asset('assets/login.png',
-                //     color: Theme.of(context).primaryColor,
-                //     height: height * 0.3,
-                //     width: double.infinity),
-                // SizedBox(height: 10),
+                SizedBox(height: 10),
                 Text(
                   'Welcome To EZEE CLUB',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -182,70 +228,48 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),
                 ),
-                Text(
-                  "Hello, ${_controller.loginScreenUserName.value}",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
                 SizedBox(height: 20),
-                _buildTextField(context, _controller.usernameController,
-                    'Username or email',
-                    icon: Icons.person),
+                _buildTextField(
+                  context,
+                  usernameController,
+                  'Member Id',
+                  icon: Icons.person,
+                ),
                 SizedBox(height: 10),
                 _buildTextField(
-                    context, _controller.passwordController, 'Password',
-                    isPassword: true,
-                    icon: Icons.lock,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        isObscureText
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                      onPressed: () {
-                        togglePasswordVisibility();
-                      },
-                    )),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Get.to(() => PasswordResetScreen());
-                      },
-                      child: Text(
-                        "Forgot password",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  context,
+                  passwordController,
+                  'Password',
+                  isPassword: true,
+                  icon: Icons.lock,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      isObscureText ? Icons.visibility_off : Icons.visibility,
+                      color: Theme.of(context).iconTheme.color,
                     ),
-                  ],
+                    onPressed: () {
+                      togglePasswordVisibility();
+                    },
+                  ),
                 ),
-                Obx(() => ElevatedButton(
-                      onPressed: _controller.isLoading.value
-                          ? null
-                          : () => _controller.login(context),
-                      // Disable button when login process is ongoing
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: isLoading ? null : () => login(context),
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.black),
                         ),
-                      ),
-                      // Pass the BuildContext to the login function
-                      child: _controller.isLoading.value
-                          ? CircularProgressIndicator()
-                          : Text(
-                              'Sign In',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                    )),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -270,7 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(
-            color: Theme.of(context).textTheme.bodyLarge!.color,
+            color: Theme.of(context).textTheme.bodyMedium!.color,
           ),
           prefixIcon: icon != null
               ? Icon(
@@ -284,12 +308,19 @@ class _LoginScreenState extends State<LoginScreen> {
             borderRadius: BorderRadius.circular(5),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.green[500]!, width: 2.0),
+            borderSide:
+                BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
             borderRadius: BorderRadius.circular(5),
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         ),
       ),
     );
+  }
+
+  void releaseUrl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('isLoggedIn'); // Remove login status
+    prefs.setString('app_url', ""); // Clear stored URL
   }
 }

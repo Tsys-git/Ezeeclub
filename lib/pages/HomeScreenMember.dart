@@ -11,6 +11,7 @@ import 'package:ezeeclub/pages/Features/notifications.dart';
 import 'package:ezeeclub/pages/Features/planDetails.dart';
 import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
 import 'package:flutter/material.dart';
@@ -114,8 +115,6 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         trimmedQuote = trimmedQuote.replaceAll('.', '').trim();
         trimmedQuote = trimmedQuote.replaceAll(':', ' :').trim();
 
-        // Remove numbers and special symbols
-
         // Remove leading numbers and spaces
         trimmedQuote = trimmedQuote.replaceFirst(RegExp(r'^\d*'), '');
 
@@ -133,11 +132,8 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   @override
   Widget build(BuildContext context) {
-    // Assuming widget.usermodel.dob is a string in "dd/MM/yyyy" format
-    String dob = widget.usermodel.dob;
-
 // Split user's date of birth string into day, month, and year parts
-    List<String> dobParts = dob.split('/');
+    List<String> dobParts = widget.usermodel.dob.split('/');
     int day = int.parse(dobParts[0]);
     int month = int.parse(dobParts[1]);
     int year = int.parse(dobParts[2]);
@@ -161,39 +157,6 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return Scaffold(
       //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
-      floatingActionButton: SpeedDial(
-        direction: SpeedDialDirection.up,
-        spaceBetweenChildren: 0,
-        icon: Icons.menu,
-        activeIcon: Icons.close,
-        backgroundColor: Colors.yellow,
-        foregroundColor: Colors.black,
-        children: [
-          SpeedDialChild(
-            child: Icon(
-              Icons.date_range,
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.red,
-            label: 'Event\'s',
-            labelBackgroundColor: Colors.transparent,
-            onTap: () => {
-              Get.to(() => CalendarScreen(
-                    memberNo: widget.usermodel.member_no,
-                    branchNo: widget.usermodel.BranchNo,
-                  ))
-            },
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.health_and_safety),
-            backgroundColor: Colors.green,
-            labelBackgroundColor: Colors.transparent,
-            label: 'Health Details',
-            onTap: () =>
-                {Get.to(() => HeathdetailsScreen(userModel: widget.usermodel))},
-          ),
-        ],
-      ),
       drawer: AppDrawer(
         userModel: widget.usermodel,
       ),
@@ -202,10 +165,9 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.purple.shade400.withOpacity(0.5),
                 Colors.blue.shade900.withOpacity(0.5),
+                Colors.purple.shade400.withOpacity(0.5),
               ],
-              
             ),
             shape: BoxShape.rectangle,
           ),
@@ -287,17 +249,51 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: _buildCalendarScrollView()),
 
                 SizedBox(height: screenWidth * 0.02),
-                SlideTransition(
-                  position: _slideAnimation,
-                  child: Container(
-                      height: screenWidth * 0.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child:
-                          _whatToDoToday(screenWidth, scrrenheight, context)),
+                Column(
+                  children: [
+                    _whatToDoToday(screenWidth, scrrenheight, context),
+                  ],
                 ),
                 SizedBox(height: screenWidth * 0.02),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: trackYourProgress(context, screenWidth, ""),
+                ),
+                SizedBox(height: screenWidth * 0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        height: screenWidth * 0.7,
+                        child: _buildInfoCard(context, 'Steps', ' Not Found',
+                            '0', Icons.directions_walk, "assets/steps.png"),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => CalorieBurningTipsScreen());
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              height: screenWidth * 0.7,
+                              child: _buildCaloriesCard(context))),
+                    ),
+                  ],
+                ),
+                SizedBox(height: screenWidth * 0.02),
+
                 SlideTransition(
                   position: _slideAnimation,
                   child: Row(
@@ -348,58 +344,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                   ),
                 ),
                 SizedBox(height: screenWidth * 0.02),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: trackYourProgress(context, screenWidth, ""),
-                ),
+
                 // Container(
                 //     decoration: BoxDecoration(
                 //       borderRadius: BorderRadius.circular(20.0),
                 //     ),
                 //     child: _buildWaterDrinkingCard(screenWidth)),
                 // SizedBox(height: screenWidth * 0.02),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        height: screenWidth * 0.7,
-                        child: _buildInfoCard(context, 'Steps', ' Not Found',
-                            '0', Icons.directions_walk, "assets/steps.png"),
-                      ),
-                    ),
-                    // SizedBox(width: screenWidth * 0.03),
-                    // Container(
-                    //   width: 3.0, // Adjust this value for the desired width
-                    //   height:
-                    //       height * 0.15, // Adjust this value for the desired height
-                    //   color: Colors.white,
-                    // ),
-                    // SizedBox(width: screenWidth * 0.03),
-                    Expanded(
-                      flex: 1,
-                      child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => CalorieBurningTipsScreen());
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              height: screenWidth * 0.7,
-                              child: _buildCaloriesCard(context))),
-                    ),
-                  ],
-                ),
 
                 SizedBox(height: screenWidth * 0.02),
 
@@ -470,7 +421,8 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           // Add other decoration properties as needed
         ),
         child: Card(
-          color: Color.fromARGB(35, 248, 245, 245), // Use card color from theme
+          // color: Color.fromARGB(35, 248, 245, 245), // Use card color from theme
+          color: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -556,94 +508,163 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             borderRadius: BorderRadius.circular(20),
           ),
           width: double.infinity,
-          child: Card(
-            child: title == "Steps"
-                ? GestureDetector(
-                    onTap: () {
-                      Get.to(() => StepCounter());
-                    },
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            img,
-                            width: screenWidth * 0.5,
-                            height: screenheight * 0.6,
-                            fit: BoxFit.cover,
-                            //color: Theme.of(context).primaryColor
-                          ),
+          child: title != "Steps"
+              ? Card(
+                  color: Color.fromARGB(
+                      35, 248, 245, 245), // Use card color from theme
 
-                          //Icon(icon, size: screenWidth * 0.25),
-                          Text(title,
-                              style: TextStyle(
-                                  fontSize: screenWidth * 0.13,
-                                  color: Colors.white)),
-                          Obx(() => Text(
-                                '${stepController.stepCount.value}',
+                  //color: Colors.transparent,
+
+                  child: title == "Steps"
+                      ? GestureDetector(
+                          onTap: () {
+                            Get.to(() => StepCounter());
+                          },
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  img,
+                                  width: screenWidth * 0.5,
+                                  height: screenheight * 0.6,
+                                  fit: BoxFit.cover,
+                                  //color: Theme.of(context).primaryColor
+                                ),
+
+                                //Icon(icon, size: screenWidth * 0.25),
+                                Text(title,
+                                    style: TextStyle(
+                                        fontSize: screenWidth * 0.13,
+                                        color: Colors.white)),
+                                Obx(() => Text(
+                                      '${stepController.stepCount.value}',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              img,
+                              width: screenWidth * 0.5,
+                              height: screenheight * 0.6,
+                              fit: BoxFit.cover,
+                              //color: Theme.of(context).primaryColor
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //Icon(icon, size: screenWidth * 0.25),
+                            Text(title,
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.13,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        img,
-                        width: screenWidth * 0.5,
-                        height: screenheight * 0.6,
-                        fit: BoxFit.cover,
-                        //color: Theme.of(context).primaryColor
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      //Icon(icon, size: screenWidth * 0.25),
-                      Text(title,
-                          style: TextStyle(
-                            fontSize: screenWidth * 0.13,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        (title == "Steps") ? "100" : value,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: screenWidth * 0.05,
+                                  color: Colors.white,
+                                )),
+                            Text(
+                              (title == "Steps") ? "100" : value,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: screenWidth * 0.05,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-          ),
+                )
+              : Card(
+                  // color: Color.fromARGB(
+                  //     35, 248, 245, 245), // Use card color from theme
+
+                  color: Colors.transparent,
+
+                  child: title == "Steps"
+                      ? GestureDetector(
+                          onTap: () {
+                            Get.to(() => StepCounter());
+                          },
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  img,
+                                  width: screenWidth * 0.5,
+                                  height: screenheight * 0.6,
+                                  fit: BoxFit.cover,
+                                  //color: Theme.of(context).primaryColor
+                                ),
+
+                                //Icon(icon, size: screenWidth * 0.25),
+                                Text(title,
+                                    style: TextStyle(
+                                        fontSize: screenWidth * 0.13,
+                                        color: Colors.white)),
+                                Obx(() => Text(
+                                      '${stepController.stepCount.value}',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              img,
+                              width: screenWidth * 0.5,
+                              height: screenheight * 0.6,
+                              fit: BoxFit.cover,
+                              //color: Theme.of(context).primaryColor
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //Icon(icon, size: screenWidth * 0.25),
+                            Text(title,
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.13,
+                                  color: Colors.white,
+                                )),
+                            Text(
+                              (title == "Steps") ? "100" : value,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: screenWidth * 0.05,
+                              ),
+                            ),
+                          ],
+                        ),
+                ),
         ),
       );
     });
   }
 
+  Widget what() {
+    return Card();
+  }
+
   Widget _whatToDoToday(
       double screenWidth, double scrrenheight, BuildContext context) {
-    print(screenWidth);
-    return AnimatedContainer(
-      duration: Duration(seconds: 1),
-      child: Card(
-        color: Color.fromARGB(35, 248, 245, 245), // Use card color from theme
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: _buildLargeLayout(context),
-          ),
-        ),
-      ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
+      child: _buildLargeLayout(context),
     );
   }
 
@@ -652,53 +673,72 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       builder: (BuildContext context, BoxConstraints constraints) {
         double screenWidth = constraints.maxWidth;
         double screenHeight = constraints.maxHeight;
-        print("inside the what to do screenHeight : $screenHeight");
-        print("inside the what to do  screenWidth : $screenWidth");
-        return Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 0,
-                        child: Text(
-                          'What to do Today?',
-                          style: TextStyle(
-                            fontSize: screenWidth *
-                                0.15, // Adjust font size as needed
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // Positioned image
+
+              // Text content
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.left,
+                          textScaler: TextScaler.linear(4.3),
+                          text: TextSpan(
+                            text: 'WHAT\n',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 22,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: '   TO DO\n',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white
+                                      .withOpacity(0.7), // Apply opacity here
+                                  fontSize: 5,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ' TODAY',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white
+                                      .withOpacity(0.6), // Full opacity here
+                                  // Larger font size for emphasis
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      Text(
-                        'Yesterday was\n{.....} Day',
-                        style: TextStyle(
-                          fontSize:
-                              screenHeight * 0.08, // Adjust font size as needed
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Positioned(
-              top: -20,
-              left: screenWidth * 0.5,
-              child: Image.asset(
-                width: screenWidth * 0.6,
-                "assets/whattodo.png",
-                height: screenHeight * 1.22,
+                ],
               ),
-            ),
-          ],
+              Positioned(
+                top: -20,
+                left: screenWidth * 0.4, // Adjust positioning
+                child: Image.asset(
+                  "assets/whattodo.png",
+                  width: screenWidth * 0.6,
+                  height: screenHeight * 1.2,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -706,69 +746,65 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _buildWaterDrinkingCard(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      double screenWidth = constraints.maxWidth;
-      double height = constraints.maxHeight;
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double screenWidth = constraints.maxWidth;
 
-      return GestureDetector(
-        onTap: () {
-          Get.to(() => WaterBenefitsScreen());
-        },
-        child: Card(
-          //color: Theme.of(context).primaryColor,
-          color: Color.fromARGB(47, 255, 255, 255),
-
-          child: Container(
-            decoration: BoxDecoration(
+        return GestureDetector(
+          onTap: () {
+            Get.to(() => WaterBenefitsScreen());
+          },
+          child: Card(
+            color: Color.fromARGB(47, 255, 255, 255),
+            elevation: 4, // Optional: adds shadow to the card
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
-              //color: Colors.grey,
-              color: Colors.transparent,
             ),
             child: Padding(
-              padding: EdgeInsets.all(
-                12,
-              ),
+              padding: EdgeInsets.all(12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
-                          'Are you Drinking enough Water ?',
+                          'Are you drinking enough water?',
+                          textScaler: TextScaler.linear(1.4),
                           style: TextStyle(
-                            fontSize: screenWidth * 0.1,
-
-                            // Adjust color if needed
+                            fontWeight:
+                                FontWeight.bold, // Optional: for emphasis
                           ),
                         ),
+                        SizedBox(
+                            height: 8), // Add spacing between text elements
                         Text(
                           'Know the benefits',
+                          textScaler: TextScaler.linear(1.2),
                           style: TextStyle(
                             color: Colors.grey,
-
-                            fontSize: height * 0.07,
-                            // Adjust color if needed
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Image.asset(
-                    "assets/water.png",
-                    height: screenWidth * 0.3,
-                    fit: BoxFit.contain, // Ensure the image fits its height
+                  SizedBox(width: 8), // Add spacing between text and image
+                  Expanded(
+                    flex: 1,
+                    child: Image.asset(
+                      "assets/water.png",
+                      fit: BoxFit.contain,
+                      width: screenWidth * 0.3,
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget _buildWorkoutCard(BuildContext Context) {
@@ -793,10 +829,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     children: [
                       Text(
                         'Workout',
+                        textScaler: TextScaler.linear(2.0),
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: height * 0.1),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -805,8 +842,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                       Expanded(
                         child: Text(
                           "Your body can stand almost anything. It’s your mind that you have to convince.",
+                          textScaler: TextScaler.linear(1.3),
                           style: TextStyle(
-                              color: Colors.white, fontSize: height * 0.05),
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
@@ -851,7 +890,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Card(
-            color: Colors.transparent,
+            color: Colors.black,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -977,7 +1016,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     });
 
     return SizedBox(
-      height: 230, // Adjusted height relative to screen width
+      height: screenWidth * 0.5,
       child: Stack(
         children: [
           Swiper(
@@ -990,7 +1029,6 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
               return Card(
                 color: Color.fromARGB(
                     35, 248, 245, 245), // Use card color from theme
-
                 child: _buildQuotesCard(
                   _quotes[index],
                   screenWidth,
@@ -1010,30 +1048,15 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _buildQuotesCard(
       String quote, double screenWidth, BuildContext context) {
-    return Container(
-      width: screenWidth,
-      margin: EdgeInsets.symmetric(horizontal: 10.0),
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            offset: Offset(0, 2),
-            blurRadius: 6.0,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Text(
-            quote,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Center(
+        child: Text(
+          "${quote}.",
+          textAlign: TextAlign.center,
+          textScaler: TextScaler.linear(1.0),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -1106,8 +1129,8 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                   gradient: isCurrentDate
                       ? LinearGradient(
                           colors: [
-                            Color.fromARGB(255, 5, 151, 49),
-                            Color.fromARGB(255, 13, 82, 48)
+                            Colors.amber,
+                            Colors.yellow,
                           ],
                           begin: Alignment.bottomLeft,
                         )
@@ -1135,7 +1158,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                           fontSize: width * 0.05,
                           fontWeight: FontWeight.bold,
                           color: isCurrentDate
-                              ? Colors.white
+                              ? Colors.black
                               : (isPastDate ? Colors.black : Colors.black),
                         ),
                       ),
@@ -1144,7 +1167,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         style: TextStyle(
                           fontSize: width * 0.05,
                           color: isCurrentDate
-                              ? Colors.white
+                              ? Colors.black
                               : (isPastDate ? Colors.black : Colors.black),
                         ),
                       ),
@@ -1153,7 +1176,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         style: TextStyle(
                           fontSize: width * 0.05,
                           color: isCurrentDate
-                              ? Colors.white
+                              ? Colors.black
                               : (isPastDate ? Colors.black54 : Colors.black54),
                         ),
                       ),

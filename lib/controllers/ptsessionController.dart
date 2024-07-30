@@ -1,12 +1,17 @@
 import 'dart:convert';
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:ezeeclub/consts/appConsts.dart';
 import 'package:ezeeclub/models/PTSessionModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PTSessionController {
+  UrlSetting urlSetting = UrlSetting();
   Future<List<PTSession>> getPTSessions(
       String memberNo, String branchNo) async {
-    final Uri uri = Uri.parse('${AppConsts.url}/GetPTSessions');
+    await urlSetting.initialize();
+    Uri? uri = urlSetting.getPtSessions;
+
     final Map<String, String> headers = {"Content-Type": "application/json"};
     final Map<String, String> params = {
       "MemberNo": memberNo,
@@ -15,7 +20,7 @@ class PTSessionController {
 
     try {
       final http.Response response =
-          await http.post(uri, headers: headers, body: json.encode(params));
+          await http.post(uri!, headers: headers, body: json.encode(params));
       print(response);
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = json.decode(response.body);
