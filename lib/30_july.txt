@@ -249,9 +249,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: _buildCalendarScrollView()),
 
                 SizedBox(height: screenWidth * 0.02),
-                Container(
-                    height: screenWidth * 0.7,
-                    child: _whatToDoToday(screenWidth, scrrenheight, context)),
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                      height: screenWidth * 0.7,
+                      child:
+                          _whatToDoToday(screenWidth, scrrenheight, context)),
+                ),
                 SizedBox(height: screenWidth * 0.02),
                 Container(
                   decoration: BoxDecoration(
@@ -301,51 +305,64 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         flex: 1,
                         child: Align(
                           alignment: Alignment.topLeft,
-                          child: Container(
-                            height: screenWidth * 0.6,
-                            decoration: BoxDecoration(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              height: screenWidth * 0.6,
+                              decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16.0),
-                                color: Colors.grey.withOpacity(0.3)),
-                            child: _buildWaterDrinkingCard(context),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: screenWidth * 0.6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return DietPlanScreen(
-                                      userModel: widget.usermodel,
-                                    );
-                                  },
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/drinking.jpg'), // Adjust the asset path as needed
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.black.withOpacity(
+                                        0.8), // Adjust opacity here (0.0 to 1.0)
+                                    BlendMode.dstATop,
+                                  ),
                                 ),
-                              );
-                            },
-                            child: _buildInfoCard(
-                                context,
-                                'Diet Plan',
-                                '',
-                                '0',
-                                Icons.food_bank_outlined,
-                                "assets/dietplan.png"),
+                              ),
+                              child: _buildWaterDrinkingCard(context),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: screenWidth * 0.02),
-
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            height: screenWidth * 0.6,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/food.jpg',
+                                ), // Adjust the asset path as needed
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(
+                                      0.8), // Adjust opacity here (0.0 to 1.0)
+                                  BlendMode.dstATop,
+                                ),
+                              ),
+                            ),
+                            child: _buildInfoCard(context, "Diet Plan", "",
+                                "unit", Icons.food_bank, "assets/dietplan.png"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 // Container(
                 //     decoration: BoxDecoration(
                 //       borderRadius: BorderRadius.circular(20.0),
@@ -506,7 +523,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       return Center(
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(16),
           ),
           width: double.infinity,
           child: title != "Steps"
@@ -557,17 +574,17 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             Image.asset(
                               img,
                               width: screenWidth * 0.5,
-                              height: screenheight * 0.6,
-                              fit: BoxFit.cover,
+                              height: screenheight * 0.4,
+                              fit: BoxFit.fill,
                               //color: Theme.of(context).primaryColor
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                             //Icon(icon, size: screenWidth * 0.25),
                             Text(title,
                                 style: TextStyle(
-                                  fontSize: screenWidth * 0.13,
+                                  fontSize: screenWidth * 0.1,
                                   color: Colors.white,
                                 )),
                             Text(
@@ -668,64 +685,71 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         double screenWidth = constraints.maxWidth;
         double screenHeight = constraints.maxHeight;
 
-        return Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Positioned image
-        
-            // Text content
-            Row(
-              children: [
-                Column(
-                  children: [
-                    RichText(
-                      textAlign: TextAlign.left,
-                      textScaler: TextScaler.linear(4.3),
-                      text: TextSpan(
-                        text: 'WHAT\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 21,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '   TO DO\n',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white
-                                  .withOpacity(0.7), // Apply opacity here
-                              fontSize: 5,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' TODAY',
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // Positioned image
+
+              // Text content
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.left,
+                          textScaler: TextScaler.linear(4.3),
+                          text: TextSpan(
+                            text: 'WHAT\n',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.white
-                                  .withOpacity(0.6), // Full opacity here
-                              // Larger font size for emphasis
-                              fontSize: 10,
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 21,
                             ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: '   TO DO\n',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white
+                                      .withOpacity(0.7), // Apply opacity here
+                                  fontSize: 5,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ' TODAY',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white
+                                      .withOpacity(0.6), // Full opacity here
+                                  // Larger font size for emphasis
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
-            ),
-            Positioned(
-              top: -20,
-              left: screenWidth * 0.5, // Adjust positioning
-              child: Image.asset(
-                "assets/whattodo.png",
-                width: screenWidth * 0.6,
-                height: screenHeight * 1.2,
-                fit: BoxFit.fitHeight,
+                  ),
+                ],
               ),
-            ),
-          ],
+              Positioned(
+                top: -20,
+                left: screenWidth * 0.5, // Adjust positioning
+                child: Image.asset(
+                  "assets/whattodo.png",
+                  width: screenWidth * 0.6,
+                  height: screenHeight * 1.2,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -746,9 +770,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("ARE YOU DRINKING ENOUGH WATER ?",
-                      textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    "ARE YOU DRINKING ENOUGH WATER ?",
+                    textScaler: TextScaler.linear(1.4),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.start,
+                  ),
                   Text(
                     "Benefits of it's.",
                     textScaler: TextScaler.linear(1),
