@@ -62,6 +62,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "device_frame",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/device_frame-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "device_preview",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/device_preview-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "equatable",
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -134,6 +146,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_localizations",
+      "rootUri": "file:///C:/Users/Delux/dev/flutter/packages/flutter_localizations",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "flutter_speed_dial",
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_speed_dial-7.0.0",
       "packageUri": "lib/",
@@ -150,6 +168,12 @@
       "rootUri": "file:///C:/Users/Delux/dev/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/freezed_annotation-2.4.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "geofence_service",
@@ -194,6 +218,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "json_annotation",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/json_annotation-4.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "leak_tracker",
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.4",
       "packageUri": "lib/",
@@ -232,6 +262,12 @@
     {
       "name": "meta",
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.12.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "nested",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -336,6 +372,12 @@
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "qr_code_scanner",
@@ -518,7 +560,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2024-07-23T08:49:37.682246Z",
+  "generated": "2024-07-31T05:49:36.735675Z",
   "generator": "pub",
   "generatorVersion": "3.4.1",
   "flutterRoot": "file:///C:/Users/Delux/dev/flutter",

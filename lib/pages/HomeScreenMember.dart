@@ -659,7 +659,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _whatToDoToday(
       double screenWidth, double scrrenheight, BuildContext context) {
-    return Card(color: Colors.transparent, child: _buildLargeLayout(context));
+    return Card(
+        color: Colors.transparent,
+        child: Padding(
+          padding: EdgeInsets.only(left: 20.0,),
+          child: _buildLargeLayout(context),
+        ));
   }
 
   Widget _buildLargeLayout(BuildContext context) {
@@ -671,47 +676,55 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         return Stack(
           clipBehavior: Clip.none,
           children: [
-            // Positioned image
-        
-            // Text content
             Row(
               children: [
-                Column(
-                  children: [
-                    RichText(
-                      textAlign: TextAlign.left,
-                      textScaler: TextScaler.linear(4.3),
-                      text: TextSpan(
-                        text: 'WHAT\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 21,
+                Padding(
+                  padding: const EdgeInsets.only(top:50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                  //  mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: 'WHAT',
+                          style: TextStyle(
+                            fontSize:
+                                screenWidth * 0.24, // Adjust the font size here
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white.withOpacity(0.6),
+                            height: 1,
+                          ),
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '   TO DO\n',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white
-                                  .withOpacity(0.7), // Apply opacity here
-                              fontSize: 5,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' TODAY',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                                  .withOpacity(0.6), // Full opacity here
-                              // Larger font size for emphasis
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                  ],
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: 'To Do',
+                          style: TextStyle(
+                            fontSize:
+                                screenWidth * 0.1, // Adjust the font size here
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white.withOpacity(0.6),
+                            height: 0.8,
+                          ),
+                        ),
+                      ),
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: 'Today',
+                          style: TextStyle(
+                            fontSize:
+                                screenWidth * 0.2, // Adjust the font size here
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white.withOpacity(0.6),
+                            height: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -748,7 +761,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 children: [
                   Text("ARE YOU DRINKING ENOUGH WATER ?",
                       textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: screenWidth * 0.1,
+                      )),
                   Text(
                     "Benefits of it's.",
                     textScaler: TextScaler.linear(1),
@@ -1008,7 +1024,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     });
 
     return SizedBox(
-      height: screenWidth * 0.5,
+      height: screenWidth * 0.6,
       child: Stack(
         children: [
           Swiper(
@@ -1043,14 +1059,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Center(
-        child: Text(
-          "${quote}.",
-          textAlign: TextAlign.center,
-          textScaler: TextScaler.linear(1.0),
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Text("${quote}.",
+            textAlign: TextAlign.center,
+            textScaler: TextScaler.linear(1.4),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: screenWidth * 0.03,
+            )),
       ),
     );
   }
@@ -1107,7 +1122,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           height: height * 0.3,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 4,
+            itemCount: 5,
             itemBuilder: (context, index) {
               DateTime today = startDate.add(Duration(days: index));
               bool isCurrentDate = DateFormat('yyyy-MM-dd').format(today) ==
@@ -1186,7 +1201,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
   Widget _buildBirthdayCard(double height) {
     return Card(
       elevation: 1, // Adds a shadow to the card
-      color: Theme.of(context).primaryColor,
+      color: Color.fromARGB(255, 73, 31, 28),
       margin: EdgeInsets.all(10), // Provides padding around the card
       child: Padding(
         padding: EdgeInsets.all(10),
@@ -1201,6 +1216,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                   Expanded(
                     child: Text(
                       'Wish You Many Many Returns Of The Day.',
+                      textScaler: TextScaler.linear(1.2),
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -1209,13 +1225,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                   ),
                   Image.asset(
                     "assets/cake.png",
-                    height: height * 0.1,
                     width: 100,
                   )
                 ],
               ),
               Center(
                 child: Text(
+                  textScaler: TextScaler.linear(1),
                   '- From Admin',
                   style: TextStyle(
                     fontSize: 16,
@@ -1224,6 +1240,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
               ),
               SizedBox(height: 10),
               Text(
+                textScaler: TextScaler.linear(1),
                 'May all your wishes come true.',
                 style: TextStyle(
                   fontSize: 16,
