@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:ezeeclub/models/StepsData.dart';
 import 'package:ezeeclub/models/User.dart';
@@ -11,6 +12,7 @@ import 'package:ezeeclub/pages/Features/notifications.dart';
 import 'package:ezeeclub/pages/Features/planDetails.dart';
 import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
@@ -25,6 +27,7 @@ import 'Features/heathDetails.dart';
 import 'common/drawer.dart';
 import 'steps/stepController.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
 
@@ -235,6 +238,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                               );
                             },
                             icon: Icon(Icons.exit_to_app)),
+                        IconButton(
+                            onPressed: () {
+                              print("hello");
+                              fetchdata();
+                            },
+                            icon: Icon(Icons.call)),
                       ],
                     )
                   ],
@@ -253,42 +262,47 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     height: screenWidth * 0.7,
                     child: _whatToDoToday(screenWidth, scrrenheight, context)),
                 SizedBox(height: screenWidth * 0.02),
+
                 Container(
                   decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue.shade900.withOpacity(0.5),
+                        Colors.purple.shade400.withOpacity(0.5),
+                      ],
+                    ),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: trackYourProgress(context, screenWidth, ""),
-                ),
-                SizedBox(height: screenWidth * 0.02),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        height: screenWidth * 0.7,
-                        child: _buildInfoCard(context, 'Steps', ' Not Found',
-                            '0', Icons.directions_walk, "assets/steps.png"),
+                  child: Column(
+                    children: [
+                      trackYourProgress(context, screenWidth, ""),
+                      Divider(height: 2.0, color: Colors.white),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: _buildInfoCard(
+                                context,
+                                'Steps',
+                                ' Not Found',
+                                '0',
+                                Icons.directions_walk,
+                                "assets/steps.png"),
+                          ),
+                          Divider(),
+                          Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => CalorieBurningTipsScreen());
+                                },
+                                child: _buildCaloriesCard(context)),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => CalorieBurningTipsScreen());
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              height: screenWidth * 0.7,
-                              child: _buildCaloriesCard(context))),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 SizedBox(height: screenWidth * 0.02),
 
@@ -421,73 +435,66 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           borderRadius: BorderRadius.circular(20),
           // Add other decoration properties as needed
         ),
-        child: Card(
-          // color: Color.fromARGB(35, 248, 245, 245), // Use card color from theme
-          color: Colors.transparent,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.local_fire_department,
-                      size: screenWidth * 0.1,
-                      color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.local_fire_department,
+                    size: screenWidth * 0.1,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: screenWidth * 0.8,
+                    width: screenWidth * 0.8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                          10), // half of height/width for circular shape
                     ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      height: screenWidth * 0.8,
-                      width: screenWidth * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            10), // half of height/width for circular shape
+                    child: CircularProgressIndicator(
+                      strokeCap: StrokeCap.round,
+                      strokeWidth: screenWidth * 0.1,
+                      value: progress.clamp(0.0,
+                          0.70), // clamp between 0 and 1 for CircularProgressIndicator
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+                      backgroundColor: Colors.grey,
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (progress)
+                            .toStringAsFixed(0), // Your calorie value here
+                        style: TextStyle(
+                            color: Colors.yellow, fontSize: screenWidth * 0.2),
+                        textAlign: TextAlign.center,
                       ),
-                      child: CircularProgressIndicator(
-                        strokeCap: StrokeCap.round,
-                        strokeWidth: screenWidth * 0.1,
-                        value: progress.clamp(0.0,
-                            0.70), // clamp between 0 and 1 for CircularProgressIndicator
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.yellow),
-                        backgroundColor: Colors.grey,
+                      Text(
+                        'cal...',
+                        style: TextStyle(
+                            color: Colors.yellow, fontSize: screenWidth * 0.1),
                       ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          (progress)
-                              .toStringAsFixed(0), // Your calorie value here
-                          style: TextStyle(
-                              color: Colors.yellow,
-                              fontSize: screenWidth * 0.2),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'cal...',
-                          style: TextStyle(
-                              color: Colors.yellow,
-                              fontSize: screenWidth * 0.1),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Calories Burned',
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.1)),
-              ],
-            ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Calories Burned',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: screenWidth * 0.1)),
+            ],
           ),
         ),
       );
@@ -581,47 +588,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                           ],
                         ),
                 )
-              : Card(
-                  // color: Color.fromARGB(
-                  //     35, 248, 245, 245), // Use card color from theme
-
-                  color: Colors.transparent,
-
-                  child: title == "Steps"
-                      ? GestureDetector(
-                          onTap: () {
-                            Get.to(() => StepCounter());
-                          },
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  img,
-                                  width: screenWidth * 0.5,
-                                  height: screenheight * 0.6,
-                                  fit: BoxFit.cover,
-                                  //color: Theme.of(context).primaryColor
-                                ),
-
-                                //Icon(icon, size: screenWidth * 0.25),
-                                Text(title,
-                                    style: TextStyle(
-                                        fontSize: screenWidth * 0.13,
-                                        color: Colors.white)),
-                                Obx(() => Text(
-                                      '${stepController.stepCount.value}',
-                                      style: TextStyle(
-                                        fontSize: screenWidth * 0.13,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                        )
-                      : Column(
+              : title == "Steps"
+                  ? GestureDetector(
+                      onTap: () {
+                        Get.to(() => StepCounter());
+                      },
+                      child: Container(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -632,26 +605,53 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                               fit: BoxFit.cover,
                               //color: Theme.of(context).primaryColor
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+
                             //Icon(icon, size: screenWidth * 0.25),
                             Text(title,
                                 style: TextStyle(
-                                  fontSize: screenWidth * 0.13,
-                                  color: Colors.white,
+                                    fontSize: screenWidth * 0.13,
+                                    color: Colors.white)),
+                            Obx(() => Text(
+                                  '${stepController.stepCount.value}',
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 )),
-                            Text(
-                              (title == "Steps") ? "100" : value,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: screenWidth * 0.05,
-                              ),
-                            ),
                           ],
                         ),
-                ),
+                      ),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          img,
+                          width: screenWidth * 0.5,
+                          height: screenheight * 0.6,
+                          fit: BoxFit.cover,
+                          //color: Theme.of(context).primaryColor
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        //Icon(icon, size: screenWidth * 0.25),
+                        Text(title,
+                            style: TextStyle(
+                              fontSize: screenWidth * 0.13,
+                              color: Colors.white,
+                            )),
+                        Text(
+                          (title == "Steps") ? "100" : value,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: screenWidth * 0.05,
+                          ),
+                        ),
+                      ],
+                    ),
         ),
       );
     });
@@ -662,7 +662,9 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return Card(
         color: Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.only(left: 20.0,),
+          padding: EdgeInsets.only(
+            left: 20.0,
+          ),
           child: _buildLargeLayout(context),
         ));
   }
@@ -679,10 +681,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top:50),
+                  padding: const EdgeInsets.only(top: 50),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                  //  mainAxisAlignment: MainAxisAlignment.start,
+                    //  mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RichText(
                         textAlign: TextAlign.left,
@@ -692,7 +694,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             fontSize:
                                 screenWidth * 0.24, // Adjust the font size here
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.6),
+                            color: Colors.white.withOpacity(1),
                             height: 1,
                           ),
                         ),
@@ -705,7 +707,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             fontSize:
                                 screenWidth * 0.1, // Adjust the font size here
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.6),
+                            color: Colors.white.withOpacity(0.8),
                             height: 0.8,
                           ),
                         ),
@@ -718,7 +720,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             fontSize:
                                 screenWidth * 0.2, // Adjust the font size here
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.6),
+                            color: Colors.white.withOpacity(0.8),
                             height: 1,
                           ),
                         ),
@@ -734,7 +736,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
               child: Image.asset(
                 "assets/whattodo.png",
                 width: screenWidth * 0.6,
-                height: screenHeight * 1.2,
+                height: (screenHeight) + 20,
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -897,114 +899,111 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: Card(
-            color: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Progress',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: width * 0.06,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Progress',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: width * 0.04,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: width * 0.06,
                         ),
                       ),
+                    ),
+                    Text(
+                      '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: width * 0.04,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                // Text(
+                //   "bar charts and pie charts",
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: width * 0.06,
+                //   ),
+                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Weight Graph",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: width * 0.04,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 200,
+                  child: SfCartesianChart(
+                    primaryXAxis: CategoryAxis(
+                      majorGridLines: MajorGridLines(width: 0.2),
+                      // Hides vertical gridlines
+                    ),
+                    primaryYAxis: NumericAxis(
+                      minimum: minValue! - 5,
+                      maximum: maxValue! + 5,
+                      majorGridLines: MajorGridLines(width: 0.2),
+                    ),
+                    series: <CartesianSeries>[
+                      SplineSeries<WeightData, String>(
+                          dataSource: weightData,
+                          dashArray: const <double>[50, 5],
+                          xValueMapper: (WeightData data, _) => data.x,
+                          yValueMapper: (WeightData data, _) => data.y)
                     ],
-                  ),
-                  // Text(
-                  //   "bar charts and pie charts",
-                  //   style: TextStyle(
-                  //     color: Colors.white,
-                  //     fontSize: width * 0.06,
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Weight Graph",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: width * 0.04,
+                    tooltipBehavior: TooltipBehavior(
+                      enable: true,
+                      header: "Weight",
+                      tooltipPosition: TooltipPosition.auto,
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(
-                        majorGridLines: MajorGridLines(width: 0.2),
-                        // Hides vertical gridlines
-                      ),
-                      primaryYAxis: NumericAxis(
-                        minimum: minValue! - 5,
-                        maximum: maxValue! + 5,
-                        majorGridLines: MajorGridLines(width: 0.2),
-                      ),
-                      series: <CartesianSeries>[
-                        SplineSeries<WeightData, String>(
-                            dataSource: weightData,
-                            dashArray: const <double>[50, 5],
-                            xValueMapper: (WeightData data, _) => data.x,
-                            yValueMapper: (WeightData data, _) => data.y)
-                      ],
-                      tooltipBehavior: TooltipBehavior(
-                        enable: true,
-                        header: "Weight",
-                        tooltipPosition: TooltipPosition.auto,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // Text(
-                  //   "Steps Graph",
-                  //   style: TextStyle(
-                  //     color: Colors.white,
-                  //     fontSize: width * 0.04,
-                  //   ),
-                  // ),
-                  // Container(
-                  //   height: 200,
-                  //   child: SfCircularChart(
-                  //     series: <CircularSeries>[
-                  //       RadialBarSeries<StepCountData, String>(
-                  //         dataSource: stepdata,
-                  //         xValueMapper: (StepCountData stepdata, _) =>
-                  //             stepdata.date,
-                  //         yValueMapper: (StepCountData stepdata, _) =>
-                  //             stepdata.steps,
-                  //         cornerStyle: CornerStyle.bothCurve,
-                  //         radius: '100%',
-                  //       )
-                  //     ],
-                  //     tooltipBehavior: TooltipBehavior(
-                  //       enable: true,
-                  //       header: "Steps",
-                  //       tooltipPosition: TooltipPosition.pointer,
-                  //     ),
-                  //   ),
-                  // )
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Text(
+                //   "Steps Graph",
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: width * 0.04,
+                //   ),
+                // ),
+                // Container(
+                //   height: 200,
+                //   child: SfCircularChart(
+                //     series: <CircularSeries>[
+                //       RadialBarSeries<StepCountData, String>(
+                //         dataSource: stepdata,
+                //         xValueMapper: (StepCountData stepdata, _) =>
+                //             stepdata.date,
+                //         yValueMapper: (StepCountData stepdata, _) =>
+                //             stepdata.steps,
+                //         cornerStyle: CornerStyle.bothCurve,
+                //         radius: '100%',
+                //       )
+                //     ],
+                //     tooltipBehavior: TooltipBehavior(
+                //       enable: true,
+                //       header: "Steps",
+                //       tooltipPosition: TooltipPosition.pointer,
+                //     ),
+                //   ),
+                // )
+              ],
             ),
           ),
         );
@@ -1251,6 +1250,53 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         ),
       ),
     );
+  }
+}
+
+Future<void> fetchdata() async {
+  try {
+    // Construct SOAP request
+    String soapRequest = '''<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LogIn xmlns="http://tempuri.org/">
+      <UserId>vr</UserId>
+      <Password>vr@123</Password>
+    </LogIn>
+  </soap:Body>
+</soap:Envelope>''';
+
+    // Calculate length of SOAP request body
+    int contentLength = utf8.encode(soapRequest).length;
+
+    // Make POST request with dynamic Content-Length header
+    print('Sending request...');
+    http.Response response = await http.post(
+      Uri.parse('http://kottaramapp.novusta.in/BillingWebService.asmx'),
+      headers: {
+        'Content-Type': 'text/xml; charset=utf-8',
+        'SOAPAction': 'https://tempuri.org/LogIn',
+        'Content-Length': '$contentLength', // Set dynamic Content-Length
+      },
+      body: soapRequest,
+    );
+
+    print('Request sent. Waiting for response...');
+    print('Response body: ${response.body}');
+
+    // Parse XML response and extract branch names and sales
+    if (response.statusCode == 200) {
+      print('Response status: ${response.reasonPhrase}');
+      print('Response body: ${response.body}');
+
+      print("Extract sales data method ....");
+      // Add code here to parse the XML response if needed
+    } else {
+      print('Error: ${response.reasonPhrase}');
+    }
+  } catch (e, stacktrace) {
+    print('Exception caught: $e');
+    print('Stacktrace: $stacktrace');
   }
 }
 

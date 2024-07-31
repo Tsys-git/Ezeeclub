@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/HomeScreenMember.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,8 @@ import 'pages/splashsreen.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future main() async {
-  UrlSetting urlSetting = UrlSetting();
 
+  UrlSetting urlSetting = UrlSetting();
   WidgetsFlutterBinding.ensureInitialized();
   await urlSetting.initialize();
   SystemChrome.setPreferredOrientations(
@@ -49,4 +51,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+
 }
