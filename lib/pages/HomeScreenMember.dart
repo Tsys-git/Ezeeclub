@@ -1318,79 +1318,83 @@ Widget _buildwhatNewInTheGym(BuildContext context) {
             // Horizontal cards with flexible height
 
             Container(
-              height: screenWidth > 400 ? 200 : 400,
+              height: screenWidth > 400 ? 180 : 270,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  // Card 1 (Replace with your actual card widget)
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: SizedBox(
-                      width: screenWidth * 0.6,
+                      width: screenWidth * 0.7,
                       child: Card(
                         color: Color.fromARGB(
                             35, 248, 245, 245), // Use card color from theme
                         child: ListTile(
                           title: Text(
-                            textScaler: TextScaler.linear(1.5),
-                            'Get Fit for Summer with Our New Classes!',
-                          ),
+                              textScaler: TextScaler.linear(1),
+                              'Get Fit for Summer with Our New Classes!',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           subtitle: Text(
-                              textScaler: TextScaler.linear(1.2),
+                              textScaler: TextScaler.linear(1),
                               'Dive into our fresh lineup of high-energy classes tailored to help you achieve your summer fitness goals. Limited spots available—reserve yours now!'),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 2 (Replace with your actual card widget)
                   SizedBox(
-                    width: screenWidth * 0.6, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
                         title: Text(
                             ' Introducing Our State-of-the-Art Equipment!',
-                            textScaler: TextScaler.linear(1.5)),
+                            textScaler: TextScaler.linear(1),
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         subtitle: Text(
                           'Experience the latest in fitness technology with our newly upgraded equipment. Enjoy improved workouts and track your progress like never before.',
-                          textScaler: TextScaler.linear(1.2),
+                          textScaler: TextScaler.linear(1),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 3 (Replace with your actual card widget)
                   SizedBox(
-                    width: screenWidth * 0.6, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
-                        title: Text('Join Our 6-Week Transformation Challenge!',
-                            textScaler: TextScaler.linear(1.5)),
+                        title: Text(
+                          'Join Our 6-Week Transformation Challenge!',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textScaler: TextScaler.linear(1),
+                        ),
                         subtitle: Text(
                           'Commit to a healthier you with our structured program including training, nutrition, and support. Transform your body and mind—sign up today!',
-                          textScaler: TextScaler.linear(1.2),
+                          textScaler: TextScaler.linear(1),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 4 (Replace with your actual card widget)
                   SizedBox(
-                    width: screenWidth * 0.6, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
                         title: Text(
                             'Elevate Your Workout with Personal Training Specials!',
-                            textScaler: TextScaler.linear(1.3)),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textScaler: TextScaler.linear(1)),
                         subtitle: Text(
                           'Take advantage of our limited-time discounts on personal training packages. Work one-on-one with expert trainers to reach your fitness goals faster.',
-                          textScaler: TextScaler.linear(1.1),
+                          textScaler: TextScaler.linear(1),
                         ),
                       ),
                     ),
