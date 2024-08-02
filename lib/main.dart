@@ -46,9 +46,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark, // This will use the system theme
-      home: HomeScreenMember(
-        usermodel: usermodel,
-      ),
+      home:SplashScreen()
     );
   }
 

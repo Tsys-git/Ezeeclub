@@ -140,6 +140,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "flutter_heatmap_calendar",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_heatmap_calendar-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
       "packageUri": "lib/",
@@ -288,6 +294,18 @@
       "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/nm-0.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "package_info_plus",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus-8.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "rootUri": "file:///C:/Users/Delux/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus_platform_interface-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "path",
@@ -560,7 +578,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2024-07-31T05:49:36.735675Z",
+  "generated": "2024-08-02T09:22:51.706676Z",
   "generator": "pub",
   "generatorVersion": "3.4.1",
   "flutterRoot": "file:///C:/Users/Delux/dev/flutter",

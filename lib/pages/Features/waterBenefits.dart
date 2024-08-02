@@ -20,10 +20,7 @@ class WaterBenefitsScreen extends StatelessWidget {
       'description':
           'Flushes out toxins from the body and prevents kidney stones.',
     },
-    {
-      'title': 'Improves Brain Function',
-      'description': 'Improves concentration, cognition, and mood.',
-    },
+   
     {
       'title': 'Regulates Body Temperature',
       'description': 'Helps in regulating body temperature.',
@@ -87,7 +84,7 @@ class WaterBenefitsScreen extends StatelessWidget {
               title: SafeArea(
                 child: Text(
                   'Benefits of Drinking Water',
-                  style: TextStyle(fontSize: 24),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               background: Container(
@@ -116,8 +113,8 @@ class WaterBenefitsScreen extends StatelessWidget {
                 (context, index) {
                   final benefit = benefits[index];
                   final gradient = gradients[index % gradients.length];
-                  return _buildBenefitItem(
-                      benefit['title']!, benefit['description']!, gradient);
+                  return _buildBenefitItem(benefit['title']!,
+                      benefit['description']!, gradient, context);
                 },
                 childCount: benefits.length,
               ),
@@ -128,8 +125,8 @@ class WaterBenefitsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBenefitItem(
-      String title, String description, Gradient gradient) {
+  Widget _buildBenefitItem(String title, String description, Gradient gradient,
+      BuildContext context) {
     return Card(
       elevation: 6.0,
       shape: RoundedRectangleBorder(
@@ -146,19 +143,12 @@ class WaterBenefitsScreen extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style:TextStyle(fontSize: 20),
             ),
             SizedBox(height: 10.0),
             Text(
               description,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white.withOpacity(0.9),
-              ),
+              style:TextStyle(fontSize: 14),
             ),
           ],
         ),
