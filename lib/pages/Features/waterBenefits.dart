@@ -20,7 +20,6 @@ class WaterBenefitsScreen extends StatelessWidget {
       'description':
           'Flushes out toxins from the body and prevents kidney stones.',
     },
-   
     {
       'title': 'Regulates Body Temperature',
       'description': 'Helps in regulating body temperature.',
@@ -32,50 +31,12 @@ class WaterBenefitsScreen extends StatelessWidget {
     },
   ];
 
-  final List<Gradient> gradients = [
-    LinearGradient(
-      colors: [Colors.teal, Colors.teal],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.red, Colors.red],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.green, Colors.green],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.purple, Colors.purple],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.cyan, Colors.cyan],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.orange, Colors.orange],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.blue, Colors.blue],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-  ];
-
   WaterBenefitsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black.withOpacity(0.9),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -87,17 +48,8 @@ class WaterBenefitsScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.teal, Colors.teal],
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                  ),
-                ),
-              ),
             ),
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.black.withOpacity(0.9),
             pinned: true,
           ),
           SliverPadding(
@@ -112,9 +64,8 @@ class WaterBenefitsScreen extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final benefit = benefits[index];
-                  final gradient = gradients[index % gradients.length];
-                  return _buildBenefitItem(benefit['title']!,
-                      benefit['description']!, gradient, context);
+                  return _buildBenefitItem(
+                      benefit['title']!, benefit['description']!, context);
                 },
                 childCount: benefits.length,
               ),
@@ -125,8 +76,8 @@ class WaterBenefitsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBenefitItem(String title, String description, Gradient gradient,
-      BuildContext context) {
+  Widget _buildBenefitItem(
+      String title, String description, BuildContext context) {
     return Card(
       elevation: 6.0,
       shape: RoundedRectangleBorder(
@@ -134,7 +85,7 @@ class WaterBenefitsScreen extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          gradient: gradient,
+          color: Colors.purple.withOpacity(0.2),
           borderRadius: BorderRadius.circular(15.0),
         ),
         padding: EdgeInsets.all(16.0),
@@ -143,12 +94,12 @@ class WaterBenefitsScreen extends StatelessWidget {
           children: [
             Text(
               title,
-              style:TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 10.0),
             Text(
               description,
-              style:TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14),
             ),
           ],
         ),

@@ -1,41 +1,44 @@
 <dependencies>
   <compile
-      roots="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:android_intent::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:fl_location::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:flutter_activity_recognition::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:geofence_service::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:network_info_plus::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:pedometer::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:permission_handler_android::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:qr_code_scanner::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:sensors::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:shared_preferences_android::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:wifi_info_flutter::release,io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.window:window-java:1.0.0-beta04@aar,androidx.window:window:1.0.0-beta04@aar,org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2@jar,org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10@jar,io.flutter:armeabi_v7a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:arm64_v8a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:x86_64_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.lifecycle:lifecycle-common-java8:2.4.0@jar,androidx.fragment:fragment:1.3.6@aar,androidx.viewpager:viewpager:1.0.0@aar,androidx.loader:loader:1.0.0@aar,androidx.activity:activity:1.2.4@aar,androidx.customview:customview:1.0.0@aar,androidx.core:core:1.7.0@aar,androidx.core:core:1.7.0@aar,androidx.lifecycle:lifecycle-runtime:2.4.0@aar,androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1@aar,androidx.lifecycle:lifecycle-livedata:2.0.0@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-common:2.4.0@jar,androidx.arch.core:core-runtime:2.1.0@aar,androidx.arch.core:core-common:2.1.0@jar,androidx.versionedparcelable:versionedparcelable:1.1.1@aar,androidx.collection:collection:1.1.0@jar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.savedstate:savedstate:1.1.0@aar,androidx.annotation:annotation:1.3.0@jar,androidx.annotation:annotation-experimental:1.1.0@aar,androidx.tracing:tracing:1.0.0@aar,org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10@jar,org.jetbrains.kotlin:kotlin-stdlib:1.7.22@jar,org.jetbrains.kotlin:kotlin-stdlib-common:1.7.22@jar,org.jetbrains:annotations:13.0@jar">
+      roots="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar,D:\tsysinfo\Ezeeclub\android@@:android_intent::release,D:\tsysinfo\Ezeeclub\android@@:fl_location::release,D:\tsysinfo\Ezeeclub\android@@:flutter_activity_recognition::release,D:\tsysinfo\Ezeeclub\android@@:geofence_service::release,D:\tsysinfo\Ezeeclub\android@@:network_info_plus::release,D:\tsysinfo\Ezeeclub\android@@:package_info_plus::release,D:\tsysinfo\Ezeeclub\android@@:pedometer::release,D:\tsysinfo\Ezeeclub\android@@:permission_handler_android::release,D:\tsysinfo\Ezeeclub\android@@:qr_code_scanner::release,D:\tsysinfo\Ezeeclub\android@@:sensors::release,D:\tsysinfo\Ezeeclub\android@@:shared_preferences_android::release,D:\tsysinfo\Ezeeclub\android@@:wifi_info_flutter::release,io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.window:window-java:1.0.0-beta04@aar,androidx.window:window:1.0.0-beta04@aar,org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2@jar,org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10@jar,io.flutter:armeabi_v7a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:arm64_v8a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:x86_64_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.lifecycle:lifecycle-common-java8:2.4.0@jar,androidx.fragment:fragment:1.3.6@aar,androidx.viewpager:viewpager:1.0.0@aar,androidx.loader:loader:1.0.0@aar,androidx.activity:activity:1.2.4@aar,androidx.customview:customview:1.0.0@aar,androidx.core:core:1.7.0@aar,androidx.core:core:1.7.0@aar,androidx.lifecycle:lifecycle-runtime:2.4.0@aar,androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1@aar,androidx.lifecycle:lifecycle-livedata:2.0.0@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-common:2.4.0@jar,androidx.arch.core:core-runtime:2.1.0@aar,androidx.arch.core:core-common:2.1.0@jar,androidx.versionedparcelable:versionedparcelable:1.1.1@aar,androidx.collection:collection:1.1.0@jar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.savedstate:savedstate:1.1.0@aar,androidx.annotation:annotation:1.3.0@jar,androidx.annotation:annotation-experimental:1.1.0@aar,androidx.tracing:tracing:1.0.0@aar,org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10@jar,org.jetbrains.kotlin:kotlin-stdlib:1.7.22@jar,org.jetbrains.kotlin:kotlin-stdlib-common:1.7.22@jar,org.jetbrains:annotations:13.0@jar">
     <dependency
-        name="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
-        simpleName="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar"/>
+        name="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
+        simpleName="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:android_intent::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:android_intent::release"
         simpleName="io.flutter.plugins.androidintent:android_intent"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:fl_location::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:fl_location::release"
         simpleName="com.pravera.fl_location:fl_location"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:flutter_activity_recognition::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:flutter_activity_recognition::release"
         simpleName="com.pravera.flutter_activity_recognition:flutter_activity_recognition"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:geofence_service::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:geofence_service::release"
         simpleName="com.pravera.geofence_service:geofence_service"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:network_info_plus::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:network_info_plus::release"
         simpleName="dev.fluttercommunity.plus.network_info:network_info_plus"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:pedometer::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:package_info_plus::release"
+        simpleName="dev.fluttercommunity.plus.packageinfo:package_info_plus"/>
+    <dependency
+        name="D:\tsysinfo\Ezeeclub\android@@:pedometer::release"
         simpleName="com.example.pedometer:pedometer"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:permission_handler_android::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:permission_handler_android::release"
         simpleName="com.baseflow.permissionhandler:permission_handler_android"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:qr_code_scanner::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:qr_code_scanner::release"
         simpleName="net.touchcapture.qr.flutterqr:qr_code_scanner"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:sensors::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:sensors::release"
         simpleName="io.flutter.plugins.sensors:sensors"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:shared_preferences_android::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:shared_preferences_android::release"
         simpleName="io.flutter.plugins.sharedpreferences:shared_preferences_android"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:wifi_info_flutter::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:wifi_info_flutter::release"
         simpleName="io.flutter.plugins.wifi_info_flutter:wifi_info_flutter"/>
     <dependency
         name="io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar"
@@ -141,42 +144,45 @@
         simpleName="org.jetbrains:annotations"/>
   </compile>
   <package
-      roots="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:android_intent::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:geofence_service::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:fl_location::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:flutter_activity_recognition::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:network_info_plus::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:pedometer::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:permission_handler_android::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:qr_code_scanner::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:sensors::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:shared_preferences_android::release,D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:wifi_info_flutter::release,io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.window:window-java:1.0.0-beta04@aar,androidx.window:window:1.0.0-beta04@aar,org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2@jar,org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10@jar,io.flutter:armeabi_v7a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:arm64_v8a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:x86_64_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,com.google.android.gms:play-services-location:21.0.1@aar,com.google.code.gson:gson:2.10.1@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10@jar,org.jetbrains.kotlin:kotlin-stdlib:1.7.22@jar,com.journeyapps:zxing-android-embedded:4.3.0@aar,androidx.appcompat:appcompat:1.4.2@aar,com.google.zxing:core:3.5.0@jar,com.google.android.gms:play-services-base:18.1.0@aar,com.google.android.gms:play-services-tasks:18.0.2@aar,com.google.android.gms:play-services-basement:18.1.0@aar,androidx.fragment:fragment:1.3.6@aar,androidx.fragment:fragment:1.3.6@aar,androidx.activity:activity:1.2.4@aar,androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1@aar,androidx.savedstate:savedstate:1.1.0@aar,androidx.loader:loader:1.0.0@aar,androidx.lifecycle:lifecycle-livedata:2.0.0@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.appcompat:appcompat-resources:1.4.2@aar,androidx.drawerlayout:drawerlayout:1.0.0@aar,androidx.emoji2:emoji2-views-helper:1.0.0@aar,androidx.emoji2:emoji2:1.0.0@aar,androidx.viewpager:viewpager:1.0.0@aar,androidx.vectordrawable:vectordrawable-animated:1.1.0@aar,androidx.vectordrawable:vectordrawable:1.1.0@aar,androidx.customview:customview:1.0.0@aar,androidx.core:core:1.7.0@aar,androidx.core:core:1.7.0@aar,androidx.lifecycle:lifecycle-process:2.4.0@aar,androidx.lifecycle:lifecycle-runtime:2.4.0@aar,androidx.lifecycle:lifecycle-common-java8:2.4.0@jar,androidx.lifecycle:lifecycle-common:2.4.0@jar,androidx.startup:startup-runtime:1.0.0@aar,androidx.tracing:tracing:1.0.0@aar,androidx.cursoradapter:cursoradapter:1.0.0@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.resourceinspection:resourceinspection-annotation:1.0.0@jar,androidx.versionedparcelable:versionedparcelable:1.1.1@aar,androidx.concurrent:concurrent-futures:1.0.0@jar,androidx.collection:collection:1.1.0@jar,androidx.arch.core:core-runtime:2.1.0@aar,androidx.arch.core:core-common:2.1.0@jar,androidx.interpolator:interpolator:1.0.0@aar,androidx.annotation:annotation:1.3.0@jar,org.jetbrains.kotlin:kotlin-stdlib-common:1.7.22@jar,org.jetbrains:annotations:13.0@jar,androidx.annotation:annotation-experimental:1.1.0@aar,com.google.guava:listenablefuture:1.0@jar">
+      roots="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar,D:\tsysinfo\Ezeeclub\android@@:android_intent::release,D:\tsysinfo\Ezeeclub\android@@:geofence_service::release,D:\tsysinfo\Ezeeclub\android@@:fl_location::release,D:\tsysinfo\Ezeeclub\android@@:flutter_activity_recognition::release,D:\tsysinfo\Ezeeclub\android@@:network_info_plus::release,D:\tsysinfo\Ezeeclub\android@@:package_info_plus::release,D:\tsysinfo\Ezeeclub\android@@:pedometer::release,D:\tsysinfo\Ezeeclub\android@@:permission_handler_android::release,D:\tsysinfo\Ezeeclub\android@@:qr_code_scanner::release,D:\tsysinfo\Ezeeclub\android@@:sensors::release,D:\tsysinfo\Ezeeclub\android@@:shared_preferences_android::release,D:\tsysinfo\Ezeeclub\android@@:wifi_info_flutter::release,io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,androidx.window:window-java:1.0.0-beta04@aar,androidx.window:window:1.0.0-beta04@aar,org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2@jar,org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10@jar,io.flutter:armeabi_v7a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:arm64_v8a_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,io.flutter:x86_64_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar,com.google.android.gms:play-services-location:21.0.1@aar,com.google.code.gson:gson:2.10.1@jar,org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10@jar,org.jetbrains.kotlin:kotlin-stdlib:1.7.22@jar,com.journeyapps:zxing-android-embedded:4.3.0@aar,androidx.appcompat:appcompat:1.4.2@aar,com.google.zxing:core:3.5.0@jar,com.google.android.gms:play-services-base:18.1.0@aar,com.google.android.gms:play-services-tasks:18.0.2@aar,com.google.android.gms:play-services-basement:18.1.0@aar,androidx.fragment:fragment:1.3.6@aar,androidx.fragment:fragment:1.3.6@aar,androidx.activity:activity:1.2.4@aar,androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1@aar,androidx.savedstate:savedstate:1.1.0@aar,androidx.loader:loader:1.0.0@aar,androidx.lifecycle:lifecycle-livedata:2.0.0@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.lifecycle:lifecycle-livedata-core:2.3.1@aar,androidx.appcompat:appcompat-resources:1.4.2@aar,androidx.drawerlayout:drawerlayout:1.0.0@aar,androidx.emoji2:emoji2-views-helper:1.0.0@aar,androidx.emoji2:emoji2:1.0.0@aar,androidx.viewpager:viewpager:1.0.0@aar,androidx.vectordrawable:vectordrawable-animated:1.1.0@aar,androidx.vectordrawable:vectordrawable:1.1.0@aar,androidx.customview:customview:1.0.0@aar,androidx.core:core:1.7.0@aar,androidx.core:core:1.7.0@aar,androidx.lifecycle:lifecycle-process:2.4.0@aar,androidx.lifecycle:lifecycle-runtime:2.4.0@aar,androidx.lifecycle:lifecycle-common-java8:2.4.0@jar,androidx.lifecycle:lifecycle-common:2.4.0@jar,androidx.startup:startup-runtime:1.0.0@aar,androidx.tracing:tracing:1.0.0@aar,androidx.cursoradapter:cursoradapter:1.0.0@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.lifecycle:lifecycle-viewmodel:2.3.1@aar,androidx.resourceinspection:resourceinspection-annotation:1.0.0@jar,androidx.versionedparcelable:versionedparcelable:1.1.1@aar,androidx.concurrent:concurrent-futures:1.0.0@jar,androidx.collection:collection:1.1.0@jar,androidx.arch.core:core-runtime:2.1.0@aar,androidx.arch.core:core-common:2.1.0@jar,androidx.interpolator:interpolator:1.0.0@aar,androidx.annotation:annotation:1.3.0@jar,org.jetbrains.kotlin:kotlin-stdlib-common:1.7.22@jar,org.jetbrains:annotations:13.0@jar,androidx.annotation:annotation-experimental:1.1.0@aar,com.google.guava:listenablefuture:1.0@jar">
     <dependency
-        name="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
-        simpleName="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar"/>
+        name="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
+        simpleName="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:android_intent::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:android_intent::release"
         simpleName="io.flutter.plugins.androidintent:android_intent"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:geofence_service::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:geofence_service::release"
         simpleName="com.pravera.geofence_service:geofence_service"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:fl_location::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:fl_location::release"
         simpleName="com.pravera.fl_location:fl_location"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:flutter_activity_recognition::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:flutter_activity_recognition::release"
         simpleName="com.pravera.flutter_activity_recognition:flutter_activity_recognition"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:network_info_plus::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:network_info_plus::release"
         simpleName="dev.fluttercommunity.plus.network_info:network_info_plus"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:pedometer::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:package_info_plus::release"
+        simpleName="dev.fluttercommunity.plus.packageinfo:package_info_plus"/>
+    <dependency
+        name="D:\tsysinfo\Ezeeclub\android@@:pedometer::release"
         simpleName="com.example.pedometer:pedometer"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:permission_handler_android::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:permission_handler_android::release"
         simpleName="com.baseflow.permissionhandler:permission_handler_android"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:qr_code_scanner::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:qr_code_scanner::release"
         simpleName="net.touchcapture.qr.flutterqr:qr_code_scanner"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:sensors::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:sensors::release"
         simpleName="io.flutter.plugins.sensors:sensors"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:shared_preferences_android::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:shared_preferences_android::release"
         simpleName="io.flutter.plugins.sharedpreferences:shared_preferences_android"/>
     <dependency
-        name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:wifi_info_flutter::release"
+        name="D:\tsysinfo\Ezeeclub\android@@:wifi_info_flutter::release"
         simpleName="io.flutter.plugins.wifi_info_flutter:wifi_info_flutter"/>
     <dependency
         name="io.flutter:flutter_embedding_release:1.0.0-55eae6864b296dd9f43b2cc7577ec256e5c32a8d@jar"

@@ -160,8 +160,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     final double scrrenheight = MediaQuery.of(context).size.height;
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-
+      backgroundColor: Colors.black,
       drawer: AppDrawer(
         userModel: widget.usermodel,
       ),
@@ -170,9 +169,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue.shade900.withOpacity(0.5),
+                Colors.black.withOpacity(0.5),
                 Colors.purple.shade400.withOpacity(0.5),
               ],
+              begin: Alignment.centerLeft,
+              end: Alignment.bottomRight,
             ),
             shape: BoxShape.rectangle,
           ),
@@ -322,45 +323,16 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                            height: screenWidth * 0.6,
+                            height: screenWidth * 0.5,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16.0),
-                                color: Colors.purple.withOpacity(0.2)),
+                              color: Colors.grey.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
                             child: _buildWaterDrinkingCard(context),
                           ),
                         ),
                       ),
                       SizedBox(width: 15.0),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: screenWidth * 0.6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return DietPlanScreen(
-                                      userModel: widget.usermodel,
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: _buildInfoCard(
-                                context,
-                                'Diet Plan',
-                                '',
-                                '0',
-                                Icons.food_bank_outlined,
-                                "assets/dietplan.png"),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -385,27 +357,32 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           height: screenWidth * 0.7,
-                          child: _buildWorkoutCard(context)),
+                          child: ptrecordswidget(screenWidth)),
                     ),
-                    // SizedBox(width: screenWidth * 0.03),
-                    // Container(
-                    //   width: 3.0, // Adjust this value for the desired width
-                    //   height:
-                    //       height * 0.15, // Adjust this value for the desired height
-                    //   color: Colors.white,
-                    // ),
-                    // SizedBox(width: screenWidth * 0.03),
-
-                    SizedBox(width: 15.0),
-
                     Expanded(
                       flex: 1,
                       child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          height: screenWidth * 0.7,
-                          child: ptrecordswidget(screenWidth)),
+                        height: screenWidth * 0.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return DietPlanScreen(
+                                    userModel: widget.usermodel,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: _buildInfoCard(context, 'Diet Plan', '', '0',
+                              Icons.food_bank_outlined, "assets/dietplan.png"),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -765,23 +742,34 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             Get.to(() => WaterBenefitsScreen());
           },
           child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+              padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("ARE YOU DRINKING ENOUGH WATER ?",
-                      textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.1,
-                      )),
-                  Text("Benefits of it's.",
-                      textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: screenWidth * 0.05,
-                      )),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("ARE YOU DRINKING ENOUGH WATER ?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.06,
+                            )),
+                        Text("Know the Benefits.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: screenWidth * 0.05,
+                            )),
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    "assets/water_drinking_concept.png",
+                    fit: BoxFit.cover,
+                    height: screenWidth * 1.5,
+                    width: screenWidth * 0.5,
+                  ),
                 ],
               )),
         );
@@ -1108,7 +1096,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
               Center(
                 child: Text(
                   textScaler: TextScaler.linear(2.0),
-                  'PT RECORDS',
+                  'PT\n RECORDS',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     // Text size

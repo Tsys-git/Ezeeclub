@@ -6,11 +6,11 @@ com.pravera.geofence_service-jetified-play-services-base-18.1.0-4 C:\Users\Delux
 com.pravera.geofence_service-core-1.6.0-5 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
 com.pravera.geofence_service-main-6 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\geofence_service-6.0.0\android\src\main\res
 com.pravera.geofence_service-release-7 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\geofence_service-6.0.0\android\src\release\res
-com.pravera.geofence_service-packaged_res-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\packaged_res\release
-com.pravera.geofence_service-packaged_res-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\packaged_res\release
-com.pravera.geofence_service-pngs-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\generated\res\pngs\release
-com.pravera.geofence_service-resValues-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\generated\res\resValues\release
-com.pravera.geofence_service-rs-12 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\generated\res\rs\release
-com.pravera.geofence_service-mergeReleaseResources-13 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\intermediates\incremental\release\mergeReleaseResources\merged.dir
-com.pravera.geofence_service-mergeReleaseResources-14 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-com.pravera.geofence_service-merged_res-15 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\intermediates\merged_res\release
+com.pravera.geofence_service-packaged_res-8 D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\packaged_res\release
+com.pravera.geofence_service-packaged_res-9 D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\packaged_res\release
+com.pravera.geofence_service-pngs-10 D:\tsysinfo\Ezeeclub\build\geofence_service\generated\res\pngs\release
+com.pravera.geofence_service-resValues-11 D:\tsysinfo\Ezeeclub\build\geofence_service\generated\res\resValues\release
+com.pravera.geofence_service-rs-12 D:\tsysinfo\Ezeeclub\build\geofence_service\generated\res\rs\release
+com.pravera.geofence_service-mergeReleaseResources-13 D:\tsysinfo\Ezeeclub\build\geofence_service\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.pravera.geofence_service-mergeReleaseResources-14 D:\tsysinfo\Ezeeclub\build\geofence_service\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.pravera.geofence_service-merged_res-15 D:\tsysinfo\Ezeeclub\build\geofence_service\intermediates\merged_res\release

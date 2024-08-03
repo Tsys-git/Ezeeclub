@@ -11,7 +11,6 @@ import 'pages/splashsreen.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future main() async {
-
   UrlSetting urlSetting = UrlSetting();
   WidgetsFlutterBinding.ensureInitialized();
   await urlSetting.initialize();
@@ -43,12 +42,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.dark, // This will use the system theme
-      home:SplashScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.dark, // This will use the system theme
+        home: HomeScreenMember(usermodel: usermodel));
   }
-
-
 }

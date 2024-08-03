@@ -9046,6 +9046,20 @@ dev.fluttercommunity.plus.network_info.R$string
 dev.fluttercommunity.plus.network_info.R$style
 dev.fluttercommunity.plus.network_info.R$styleable
 dev.fluttercommunity.plus.network_info.R
+dev.fluttercommunity.plus.packageinfo.BuildConfig
+dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin:
+    private static final java.lang.String CHANNEL_NAME
+dev.fluttercommunity.plus.packageinfo.R$attr
+dev.fluttercommunity.plus.packageinfo.R$color
+dev.fluttercommunity.plus.packageinfo.R$dimen
+dev.fluttercommunity.plus.packageinfo.R$drawable
+dev.fluttercommunity.plus.packageinfo.R$id
+dev.fluttercommunity.plus.packageinfo.R$integer
+dev.fluttercommunity.plus.packageinfo.R$layout
+dev.fluttercommunity.plus.packageinfo.R$string
+dev.fluttercommunity.plus.packageinfo.R$style
+dev.fluttercommunity.plus.packageinfo.R$styleable
+dev.fluttercommunity.plus.packageinfo.R
 io.flutter.Build$API_LEVELS
 io.flutter.Build
 io.flutter.BuildConfig
@@ -10748,7 +10762,6 @@ kotlin.collections.ArraysKt___ArraysKt:
     public static final int first(int[],kotlin.jvm.functions.Function1)
     public static final long first(long[])
     public static final long first(long[],kotlin.jvm.functions.Function1)
-    public static final java.lang.Object first(java.lang.Object[])
     public static final java.lang.Object first(java.lang.Object[],kotlin.jvm.functions.Function1)
     public static final short first(short[])
     public static final short first(short[],kotlin.jvm.functions.Function1)
@@ -20262,6 +20275,12 @@ dev.fluttercommunity.plus.network_info.NetworkInfo:
 dev.fluttercommunity.plus.network_info.NetworkInfoPlusPlugin$Companion
 dev.fluttercommunity.plus.network_info.NetworkInfoPlusPlugin:
     public static final dev.fluttercommunity.plus.network_info.NetworkInfoPlusPlugin$Companion Companion
+    static void <clinit>()
+dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin$$InternalSyntheticApiModelOutline$2$382813a1576168f78e4defe31c0719592cac8b3b346c5895faaf0633645005ee$0
+dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin$$InternalSyntheticApiModelOutline$2$5ec7637298ab2c0e45004ff84252d68318f959a0787b70f2c24bee68bab1748a$0
+dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin$Companion
+dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin:
+    public static final dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin$Companion Companion
     static void <clinit>()
 io.flutter.FlutterInjector$1
 io.flutter.FlutterInjector$Builder$NamedThreadFactory:

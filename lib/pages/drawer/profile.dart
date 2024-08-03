@@ -59,7 +59,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.9),
       appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.black.withOpacity(0.9),
         actions: [
           IconButton(
             onPressed: () {
@@ -208,16 +211,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Colors.blue,
-                Colors.purple.shade800,
-              ],
-            ),
-          ),
+              borderRadius: BorderRadius.circular(10.0),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                colors: [
+                  Colors.black.withOpacity(1),
+                  Colors.purple.shade800,
+                ],
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 16,
+                    offset: Offset.zero)
+              ]),
           padding: EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
