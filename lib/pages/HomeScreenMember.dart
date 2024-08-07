@@ -765,10 +765,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     ),
                   ),
                   Image.asset(
-                    "assets/water_drinking_concept.png",
+                    "assets/wdc.jpg",
                     fit: BoxFit.cover,
-                    height: screenWidth * 1.5,
-                    width: screenWidth * 0.5,
+                    height: screenWidth * 3,
+                    width: screenWidth * 0.2,
                   ),
                 ],
               )),

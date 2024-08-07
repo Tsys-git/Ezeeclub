@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ezeeclub/pages/Auth/login.dart';
 import 'package:ezeeclub/pages/Features/rules.dart';
 import 'package:ezeeclub/pages/drawer/about.dart';
-import 'package:ezeeclub/pages/drawer/socialMedia.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Features/calender.dart';
 import '../Features/heathDetails.dart';
@@ -23,7 +23,6 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Drawer(
         child: SingleChildScrollView(
@@ -160,7 +159,9 @@ class _AppDrawerState extends State<AppDrawer> {
               //   );
               // }),
 
-              buildDrawerListTile(Icons.star, "Rate Us", () {}),
+              buildDrawerListTile(Icons.star, "Rate Us", () {
+                _showRateUsBottomSheet(context);
+              }),
               buildDrawerListTile(Icons.help, "Help", () {
                 Navigator.push(
                   context,
@@ -195,5 +196,73 @@ class _AppDrawerState extends State<AppDrawer> {
       title: Text(title, style: TextStyle(color: Colors.white, fontSize: 20)),
       onTap: onTap,
     );
+  }
+
+  void _showRateUsBottomSheet(BuildContext context) {
+    var _rating = 4;
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                'Rate Us',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'If you like our app, please rate us!',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(5, (index) {
+                  return IconButton(
+                    icon: Icon(
+                      index < _rating ? Icons.star : Icons.star_border,
+                      color: Colors.amber,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _rating = index + 1;
+                      });
+                    },
+                  );
+                }),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _openRatingPage();
+                },
+                child: Text('Rate Now'),
+              ),
+              SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Later'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _openRatingPage() async {
+    const url =
+        'https://play.google.com/store/apps/details'; // Replace with your app's store URL
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

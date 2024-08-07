@@ -31,75 +31,57 @@ class WaterBenefitsScreen extends StatelessWidget {
     },
   ];
 
-  WaterBenefitsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Benefits of Drinking Water'),
+        backgroundColor: Colors.black.withOpacity(0.9),
+      ),
       backgroundColor: Colors.black.withOpacity(0.9),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 20.0,
-            flexibleSpace: FlexibleSpaceBar(
-              title: SafeArea(
-                child: Text(
-                  'Benefits of Drinking Water',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            backgroundColor: Colors.black.withOpacity(0.9),
-            pinned: true,
-          ),
-          SliverPadding(
-            padding: EdgeInsets.all(16.0),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: 0.8, // Adjust as needed
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final benefit = benefits[index];
-                  return _buildBenefitItem(
-                      benefit['title']!, benefit['description']!, context);
-                },
-                childCount: benefits.length,
-              ),
-            ),
-          ),
-        ],
+      body: GridView.builder(
+        padding: EdgeInsets.all(16.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+        ),
+        itemCount: benefits.length,
+        itemBuilder: (context, index) {
+          final benefit = benefits[index];
+          return _buildBenefitCard(
+              benefit['title']!, benefit['description']!);
+        },
       ),
     );
   }
 
-  Widget _buildBenefitItem(
-      String title, String description, BuildContext context) {
+  Widget _buildBenefitCard(String title, String description) {
     return Card(
-      elevation: 6.0,
+      color: Colors.grey.withOpacity(0.9),
+      elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.purple.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        padding: EdgeInsets.all(16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
             ),
             SizedBox(height: 10.0),
             Text(
               description,
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.white.withOpacity(0.7),
+              ),
             ),
           ],
         ),
