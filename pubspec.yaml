@@ -51,6 +51,9 @@ dependencies:
   geofence_service: ^6.0.0
   pedometer: ^4.0.1
   device_preview: ^1.2.0
+  flutter_heatmap_calendar: ^1.0.5
+  package_info_plus: ^8.0.1
+  url_launcher: ^6.3.0
   
   
 

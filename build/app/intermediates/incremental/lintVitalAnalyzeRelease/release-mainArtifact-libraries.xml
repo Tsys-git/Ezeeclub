@@ -1,13 +1,13 @@
 <libraries>
   <library
-      name="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar"
-      resolved="__local_aars__:D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\intermediates\flutter\release\libs.jar:unspecified"/>
+      name="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified@jar"
+      jars="D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar"
+      resolved="__local_aars__:D:\tsysinfo\Ezeeclub\android\app\build\intermediates\flutter\release\libs.jar:unspecified"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:android_intent::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\.transforms\8754fd97f86e768de921b392e3b1240d\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\.transforms\8754fd97f86e768de921b392e3b1240d\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:android_intent::release"
+      jars="D:\tsysinfo\Ezeeclub\build\android_intent\.transforms\36e319ef19a2e3d1d634d707aa3b66e1\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\android_intent\.transforms\36e319ef19a2e3d1d634d707aa3b66e1\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.androidintent:android_intent:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\.transforms\8754fd97f86e768de921b392e3b1240d\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\android_intent\.transforms\36e319ef19a2e3d1d634d707aa3b66e1\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -17,10 +17,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:fl_location::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\.transforms\32e40b55224cbbde6c390f38ab045ae2\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\.transforms\32e40b55224cbbde6c390f38ab045ae2\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:fl_location::release"
+      jars="D:\tsysinfo\Ezeeclub\build\fl_location\.transforms\d1197fc966b1543f46cc5c13e3c8f736\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\fl_location\.transforms\d1197fc966b1543f46cc5c13e3c8f736\transformed\out\jars\libs\R.jar"
       resolved="com.pravera.fl_location:fl_location:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\.transforms\32e40b55224cbbde6c390f38ab045ae2\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\fl_location\.transforms\d1197fc966b1543f46cc5c13e3c8f736\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -30,10 +30,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:flutter_activity_recognition::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\.transforms\68a3efa9e0592bc8ef2fb84d96cf82c4\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\.transforms\68a3efa9e0592bc8ef2fb84d96cf82c4\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:flutter_activity_recognition::release"
+      jars="D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\.transforms\77164bb8b1a0479095df96aee50dc5b3\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\.transforms\77164bb8b1a0479095df96aee50dc5b3\transformed\out\jars\libs\R.jar"
       resolved="com.pravera.flutter_activity_recognition:flutter_activity_recognition:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\.transforms\68a3efa9e0592bc8ef2fb84d96cf82c4\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\.transforms\77164bb8b1a0479095df96aee50dc5b3\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -43,10 +43,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:geofence_service::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\.transforms\cf64ecdd03e33d151bc5e6896d62940d\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\.transforms\cf64ecdd03e33d151bc5e6896d62940d\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:geofence_service::release"
+      jars="D:\tsysinfo\Ezeeclub\build\geofence_service\.transforms\73564308203cc5128fbb068a972fd896\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\geofence_service\.transforms\73564308203cc5128fbb068a972fd896\transformed\out\jars\libs\R.jar"
       resolved="com.pravera.geofence_service:geofence_service:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\.transforms\cf64ecdd03e33d151bc5e6896d62940d\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\geofence_service\.transforms\73564308203cc5128fbb068a972fd896\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -56,10 +56,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:network_info_plus::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\.transforms\2d523c243e7e22a6224afa08faa9a321\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\.transforms\2d523c243e7e22a6224afa08faa9a321\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:network_info_plus::release"
+      jars="D:\tsysinfo\Ezeeclub\build\network_info_plus\.transforms\b388f52c5905654193c1bb60b4a6d36a\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\network_info_plus\.transforms\b388f52c5905654193c1bb60b4a6d36a\transformed\out\jars\libs\R.jar"
       resolved="dev.fluttercommunity.plus.network_info:network_info_plus:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\.transforms\2d523c243e7e22a6224afa08faa9a321\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\network_info_plus\.transforms\b388f52c5905654193c1bb60b4a6d36a\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -69,10 +69,23 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:pedometer::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\pedometer\.transforms\92add7d63de74f7581e332da1c1f4c19\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\pedometer\.transforms\92add7d63de74f7581e332da1c1f4c19\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:package_info_plus::release"
+      jars="D:\tsysinfo\Ezeeclub\build\package_info_plus\.transforms\d4985ded159f3dc73d4753a2c3be99f8\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\package_info_plus\.transforms\d4985ded159f3dc73d4753a2c3be99f8\transformed\out\jars\libs\R.jar"
+      resolved="dev.fluttercommunity.plus.packageinfo:package_info_plus:unspecified"
+      folder="D:\tsysinfo\Ezeeclub\build\package_info_plus\.transforms\d4985ded159f3dc73d4753a2c3be99f8\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="D:\tsysinfo\Ezeeclub\android@@:pedometer::release"
+      jars="D:\tsysinfo\Ezeeclub\build\pedometer\.transforms\4d886db07bb4df600f0292899d20b2ff\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\pedometer\.transforms\4d886db07bb4df600f0292899d20b2ff\transformed\out\jars\libs\R.jar"
       resolved="com.example.pedometer:pedometer:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\pedometer\.transforms\92add7d63de74f7581e332da1c1f4c19\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\pedometer\.transforms\4d886db07bb4df600f0292899d20b2ff\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -82,10 +95,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:permission_handler_android::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\permission_handler_android\.transforms\338ac87121be2c1d599f5b3b7a66b4b9\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\permission_handler_android\.transforms\338ac87121be2c1d599f5b3b7a66b4b9\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:permission_handler_android::release"
+      jars="D:\tsysinfo\Ezeeclub\build\permission_handler_android\.transforms\3783af6be691acdfaf05c27f790cde8b\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\permission_handler_android\.transforms\3783af6be691acdfaf05c27f790cde8b\transformed\out\jars\libs\R.jar"
       resolved="com.baseflow.permissionhandler:permission_handler_android:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\permission_handler_android\.transforms\338ac87121be2c1d599f5b3b7a66b4b9\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\permission_handler_android\.transforms\3783af6be691acdfaf05c27f790cde8b\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -95,10 +108,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:qr_code_scanner::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\.transforms\fd7bdf36493f1e6766530fcf585baa98\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\.transforms\fd7bdf36493f1e6766530fcf585baa98\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:qr_code_scanner::release"
+      jars="D:\tsysinfo\Ezeeclub\build\qr_code_scanner\.transforms\5fec6688d8060926004cd72bba871c8b\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\qr_code_scanner\.transforms\5fec6688d8060926004cd72bba871c8b\transformed\out\jars\libs\R.jar"
       resolved="net.touchcapture.qr.flutterqr:qr_code_scanner:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\.transforms\fd7bdf36493f1e6766530fcf585baa98\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\qr_code_scanner\.transforms\5fec6688d8060926004cd72bba871c8b\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -108,10 +121,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:sensors::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\sensors\.transforms\be5a58530d6dc12638ac2af63fcc902c\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\sensors\.transforms\be5a58530d6dc12638ac2af63fcc902c\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:sensors::release"
+      jars="D:\tsysinfo\Ezeeclub\build\sensors\.transforms\952307fcea5cc9be2ee2b459b9d27fef\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\sensors\.transforms\952307fcea5cc9be2ee2b459b9d27fef\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.sensors:sensors:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\sensors\.transforms\be5a58530d6dc12638ac2af63fcc902c\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\sensors\.transforms\952307fcea5cc9be2ee2b459b9d27fef\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -121,10 +134,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:shared_preferences_android::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\shared_preferences_android\.transforms\936948c71eccd1799965ef5535c9eb6b\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\shared_preferences_android\.transforms\936948c71eccd1799965ef5535c9eb6b\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:shared_preferences_android::release"
+      jars="D:\tsysinfo\Ezeeclub\build\shared_preferences_android\.transforms\b5cac73b4c82a1db42c4c4d933fd5cd2\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\shared_preferences_android\.transforms\b5cac73b4c82a1db42c4c4d933fd5cd2\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.sharedpreferences:shared_preferences_android:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\shared_preferences_android\.transforms\936948c71eccd1799965ef5535c9eb6b\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\shared_preferences_android\.transforms\b5cac73b4c82a1db42c4c4d933fd5cd2\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -134,10 +147,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="D:\Projects\Gym App Ezeeclub\EzeeClub\android@@:wifi_info_flutter::release"
-      jars="D:\Projects\Gym App Ezeeclub\EzeeClub\build\wifi_info_flutter\.transforms\4dddf1d5f4525b2ac838f68aabb8e3d3\transformed\out\jars\classes.jar;D:\Projects\Gym App Ezeeclub\EzeeClub\build\wifi_info_flutter\.transforms\4dddf1d5f4525b2ac838f68aabb8e3d3\transformed\out\jars\libs\R.jar"
+      name="D:\tsysinfo\Ezeeclub\android@@:wifi_info_flutter::release"
+      jars="D:\tsysinfo\Ezeeclub\build\wifi_info_flutter\.transforms\5c4fb1013699c1c8e4ecc84ae5a24baa\transformed\out\jars\classes.jar;D:\tsysinfo\Ezeeclub\build\wifi_info_flutter\.transforms\5c4fb1013699c1c8e4ecc84ae5a24baa\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.wifi_info_flutter:wifi_info_flutter:unspecified"
-      folder="D:\Projects\Gym App Ezeeclub\EzeeClub\build\wifi_info_flutter\.transforms\4dddf1d5f4525b2ac838f68aabb8e3d3\transformed\out"
+      folder="D:\tsysinfo\Ezeeclub\build\wifi_info_flutter\.transforms\5c4fb1013699c1c8e4ecc84ae5a24baa\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

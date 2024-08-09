@@ -6,9 +6,9 @@ class RulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.grey.withOpacity(0.2),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.grey.withOpacity(0.2),
 //Colors.grey[800]
         title: Text(
           "Gym Rules",
@@ -113,7 +113,7 @@ class RuleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.green[200],
+      color: Colors.grey,
       margin: EdgeInsets.only(bottom: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -150,7 +150,7 @@ class RuleItem extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -158,7 +158,7 @@ class RuleItem extends StatelessWidget {
                     ruleDescription,
                     style: TextStyle(
                       fontSize: 16.0,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ],

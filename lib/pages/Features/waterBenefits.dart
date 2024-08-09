@@ -21,10 +21,6 @@ class WaterBenefitsScreen extends StatelessWidget {
           'Flushes out toxins from the body and prevents kidney stones.',
     },
     {
-      'title': 'Improves Brain Function',
-      'description': 'Improves concentration, cognition, and mood.',
-    },
-    {
       'title': 'Regulates Body Temperature',
       'description': 'Helps in regulating body temperature.',
     },
@@ -35,129 +31,56 @@ class WaterBenefitsScreen extends StatelessWidget {
     },
   ];
 
-  final List<Gradient> gradients = [
-    LinearGradient(
-      colors: [Colors.teal, Colors.teal],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.red, Colors.red],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.green, Colors.green],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.purple, Colors.purple],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.cyan, Colors.cyan],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.orange, Colors.orange],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    LinearGradient(
-      colors: [Colors.blue, Colors.blue],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-  ];
-
-  WaterBenefitsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 20.0,
-            flexibleSpace: FlexibleSpaceBar(
-              title: SafeArea(
-                child: Text(
-                  'Benefits of Drinking Water',
-                  style: TextStyle(fontSize: 24),
-                ),
-              ),
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.teal, Colors.teal],
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                  ),
-                ),
-              ),
-            ),
-            backgroundColor: Theme.of(context).primaryColor,
-            pinned: true,
-          ),
-          SliverPadding(
-            padding: EdgeInsets.all(16.0),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: 0.8, // Adjust as needed
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final benefit = benefits[index];
-                  final gradient = gradients[index % gradients.length];
-                  return _buildBenefitItem(
-                      benefit['title']!, benefit['description']!, gradient);
-                },
-                childCount: benefits.length,
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: Text('Benefits of Drinking Water'),
+        backgroundColor: Colors.black.withOpacity(0.9),
+      ),
+      backgroundColor: Colors.black.withOpacity(0.9),
+      body: GridView.builder(
+        padding: EdgeInsets.all(16.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+        ),
+        itemCount: benefits.length,
+        itemBuilder: (context, index) {
+          final benefit = benefits[index];
+          return _buildBenefitCard(
+              benefit['title']!, benefit['description']!);
+        },
       ),
     );
   }
 
-  Widget _buildBenefitItem(
-      String title, String description, Gradient gradient) {
+  Widget _buildBenefitCard(String title, String description) {
     return Card(
-      elevation: 6.0,
+      color: Colors.grey.withOpacity(0.9),
+      elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        padding: EdgeInsets.all(16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
               style: TextStyle(
-                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontSize: 16.0,
               ),
             ),
             SizedBox(height: 10.0),
             Text(
               description,
               style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white.withOpacity(0.9),
+                fontSize: 14.0,
+                color: Colors.white.withOpacity(0.7),
               ),
             ),
           ],

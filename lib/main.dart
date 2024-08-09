@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark, // This will use the system theme
-      home: SplashScreen()
+      home: HomeScreenMember(
+        usermodel: usermodel,
+      ),
     );
   }
-
-
 }

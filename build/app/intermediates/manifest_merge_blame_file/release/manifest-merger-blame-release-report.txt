@@ -6,34 +6,34 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml
+8-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="34" />
-9-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml
+9-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" /> <!-- for intenet -->
-11-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:3:17-78
-11-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:3:34-76
+11-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:3:17-78
+11-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:3:34-76
 12    <uses-permission android:name="android.permission.CAMERA" /> <!-- for scan the qr code -->
-12-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:4:21-81
-12-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:4:38-78
+12-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:4:21-81
+12-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:4:38-78
 13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- for location -->
-13-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:5:17-93
-13-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:5:34-90
+13-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:5:17-93
+13-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:5:34-90
 14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- for attendace via wifi connection -->
-14-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:6:17-88
-14-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:6:34-85
+14-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:6:17-88
+14-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:6:34-85
 15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- for attendace via wifi connection -->
-15-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:7:17-91
-15-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:7:34-88
+15-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:7:17-91
+15-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:7:34-88
 16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- for attendace via geofencing -->
-16-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:8:17-91
-16-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:8:34-88
+16-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:8:17-91
+16-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:8:34-88
 17    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- for attendace via geofencing -->
-17-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:9:17-97
-17-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:9:34-94
+17-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:9:17-97
+17-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:9:34-94
 18    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-18-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:10:17-90
-18-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:10:34-88
+18-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:10:17-90
+18-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:10:34-88
 19
 20    <!--
 21         Required to query activities that can process text, see:
@@ -43,16 +43,16 @@
 25         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 26    -->
 27    <queries>
-27-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:53:5-58:15
+27-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:53:5-58:15
 28        <intent>
-28-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:54:9-57:18
+28-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:54:9-57:18
 29            <action android:name="android.intent.action.PROCESS_TEXT" />
-29-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:55:13-72
-29-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:55:21-70
+29-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:55:13-72
+29-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:55:21-70
 30
 31            <data android:mimeType="text/plain" />
-31-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:56:13-50
-31-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:56:19-48
+31-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:56:13-50
+31-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:56:19-48
 32        </intent>
 33    </queries>
 34    <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
@@ -95,31 +95,31 @@
 53-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Delux\.gradle\caches\transforms-3\9ef084a9dcca6685d2791b09b4e75fde\transformed\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
 54    <application
 55        android:name="android.app.Application"
-55-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:15:9-42
+55-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:15:9-42
 56        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 56-->[androidx.core:core:1.7.0] C:\Users\Delux\.gradle\caches\transforms-3\008a3dd6ded4806b9a1a48d13a4d3670\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
 57        android:icon="@mipmap/ic_launcher"
-57-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:16:9-43
+57-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:16:9-43
 58        android:label="ezeeclub" >
-58-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:14:9-33
+58-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:14:9-33
 59        <activity
-59-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:17:9-39:20
+59-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:17:9-39:20
 60            android:name="com.example.ezeeclub.MainActivity"
-60-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:19:13-41
+60-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:19:13-41
 61            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-61-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:24:13-163
+61-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:24:13-163
 62            android:exported="true"
-62-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:20:13-36
+62-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:20:13-36
 63            android:hardwareAccelerated="true"
-63-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:25:13-47
+63-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:25:13-47
 64            android:launchMode="singleTop"
-64-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:21:13-43
+64-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:21:13-43
 65            android:taskAffinity=""
-65-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:22:13-36
+65-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:22:13-36
 66            android:theme="@style/LaunchTheme"
-66-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:23:13-47
+66-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:23:13-47
 67            android:windowSoftInputMode="adjustResize" >
-67-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:26:13-55
+67-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:26:13-55
 68
 69            <!--
 70                 Specifies an Android theme to apply to this Activity as soon as
@@ -128,21 +128,21 @@
 73                 to determine the Window background behind the Flutter UI.
 74            -->
 75            <meta-data
-75-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:31:13-34:17
+75-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:31:13-34:17
 76                android:name="io.flutter.embedding.android.NormalTheme"
-76-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:32:15-70
+76-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:32:15-70
 77                android:resource="@style/NormalTheme" />
-77-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:33:15-52
+77-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:33:15-52
 78
 79            <intent-filter>
-79-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:35:13-38:29
+79-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:35:13-38:29
 80                <action android:name="android.intent.action.MAIN" />
-80-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:36:17-68
-80-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:36:25-66
+80-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:36:17-68
+80-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:36:25-66
 81
 82                <category android:name="android.intent.category.LAUNCHER" />
-82-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:37:17-76
-82-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:37:27-74
+82-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:37:17-76
+82-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:37:27-74
 83            </intent-filter>
 84        </activity>
 85        <!--
@@ -150,42 +150,42 @@
 87             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 88        -->
 89        <meta-data
-89-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:42:9-44:33
+89-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:42:9-44:33
 90            android:name="flutterEmbedding"
-90-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:43:13-44
+90-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:43:13-44
 91            android:value="2" />
-91-->D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\AndroidManifest.xml:44:13-30
+91-->D:\tsysinfo\Ezeeclub\android\app\src\main\AndroidManifest.xml:44:13-30
 92
 93        <service
-93-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:13:9-17:72
+93-->[:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:13:9-17:72
 94            android:name="com.pravera.fl_location.service.LocationServicesStatusIntentService"
-94-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-95
+94-->[:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-95
 95            android:enabled="true"
-95-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-35
+95-->[:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-35
 96            android:exported="false"
-96-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-37
+96-->[:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-37
 97            android:permission="android.permission.BIND_JOB_SERVICE" />
-97-->[:fl_location] D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-69
+97-->[:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-69
 98
 99        <receiver
-99-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:11:9-15:47
+99-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:11:9-15:47
 100            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentReceiver"
-100-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-110
+100-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-110
 101            android:enabled="true"
-101-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-35
+101-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-35
 102            android:exported="true" />
-102-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-36
+102-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-36
 103
 104        <service
-104-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:17:9-21:72
+104-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:17:9-21:72
 105            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentService"
-105-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:18:13-109
+105-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:18:13-109
 106            android:enabled="true"
-106-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-35
+106-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-35
 107            android:exported="false"
-107-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-37
+107-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-37
 108            android:permission="android.permission.BIND_JOB_SERVICE" />
-108-->[:flutter_activity_recognition] D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-69
+108-->[:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-69
 109
 110        <uses-library
 110-->[androidx.window:window:1.0.0-beta04] C:\Users\Delux\.gradle\caches\transforms-3\0e1fe3c9069ea1bc5ecfc6b349cbd38f\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40

@@ -4,9 +4,9 @@ dev.fluttercommunity.plus.network_info.network_info_plus-jetified-window-java-1.
 dev.fluttercommunity.plus.network_info.network_info_plus-core-1.6.0-3 C:\Users\Delux\.gradle\caches\transforms-3\a766ebd4f8d1071b0d3866a36858c9da\transformed\core-1.6.0\res
 dev.fluttercommunity.plus.network_info.network_info_plus-main-4 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\network_info_plus-5.0.3\android\src\main\res
 dev.fluttercommunity.plus.network_info.network_info_plus-release-5 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\network_info_plus-5.0.3\android\src\release\res
-dev.fluttercommunity.plus.network_info.network_info_plus-pngs-6 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\pngs\release
-dev.fluttercommunity.plus.network_info.network_info_plus-resValues-7 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\resValues\release
-dev.fluttercommunity.plus.network_info.network_info_plus-rs-8 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\generated\res\rs\release
-dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-9 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\merged.dir
-dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-10 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-dev.fluttercommunity.plus.network_info.network_info_plus-merged_res-11 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\merged_res\release
+dev.fluttercommunity.plus.network_info.network_info_plus-pngs-6 D:\tsysinfo\Ezeeclub\build\network_info_plus\generated\res\pngs\release
+dev.fluttercommunity.plus.network_info.network_info_plus-resValues-7 D:\tsysinfo\Ezeeclub\build\network_info_plus\generated\res\resValues\release
+dev.fluttercommunity.plus.network_info.network_info_plus-rs-8 D:\tsysinfo\Ezeeclub\build\network_info_plus\generated\res\rs\release
+dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-9 D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\merged.dir
+dev.fluttercommunity.plus.network_info.network_info_plus-mergeReleaseResources-10 D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+dev.fluttercommunity.plus.network_info.network_info_plus-merged_res-11 D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\merged_res\release

@@ -15,9 +15,9 @@ net.touchcapture.qr.flutterqr.qr_code_scanner-jetified-emoji2-1.0.0-13 C:\Users\
 net.touchcapture.qr.flutterqr.qr_code_scanner-jetified-lifecycle-process-2.4.0-14 C:\Users\Delux\.gradle\caches\transforms-3\de8967fdfc3da41303a33a2eb1041839\transformed\jetified-lifecycle-process-2.4.0\res
 net.touchcapture.qr.flutterqr.qr_code_scanner-main-15 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\qr_code_scanner-1.0.1\android\src\main\res
 net.touchcapture.qr.flutterqr.qr_code_scanner-release-16 C:\Users\Delux\AppData\Local\Pub\Cache\hosted\pub.dev\qr_code_scanner-1.0.1\android\src\release\res
-net.touchcapture.qr.flutterqr.qr_code_scanner-pngs-17 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\generated\res\pngs\release
-net.touchcapture.qr.flutterqr.qr_code_scanner-resValues-18 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\generated\res\resValues\release
-net.touchcapture.qr.flutterqr.qr_code_scanner-rs-19 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\generated\res\rs\release
-net.touchcapture.qr.flutterqr.qr_code_scanner-mergeReleaseResources-20 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\intermediates\incremental\release\mergeReleaseResources\merged.dir
-net.touchcapture.qr.flutterqr.qr_code_scanner-mergeReleaseResources-21 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-net.touchcapture.qr.flutterqr.qr_code_scanner-merged_res-22 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\intermediates\merged_res\release
+net.touchcapture.qr.flutterqr.qr_code_scanner-pngs-17 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\generated\res\pngs\release
+net.touchcapture.qr.flutterqr.qr_code_scanner-resValues-18 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\generated\res\resValues\release
+net.touchcapture.qr.flutterqr.qr_code_scanner-rs-19 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\generated\res\rs\release
+net.touchcapture.qr.flutterqr.qr_code_scanner-mergeReleaseResources-20 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\intermediates\incremental\release\mergeReleaseResources\merged.dir
+net.touchcapture.qr.flutterqr.qr_code_scanner-mergeReleaseResources-21 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+net.touchcapture.qr.flutterqr.qr_code_scanner-merged_res-22 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\intermediates\merged_res\release

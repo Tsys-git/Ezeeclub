@@ -1,10 +1,10 @@
-
 import 'package:ezeeclub/setGoalScreen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // For date formatting
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 
 import 'package:flutter/services.dart';
 
@@ -19,14 +19,13 @@ class _TodayScreenState extends State<TodayScreen> {
   int stepsGoal = 0;
   int caloriesGoal = 0;
   double durationGoal = 0.0;
-  Map<String,String>? _locationMessage;
+  Map<String, String>? _locationMessage;
 
   @override
   void initState() {
     super.initState();
     _loadGoals();
   }
-
 
   Future<void> _loadGoals() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,19 +39,8 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat.yMMMMd().format(DateTime.now());
-    String Day = DateFormat.EEEE().format(DateTime.now());
-    final List<List<bool>> calendar = [
-      [true, true, true, false, true, true, true],
-      [true, true, false, true, true, true, false],
-      [true, true, true, true, false, false, false],
-      [true, true, false, false, true, false, true],
-    ];
-    int countPresentDays() {
-      return calendar.fold(1, (prev, element) {
-        return prev + element.where((day) => day).length;
-      });
-    }
-
+    final Map<DateTime, int> data = _generateCurrentMonthData();
+    print(data);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -109,10 +97,6 @@ class _TodayScreenState extends State<TodayScreen> {
                       formattedDate,
                       style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                     ),
-                    Text(
-                      Day,
-                      style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-                    ),
                   ],
                 ),
               ),
@@ -120,96 +104,15 @@ class _TodayScreenState extends State<TodayScreen> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.white)),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Training Calendar',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Table(
-                    children: [
-                      TableRow(
-                        children: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-                            .map((day) => Center(
-                                    child: Text(
-                                  day,
-                                  style: TextStyle(color: Colors.white),
-                                )))
-                            .toList(),
-                      ),
-                      for (var week in calendar)
-                        TableRow(
-                          children: week
-                              .map((active) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          active ? Colors.green : Colors.red,
-                                      radius: 10,
-                                    ),
-                                  ))
-                              .toList(),
-                        ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Present Days :',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(Icons.whatshot, color: Colors.orange),
-                      SizedBox(width: 5),
-                      Text(
-                        '${countPresentDays()} DAYS',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Active days = ', style: TextStyle(fontSize: 18)),
-                      CircleAvatar(
-                        backgroundColor: Colors.green,
-                        radius: 10,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Absent days = ', style: TextStyle(fontSize: 18)),
-                      CircleAvatar(
-                        backgroundColor: Colors.red,
-                        radius: 10,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: HeatMapCalendar(
+            //     datasets: data,
+            //     colorsets: {
+            //       2: Colors.green[100]!,
+            //     },
+            //   ),
+            // ),
             SizedBox(height: 10),
             Container(
               height: 300,
@@ -613,6 +516,19 @@ class _TodayScreenState extends State<TodayScreen> {
       ],
     );
   }
+}
+
+Map<DateTime, int> _generateCurrentMonthData() {
+  Map<DateTime, int> data = {};
+  DateTime now = DateTime.now();
+  DateTime firstDayOfMonth = DateTime(now.year, 1, 1);
+  DateTime lastDayOfMonth = DateTime(now.year, now.month, 0);
+
+  for (int i = 0; i < lastDayOfMonth.day; i++) {
+    DateTime date = firstDayOfMonth.add(Duration(days: i));
+    data[date] = 2;
+  }
+  return data;
 }
 
 class BadgeItem extends StatelessWidget {

@@ -15,22 +15,23 @@ com.example.ezeeclub.app-jetified-zxing-android-embedded-4.3.0-13 C:\Users\Delux
 com.example.ezeeclub.app-lifecycle-viewmodel-2.3.1-14 C:\Users\Delux\.gradle\caches\transforms-3\9f314aa55dfcd6bfe743501f4128bc59\transformed\lifecycle-viewmodel-2.3.1\res
 com.example.ezeeclub.app-jetified-emoji2-1.0.0-15 C:\Users\Delux\.gradle\caches\transforms-3\c49bab0cf3545bf00803aa2e9b367436\transformed\jetified-emoji2-1.0.0\res
 com.example.ezeeclub.app-jetified-lifecycle-process-2.4.0-16 C:\Users\Delux\.gradle\caches\transforms-3\de8967fdfc3da41303a33a2eb1041839\transformed\jetified-lifecycle-process-2.4.0\res
-com.example.ezeeclub.app-pngs-17 D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\generated\res\pngs\release
-com.example.ezeeclub.app-resValues-18 D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\generated\res\resValues\release
-com.example.ezeeclub.app-rs-19 D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\build\generated\res\rs\release
-com.example.ezeeclub.app-main-20 D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\main\res
-com.example.ezeeclub.app-release-21 D:\Projects\Gym App Ezeeclub\EzeeClub\android\app\src\release\res
-com.example.ezeeclub.app-packaged_res-22 D:\Projects\Gym App Ezeeclub\EzeeClub\build\android_intent\intermediates\packaged_res\release
-com.example.ezeeclub.app-mergeReleaseResources-23 D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\incremental\release\mergeReleaseResources\merged.dir
-com.example.ezeeclub.app-mergeReleaseResources-24 D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-com.example.ezeeclub.app-merged_res-25 D:\Projects\Gym App Ezeeclub\EzeeClub\build\app\intermediates\merged_res\release
-com.example.ezeeclub.app-packaged_res-26 D:\Projects\Gym App Ezeeclub\EzeeClub\build\fl_location\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-27 D:\Projects\Gym App Ezeeclub\EzeeClub\build\flutter_activity_recognition\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-28 D:\Projects\Gym App Ezeeclub\EzeeClub\build\geofence_service\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-29 D:\Projects\Gym App Ezeeclub\EzeeClub\build\network_info_plus\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-30 D:\Projects\Gym App Ezeeclub\EzeeClub\build\pedometer\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-31 D:\Projects\Gym App Ezeeclub\EzeeClub\build\permission_handler_android\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-32 D:\Projects\Gym App Ezeeclub\EzeeClub\build\qr_code_scanner\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-33 D:\Projects\Gym App Ezeeclub\EzeeClub\build\sensors\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-34 D:\Projects\Gym App Ezeeclub\EzeeClub\build\shared_preferences_android\intermediates\packaged_res\release
-com.example.ezeeclub.app-packaged_res-35 D:\Projects\Gym App Ezeeclub\EzeeClub\build\wifi_info_flutter\intermediates\packaged_res\release
+com.example.ezeeclub.app-pngs-17 D:\tsysinfo\Ezeeclub\android\app\build\generated\res\pngs\release
+com.example.ezeeclub.app-resValues-18 D:\tsysinfo\Ezeeclub\android\app\build\generated\res\resValues\release
+com.example.ezeeclub.app-rs-19 D:\tsysinfo\Ezeeclub\android\app\build\generated\res\rs\release
+com.example.ezeeclub.app-main-20 D:\tsysinfo\Ezeeclub\android\app\src\main\res
+com.example.ezeeclub.app-release-21 D:\tsysinfo\Ezeeclub\android\app\src\release\res
+com.example.ezeeclub.app-packaged_res-22 D:\tsysinfo\Ezeeclub\build\android_intent\intermediates\packaged_res\release
+com.example.ezeeclub.app-mergeReleaseResources-23 D:\tsysinfo\Ezeeclub\build\app\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.example.ezeeclub.app-mergeReleaseResources-24 D:\tsysinfo\Ezeeclub\build\app\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.example.ezeeclub.app-merged_res-25 D:\tsysinfo\Ezeeclub\build\app\intermediates\merged_res\release
+com.example.ezeeclub.app-packaged_res-26 D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-27 D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-28 D:\tsysinfo\Ezeeclub\build\geofence_service\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-29 D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-30 D:\tsysinfo\Ezeeclub\build\package_info_plus\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-31 D:\tsysinfo\Ezeeclub\build\pedometer\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-32 D:\tsysinfo\Ezeeclub\build\permission_handler_android\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-33 D:\tsysinfo\Ezeeclub\build\qr_code_scanner\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-34 D:\tsysinfo\Ezeeclub\build\sensors\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-35 D:\tsysinfo\Ezeeclub\build\shared_preferences_android\intermediates\packaged_res\release
+com.example.ezeeclub.app-packaged_res-36 D:\tsysinfo\Ezeeclub\build\wifi_info_flutter\intermediates\packaged_res\release

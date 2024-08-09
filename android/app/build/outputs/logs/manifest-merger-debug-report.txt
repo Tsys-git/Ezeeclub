@@ -42,6 +42,7 @@ MERGED from [:geofence_service] D:\tsysinfo\Ezeeclub\build\geofence_service\inte
 MERGED from [:fl_location] D:\tsysinfo\Ezeeclub\build\fl_location\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-20:12
 MERGED from [:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-24:12
 MERGED from [:network_info_plus] D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-12:12
+MERGED from [:package_info_plus] D:\tsysinfo\Ezeeclub\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:pedometer] D:\tsysinfo\Ezeeclub\build\pedometer\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:permission_handler_android] D:\tsysinfo\Ezeeclub\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:qr_code_scanner] D:\tsysinfo\Ezeeclub\build\qr_code_scanner\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
@@ -171,6 +172,8 @@ MERGED from [:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_a
 MERGED from [:flutter_activity_recognition] D:\tsysinfo\Ezeeclub\build\flutter_activity_recognition\intermediates\merged_manifest\debug\AndroidManifest.xml:6:5-8:41
 MERGED from [:network_info_plus] D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:network_info_plus] D:\tsysinfo\Ezeeclub\build\network_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:package_info_plus] D:\tsysinfo\Ezeeclub\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:package_info_plus] D:\tsysinfo\Ezeeclub\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:pedometer] D:\tsysinfo\Ezeeclub\build\pedometer\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:pedometer] D:\tsysinfo\Ezeeclub\build\pedometer\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:permission_handler_android] D:\tsysinfo\Ezeeclub\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41

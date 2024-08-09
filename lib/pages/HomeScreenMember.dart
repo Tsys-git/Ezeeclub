@@ -30,7 +30,6 @@ import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
 
-
 class WeightData {
   WeightData(this.x, this.y);
   final String? x;
@@ -261,15 +260,9 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: _buildCalendarScrollView()),
 
                 SizedBox(height: screenWidth * 0.02),
-                GestureDetector(
-                  onTap: () {
-                  
-                  },
-                  child: Container(
-                      height: screenWidth * 0.7,
-                      child:
-                          _whatToDoToday(screenWidth, scrrenheight, context)),
-                ),
+                Container(
+                    height: screenWidth * 0.7,
+                    child: _whatToDoToday(screenWidth, scrrenheight, context)),
                 SizedBox(height: screenWidth * 0.02),
 
                 Card(
@@ -740,33 +733,20 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             Get.to(() => WaterBenefitsScreen());
           },
           child: Padding(
-              padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("ARE YOU DRINKING ENOUGH WATER ?",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: screenWidth * 0.04,
-                            )),
-                        Text("Know the Benefits.",
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: screenWidth * 0.04,
-                            )),
-                      ],
-                    ),
-                  ),
-                  Image.asset(
-                    "assets/man.png",
-                    fit: BoxFit.contain,
-                    height: screenWidth * 1.5,
-                    width: screenWidth * 0.3,
+                  Text("ARE YOU DRINKING ENOUGH WATER ?",
+                      textScaler: TextScaler.linear(1.4),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: screenWidth * 0.1,
+                      )),
+                  Text(
+                    "Benefits of it's.",
+                    textScaler: TextScaler.linear(1),
                   ),
                 ],
               )),

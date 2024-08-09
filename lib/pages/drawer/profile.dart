@@ -3,6 +3,12 @@ import 'package:ezeeclub/controllers/planDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/resetPasswordMember.dart';
 import 'package:flip_card/flip_card.dart'; // Import flip_card package
+<<<<<<< HEAD
+=======
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:network_info_plus/network_info_plus.dart';
+import 'package:wifi_info_flutter/wifi_info_flutter.dart';
+>>>>>>> refs/remotes/origin/main
 import '../../models/Plan.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -38,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
         // Default value or handle null case
         print(endate);
+        print(_plan?.endDt);
       });
     } catch (e) {
       // Handle error - show snackbar or message to the user
@@ -48,12 +55,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       );
     }
+
+    print(_plan?.endDt.runtimeType);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.9),
       appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.black.withOpacity(0.9),
         actions: [
           IconButton(
             onPressed: () {
@@ -78,111 +90,101 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
-      body: _plan == null
-          ? Center(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Loading...", style: TextStyle(fontSize: 24)),
-                SizedBox(
-                  height: 10,
-                ),
-                CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor,
-                ),
-              ],
-            ))
-          : LayoutBuilder(
-              builder: (context, constraints) {
-                double fontSize = 18.0;
-                if (constraints.maxWidth < 320) {
-                  fontSize = 16.0;
-                } else if (constraints.maxWidth <= 420) {
-                  fontSize = 18.0;
-                } else {
-                  fontSize = 20.0;
-                }
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double fontSize = 18.0;
+          if (constraints.maxWidth < 320) {
+            fontSize = 16.0;
+          } else if (constraints.maxWidth <= 420) {
+            fontSize = 18.0;
+          } else {
+            fontSize = 20.0;
+          }
 
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              "assets/man.png",
-                              fit: BoxFit.contain,
-                            ),
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        "assets/man.png",
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  FlipCard(
+                    direction:
+                        FlipDirection.VERTICAL, // Set the direction of flip
+                    front: _buildBasicCard(fontSize),
+                    back: _plan?.endDt != "null"
+                        ? _buildPlanDetailsCard(fontSize)
+                        : Container(
+                            height: 100,
+                            child: _buildNoPlanDetailsCard(fontSize)),
+                  ),
+                  _buildmeasurementCard(fontSize),
+                  SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      child: ProfileDetail(
+                        title: "Email",
+                        value: widget.userModel.email ?? "Not Available",
+                        fontSize: fontSize,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ProfileDetail(
+                            title: "Mobile Number",
+                            value:
+                                widget.userModel.phoneNumber ?? "Not Available",
+                            fontSize: fontSize,
                           ),
-                        ),
-                        SizedBox(height: 20),
-                        FlipCard(
-                          direction: FlipDirection
-                              .VERTICAL, // Set the direction of flip
-                          front: _buildBasicCard(fontSize),
-                          back: _buildPlanDetailsCard(fontSize),
-                        ),
-                        _buildmeasurementCard(fontSize),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Card(
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: widget.userModel.mem_status == "Active"
+                        ? Card(
+                            color: Colors.green,
                             child: ProfileDetail(
-                              title: "Email",
-                              value: widget.userModel.email ?? "Not Available",
+                              title: "Membership Status ",
+                              value: widget.userModel.mem_status,
+                              fontSize: fontSize,
+                            ),
+                          )
+                        : Card(
+                            color: Colors.red,
+                            child: ProfileDetail(
+                              title: "Membership Status ",
+                              value: widget.userModel.mem_status,
                               fontSize: fontSize,
                             ),
                           ),
-                        ),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Card(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ProfileDetail(
-                                  title: "Mobile Number",
-                                  value: widget.userModel.phoneNumber ??
-                                      "Not Available",
-                                  fontSize: fontSize,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          child: widget.userModel.mem_status == "Active"
-                              ? Card(
-                                  color: Colors.green,
-                                  child: ProfileDetail(
-                                    title: "Membership Status ",
-                                    value: widget.userModel.mem_status,
-                                    fontSize: fontSize,
-                                  ),
-                                )
-                              : Card(
-                                  color: Colors.red,
-                                  child: ProfileDetail(
-                                    title: "Membership Status ",
-                                    value: widget.userModel.mem_status,
-                                    fontSize: fontSize,
-                                  ),
-                                ),
-                        ),
-                        SizedBox(height: 12),
-                      ],
-                    ),
                   ),
-                );
-              },
+                  SizedBox(height: 12),
+                ],
+              ),
             ),
+          );
+        },
+      ),
     );
   }
 
@@ -212,16 +214,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Colors.blue,
-                Colors.purple.shade800,
-              ],
-            ),
-          ),
+              borderRadius: BorderRadius.circular(10.0),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                colors: [
+                  Colors.black.withOpacity(1),
+                  Colors.purple.shade800,
+                ],
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 16,
+                    offset: Offset.zero)
+              ]),
           padding: EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -307,6 +313,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: 12),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNoPlanDetailsCard(double fontSize) {
+    return Card(
+      child: Center(
+        child: Text(
+          'Plan Details Not Found.',
+          style: TextStyle(fontSize: fontSize),
         ),
       ),
     );

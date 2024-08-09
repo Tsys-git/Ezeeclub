@@ -1,5 +1,3 @@
-// help_page.dart
-
 import 'package:flutter/material.dart';
 
 class HelpPage extends StatelessWidget {
@@ -7,96 +5,115 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help'),
+        title: Text('Help',style: TextStyle(fontSize: 24),),
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _buildSectionTitle('Getting Started'),
-            _buildHelpItem(
-              'How to Sign Up',
-              'To sign up, click on the Sign Up button on the login screen and follow the instructions.',
-            ),
-            _buildHelpItem(
-              'How to Log In',
-              'Enter your credentials (email and password) and click on Log In to access your account.',
-            ),
-            _buildHelpItem(
-              'Forgot Password',
-              'If you forgot your password, click on Forgot Password on the login screen and follow the prompts.',
-            ),
-            SizedBox(height: 20.0),
-            _buildSectionTitle('Profile'),
-            _buildHelpItem(
-              'View Profile',
-              'To view your profile, go to the Profile tab in the bottom navigation bar.',
-            ),
-            _buildHelpItem(
-              'Edit Profile',
-              'To edit your profile, go to Profile > Edit Profile and make the desired changes.',
-            ),
-            SizedBox(height: 20.0),
-            _buildSectionTitle('Workouts'),
-            _buildHelpItem(
-              'Track Workouts',
-              'Go to Workouts > My Workouts to view and track your workout history.',
-            ),
-            _buildHelpItem(
-              'Create New Workout',
-              'To create a new workout, click on the "+" button in the My Workouts screen and fill in the details.',
-            ),
-            SizedBox(height: 20.0),
-            _buildSectionTitle('Settings'),
-            _buildHelpItem(
-              'Change App Settings',
-              'To change app settings, go to Settings from the Profile tab and customize as per your preference.',
-            ),
-            SizedBox(height: 20.0),
-            _buildSectionTitle('Contact Support'),
-            _buildHelpItem(
-              'Need Help?',
-              'For any assistance or queries, contact our support team at support@gymapp.com.',
-            ),
-          ],
-        ),
+        children: <Widget>[
+          _buildExpandableSection(
+            'Getting Started',
+            [
+              _buildHelpItem(
+                'How to Log In',
+                'Enter your credentials (member ID and password) and click on Log In to access your account.',
+              ),
+              _buildHelpItem(
+                'Forgot Password',
+                'If you forgot your password, click on Forgot Password on the login screen and follow the prompts.',
+              ),
+            ],
+          ),
+          _buildExpandableSection(
+            'Profile',
+            [
+              _buildHelpItem(
+                'View Profile',
+                'To view your profile, go to the Profile tab in the App Drawer.',
+              ),
+              _buildHelpItem(
+                'Edit Profile',
+                'To edit your profile, go to Profile > Edit Profile and make the desired changes.',
+              ),
+            ],
+          ),
+          _buildExpandableSection(
+            'Change Password',
+            [
+              _buildHelpItem(
+                'Change Password',
+                'To change your password, go to the Profile tab in the App Drawer, then click on the lock icon in the app bar.',
+              ),
+            ],
+          ),
+          _buildExpandableSection(
+            'Plan Details',
+            [
+              _buildHelpItem(
+                'View Plan Details',
+                'To view your Plan Details, go to the Profile tab in the App Drawer.',
+              ),
+            ],
+          ),
+          _buildExpandableSection(
+            'Settings',
+            [
+              _buildHelpItem(
+                'Change App Settings',
+                'To change app settings, go to Settings from the Profile tab and customize as per your preference.',
+              ),
+            ],
+          ),
+          _buildExpandableSection(
+            'Contact Support',
+            [
+              _buildHelpItem(
+                'Need Help?',
+                'For any assistance or queries, contact our support team at support@gymapp.com.',
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
-      child: Text(
+  Widget _buildExpandableSection(String title, List<Widget> helpItems) {
+    return ExpansionTile(
+      initiallyExpanded: false,
+      title: Text(
         title,
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
+          color: Colors.white, // Section title color
         ),
       ),
+      children: helpItems,
     );
   }
 
   Widget _buildHelpItem(String title, String description) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8.0), // Add margin between cards
+      elevation: 4.0, // Add shadow for better separation
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0), // Rounded corners
+      ),
+      child: ListTile(
+        contentPadding: EdgeInsets.all(16.0), // Padding inside the card
+        title: Text(
           title,
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
+            color: Colors. white, // Text color
           ),
         ),
-        SizedBox(height: 8.0),
-        Text(
+        subtitle: Text(
           description,
-          style: TextStyle(fontSize: 14.0),
+          style: TextStyle(fontSize: 14.0, color: Colors.white), // Description text color
         ),
-        SizedBox(height: 12.0),
-        Divider(),
-      ],
+      ),
     );
   }
 }
