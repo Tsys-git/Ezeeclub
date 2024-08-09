@@ -3,12 +3,6 @@ import 'package:ezeeclub/controllers/planDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/resetPasswordMember.dart';
 import 'package:flip_card/flip_card.dart'; // Import flip_card package
-<<<<<<< HEAD
-=======
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:network_info_plus/network_info_plus.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
->>>>>>> refs/remotes/origin/main
 import '../../models/Plan.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -124,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     front: _buildBasicCard(fontSize),
                     back: _plan?.endDt != "null"
                         ? _buildPlanDetailsCard(fontSize)
-                        : Container(
+                        : SizedBox(
                             height: 100,
                             child: _buildNoPlanDetailsCard(fontSize)),
                   ),
@@ -222,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Colors.purple.shade800,
                 ],
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Colors.black,
                     blurRadius: 16,

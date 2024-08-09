@@ -12,6 +12,8 @@ import '../../consts/userLogin.dart';
 import '../splashsreen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -58,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     storedUrl = prefs.getString('app_url');
 
-    final Uri url = Uri.parse('http://${storedUrl}/UserLogin');
+    final Uri url = Uri.parse('http://$storedUrl/UserLogin');
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -166,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: Row(
-                    children: [
+                    children: const [
                       // Image.asset(
                       //   "assets/confirm.png",
                       //   height: 30,
@@ -258,12 +260,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: isLoading ? null : () => login(context),
-                  child: isLoading
-                      ? CircularProgressIndicator()
-                      : Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.black),
-                        ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                     padding:
@@ -272,6 +268,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.black),
+                        ),
                 ),
               ],
             ),

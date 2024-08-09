@@ -57,6 +57,7 @@ dependencies:
   
   
 
+  wifi_info_flutter: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
 }
 
 class GymListScreen extends StatefulWidget {
+  const GymListScreen({super.key});
+
   @override
   _GymListScreenState createState() => _GymListScreenState();
 }
@@ -202,7 +206,7 @@ class _GymListScreenState extends State<GymListScreen> {
 class DetailScreen extends StatelessWidget {
   final Map<String, String> item;
 
-  const DetailScreen({Key? key, required this.item}) : super(key: key);
+  const DetailScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +226,7 @@ class DetailScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Colors.black, Colors.purple])),
+                            colors: const [Colors.black, Colors.purple])),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(

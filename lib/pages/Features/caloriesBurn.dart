@@ -59,37 +59,37 @@ class CalorieBurningTipsScreen extends StatelessWidget {
 
   final List<Gradient> gradients = [
     LinearGradient(
-      colors: [Colors.teal, Colors.teal],
+      colors: const [Colors.teal, Colors.teal],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.red, Colors.red],
+      colors: const [Colors.red, Colors.red],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.green, Colors.green],
+      colors: const [Colors.green, Colors.green],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.purple, Colors.purple],
+      colors: const [Colors.purple, Colors.purple],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.cyan, Colors.cyan],
+      colors: const [Colors.cyan, Colors.cyan],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.orange, Colors.orange],
+      colors: const [Colors.orange, Colors.orange],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: [Colors.blue, Colors.blue],
+      colors: const [Colors.blue, Colors.blue],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),

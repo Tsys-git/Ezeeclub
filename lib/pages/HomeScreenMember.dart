@@ -1,32 +1,23 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:ezeeclub/models/StepsData.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Auth/login.dart';
 import 'package:ezeeclub/pages/Features/PTRecords.dart';
-import 'package:ezeeclub/pages/Features/calender.dart';
 import 'package:ezeeclub/pages/Features/caloriesBurn.dart';
 import 'package:ezeeclub/pages/Features/dietPlan.dart';
 import 'package:ezeeclub/pages/Features/notifications.dart';
-import 'package:ezeeclub/pages/Features/planDetails.dart';
 import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
-import 'package:pedometer/pedometer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../whatto.dart';
-import 'Features/heathDetails.dart';
 import 'common/drawer.dart';
-import 'steps/stepController.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
 
@@ -260,7 +251,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: _buildCalendarScrollView()),
 
                 SizedBox(height: screenWidth * 0.02),
-                Container(
+                SizedBox(
                     height: screenWidth * 0.7,
                     child: _whatToDoToday(screenWidth, scrrenheight, context)),
                 SizedBox(height: screenWidth * 0.02),
@@ -1039,7 +1030,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Center(
-        child: Text("${quote}.",
+        child: Text("$quote.",
             textAlign: TextAlign.center,
             textScaler: TextScaler.linear(1.4),
             style: TextStyle(
@@ -1116,7 +1107,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 decoration: BoxDecoration(
                   gradient: isCurrentDate
                       ? LinearGradient(
-                          colors: [
+                          colors: const [
                             Colors.amber,
                             Colors.yellow,
                           ],
@@ -1124,10 +1115,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         )
                       : (isPastDate
                           ? LinearGradient(
-                              colors: [Colors.grey, Colors.grey],
+                              colors: const [Colors.grey, Colors.grey],
                             )
                           : LinearGradient(
-                              colors: [Colors.white, Colors.white])),
+                              colors: const [Colors.white, Colors.white])),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: GestureDetector(
@@ -1283,7 +1274,7 @@ Widget _buildwhatNewInTheGym(BuildContext context) {
             ),
             // Horizontal cards with flexible height
 
-            Container(
+            SizedBox(
               height: screenWidth > 400 ? 180 : 270,
               child: ListView(
                 scrollDirection: Axis.horizontal,

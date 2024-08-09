@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geofence_service/geofence_service.dart';
 
 class ExampleApp extends StatefulWidget {
-  const ExampleApp({Key? key}) : super(key: key);
+  const ExampleApp({super.key});
 
   @override
   State<StatefulWidget> createState() => _ExampleAppState();

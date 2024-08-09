@@ -8,6 +8,8 @@ PODS:
     - Flutter
   - network_info_plus (0.0.1):
     - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
   - pedometer (0.0.1):
     - Flutter
   - permission_handler_apple (9.3.0):
@@ -17,6 +19,10 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - wifi_info_flutter (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - fl_location (from `.symlinks/plugins/fl_location/ios`)
@@ -24,10 +30,13 @@ DEPENDENCIES:
   - flutter_activity_recognition (from `.symlinks/plugins/flutter_activity_recognition/ios`)
   - geofence_service (from `.symlinks/plugins/geofence_service/ios`)
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - pedometer (from `.symlinks/plugins/pedometer/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sensors (from `.symlinks/plugins/sensors/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - wifi_info_flutter (from `.symlinks/plugins/wifi_info_flutter/ios`)
 
 EXTERNAL SOURCES:
   fl_location:
@@ -40,6 +49,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geofence_service/ios"
   network_info_plus:
     :path: ".symlinks/plugins/network_info_plus/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   pedometer:
     :path: ".symlinks/plugins/pedometer/ios"
   permission_handler_apple:
@@ -48,6 +59,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sensors/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  wifi_info_flutter:
+    :path: ".symlinks/plugins/wifi_info_flutter/ios"
 
 SPEC CHECKSUMS:
   fl_location: 68b4a6c4aad2a453493ff66f196e0748280cf43e
@@ -55,10 +70,13 @@ SPEC CHECKSUMS:
   flutter_activity_recognition: 5c3b026997742b01e82424ef257db9640822ad77
   geofence_service: e007ddec3cf8b85531e8f7b202c1ceabca669d64
   network_info_plus: 9d930145451916919786087c4173226363616071
+  package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   pedometer: 381969883680ade42559782cc41a3bbd453d8234
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   sensors: 84eb7a30e47a649e4172b71d6e81be614c280336
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
+  wifi_info_flutter: 55d4c2469034f5b5c38063ccefa62f708a503a2b
 
 PODFILE CHECKSUM: 23fba7aa6f0c517b0b088e7fae5ff57f320e2a06
 

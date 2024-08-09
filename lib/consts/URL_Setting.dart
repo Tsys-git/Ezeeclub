@@ -26,7 +26,7 @@ class UrlSetting {
 
   Future<void> initialize() async {
     Uri fetchedUrl = await _ac.getStoredUrl();
-    baseUrl = Uri.parse("http://${fetchedUrl}");
+    baseUrl = Uri.parse("http://$fetchedUrl");
     print('Base URL: $baseUrl'); // For verification
 
     // Initialize endpoint URLs

@@ -199,7 +199,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   void _showRateUsBottomSheet(BuildContext context) {
-    var _rating = 4;
+    var rating = 4;
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -223,12 +223,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 children: List.generate(5, (index) {
                   return IconButton(
                     icon: Icon(
-                      index < _rating ? Icons.star : Icons.star_border,
+                      index < rating ? Icons.star : Icons.star_border,
                       color: Colors.amber,
                     ),
                     onPressed: () {
                       setState(() {
-                        _rating = index + 1;
+                        rating = index + 1;
                       });
                     },
                   );

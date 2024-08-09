@@ -1,14 +1,12 @@
-import 'dart:convert';
 
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/HomeScreenMember.dart';
+import 'package:ezeeclub/pages/splashsreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'consts/URL_Setting.dart';
 import 'consts/theme.dart';
 import 'package:get/get.dart';
-import 'pages/splashsreen.dart';
-import 'package:device_preview/device_preview.dart';
 
 Future main() async {
   UrlSetting urlSetting = UrlSetting();
@@ -39,9 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark, // This will use the system theme
-      home: HomeScreenMember(
-        usermodel: usermodel,
-      ),
+      home:SplashScreen()
     );
   }
 }

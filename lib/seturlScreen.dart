@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/Auth/login.dart';
 
 class SetUrlScreen extends StatefulWidget {
+  const SetUrlScreen({super.key});
+
   @override
   _SetUrlScreenState createState() => _SetUrlScreenState();
 }
