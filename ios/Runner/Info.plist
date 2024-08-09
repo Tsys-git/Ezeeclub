@@ -2,15 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>App needs access to location for attendance via Wi-Fi connection</string>
-
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>App needs access to location for attendance via geofencing</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>App needs access to location for background tasks like attendance via geofencing</string>
-
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -54,5 +45,17 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>location needed for attendace mark</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>location needed for attendace mark</string>
+	<key>NSLocationUsageDescription</key>
+	<string>location needed for attendace mark</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>location needed for attendace mark</string>
+
+	
 </dict>
 </plist>

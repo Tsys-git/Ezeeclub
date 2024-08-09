@@ -209,12 +209,15 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 10),
                 Text(
                   'Welcome To EZEE CLUB',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
+
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),

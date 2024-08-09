@@ -3,8 +3,6 @@ import 'package:ezeeclub/controllers/planDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/resetPasswordMember.dart';
 import 'package:flip_card/flip_card.dart'; // Import flip_card package
-import 'package:network_info_plus/network_info_plus.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 import '../../models/Plan.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,21 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _fetchPlan();
-    _getWiFiInfo();
-  }
-
-  Future<void> _getWiFiInfo() async {
-    try {
-      final info = NetworkInfo();
-      final wifiName = await info.getWifiName();
-      final wifiIP = await info.getWifiIP();
-
-      print(wifiIP);
-      print(wifiName);
-
-    } catch (e) {
-      print("Error getting Wi-Fi information: $e");
-    }
   }
 
   void _fetchPlan() async {

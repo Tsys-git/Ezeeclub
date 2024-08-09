@@ -57,7 +57,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AttendanceScreen();
+                      return ExampleApp();
                     },
                   ),
                 );

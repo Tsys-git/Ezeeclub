@@ -14,7 +14,6 @@ import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +29,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
+
 
 class WeightData {
   WeightData(this.x, this.y);
@@ -158,8 +158,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     final double scrrenheight = MediaQuery.of(context).size.height;
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-
+      backgroundColor: Colors.black,
       drawer: AppDrawer(
         userModel: widget.usermodel,
       ),
@@ -168,9 +167,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue.shade900.withOpacity(0.5),
+                Colors.black.withOpacity(0.5),
                 Colors.purple.shade400.withOpacity(0.5),
               ],
+              begin: Alignment.centerLeft,
+              end: Alignment.bottomRight,
             ),
             shape: BoxShape.rectangle,
           ),
@@ -189,8 +190,8 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         },
                         child: Image.asset(
                           'assets/downloaded/6.png', // Replace with your image asset path
-                          width: 50.0,
-                          height: 50.0,
+                          width: screenWidth * 0.1,
+                          height: screenWidth * 0.1,
                           fit: BoxFit
                               .cover, // Change to BoxFit.cover to fit the image inside the circle
                         ),
@@ -202,12 +203,16 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                       children: [
                         Text(widget.usermodel.fullName,
                             selectionColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 20)
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.05)
                             // style: Theme.of(context).textTheme.bodySmall,
                             ),
                         Text(widget.usermodel.member_no,
                             selectionColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 14)
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.05)
                             // style: Theme.of(context).textTheme.bodySmall,
                             ),
                       ],
@@ -225,7 +230,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                 ),
                               );
                             },
-                            icon: Icon(Icons.notifications)),
+                            icon: Icon(
+                              Icons.notifications,
+                              size: screenWidth * 0.05,
+                            )),
                         IconButton(
                             onPressed: () {
                               Navigator.pushReplacement(
@@ -237,13 +245,8 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                 ),
                               );
                             },
-                            icon: Icon(Icons.exit_to_app)),
-                        IconButton(
-                            onPressed: () {
-                              print("hello");
-                              fetchdata();
-                            },
-                            icon: Icon(Icons.call)),
+                            icon: Icon(Icons.exit_to_app,
+                                size: screenWidth * 0.05)),
                       ],
                     )
                   ],
@@ -258,53 +261,55 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: _buildCalendarScrollView()),
 
                 SizedBox(height: screenWidth * 0.02),
-                Container(
-                    height: screenWidth * 0.7,
-                    child: _whatToDoToday(screenWidth, scrrenheight, context)),
-                SizedBox(height: screenWidth * 0.02),
-
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.shade900.withOpacity(0.5),
-                        Colors.purple.shade400.withOpacity(0.5),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Column(
-                    children: [
-                      trackYourProgress(context, screenWidth, ""),
-                      Divider(height: 2.0, color: Colors.white),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: _buildInfoCard(
-                                context,
-                                'Steps',
-                                ' Not Found',
-                                '0',
-                                Icons.directions_walk,
-                                "assets/steps.png"),
-                          ),
-                          Divider(),
-                          Expanded(
-                            flex: 1,
-                            child: GestureDetector(
-                                onTap: () {
-                                  Get.to(() => CalorieBurningTipsScreen());
-                                },
-                                child: _buildCaloriesCard(context)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                GestureDetector(
+                  onTap: () {
+                  
+                  },
+                  child: Container(
+                      height: screenWidth * 0.7,
+                      child:
+                          _whatToDoToday(screenWidth, scrrenheight, context)),
                 ),
                 SizedBox(height: screenWidth * 0.02),
+
+                Card(
+                  color: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      children: [
+                        trackYourProgress(context, screenWidth, ""),
+                        Divider(height: 2.0, color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: _buildInfoCard(
+                                  context,
+                                  'Steps',
+                                  ' Not Found',
+                                  '0',
+                                  Icons.directions_walk,
+                                  "assets/steps.png"),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => CalorieBurningTipsScreen());
+                                  },
+                                  child: _buildCaloriesCard(context)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: screenWidth * 0.04),
 
                 SlideTransition(
                   position: _slideAnimation,
@@ -316,45 +321,16 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                            height: screenWidth * 0.6,
+                            height: screenWidth * 0.5,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16.0),
-                                color: Colors.grey.withOpacity(0.3)),
+                              color: Colors.grey.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
                             child: _buildWaterDrinkingCard(context),
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: screenWidth * 0.6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return DietPlanScreen(
-                                      userModel: widget.usermodel,
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: _buildInfoCard(
-                                context,
-                                'Diet Plan',
-                                '',
-                                '0',
-                                Icons.food_bank_outlined,
-                                "assets/dietplan.png"),
-                          ),
-                        ),
-                      ),
+                      SizedBox(width: 15.0),
                     ],
                   ),
                 ),
@@ -379,24 +355,32 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           height: screenWidth * 0.7,
-                          child: _buildWorkoutCard(context)),
+                          child: ptrecordswidget(screenWidth)),
                     ),
-                    // SizedBox(width: screenWidth * 0.03),
-                    // Container(
-                    //   width: 3.0, // Adjust this value for the desired width
-                    //   height:
-                    //       height * 0.15, // Adjust this value for the desired height
-                    //   color: Colors.white,
-                    // ),
-                    // SizedBox(width: screenWidth * 0.03),
                     Expanded(
                       flex: 1,
                       child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          height: screenWidth * 0.7,
-                          child: ptrecordswidget()),
+                        height: screenWidth * 0.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return DietPlanScreen(
+                                    userModel: widget.usermodel,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: _buildInfoCard(context, 'Diet Plan', '', '0',
+                              Icons.food_bank_outlined, "assets/dietplan.png"),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -423,12 +407,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
   }
 
   Widget _buildCaloriesCard(BuildContext context) {
-    final StepController stepController = Get.put(StepController());
+    //final StepController stepController = Get.put(StepController());
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       double screenWidth = constraints.maxWidth;
       double scrrenHeight = constraints.maxHeight;
-      double progress = stepController.stepCount.value * 0.063;
+      double progress =100* 0.063;
 
       return Container(
         decoration: BoxDecoration(
@@ -503,7 +487,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _buildInfoCard(BuildContext context, String title, String value,
       String unit, IconData icon, String img) {
-    final StepController stepController = Get.put(StepController());
+    //final StepController stepController = Get.put(StepController());
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       double screenWidth = constraints.maxWidth;
@@ -546,13 +530,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                     style: TextStyle(
                                         fontSize: screenWidth * 0.13,
                                         color: Colors.white)),
-                                Obx(() => Text(
-                                      '${stepController.stepCount.value}',
-                                      style: TextStyle(
-                                        fontSize: screenWidth * 0.13,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )),
+                                // Obx(() => Text(
+                                //       '${stepController.stepCount.value}',
+                                //       style: TextStyle(
+                                //         fontSize: screenWidth * 0.13,
+                                //         fontWeight: FontWeight.bold,
+                                //       ),
+                                //     )),
                               ],
                             ),
                           ),
@@ -611,13 +595,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                 style: TextStyle(
                                     fontSize: screenWidth * 0.13,
                                     color: Colors.white)),
-                            Obx(() => Text(
-                                  '${stepController.stepCount.value}',
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.13,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )),
+                            // Obx(() => Text(
+                            //       '${stepController.stepCount.value}',
+                            //       style: TextStyle(
+                            //         fontSize: screenWidth * 0.13,
+                            //         fontWeight: FontWeight.bold,
+                            //       ),
+                            //     )),
                           ],
                         ),
                       ),
@@ -756,20 +740,33 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             Get.to(() => WaterBenefitsScreen());
           },
           child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+              padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("ARE YOU DRINKING ENOUGH WATER ?",
-                      textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.1,
-                      )),
-                  Text(
-                    "Benefits of it's.",
-                    textScaler: TextScaler.linear(1),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("ARE YOU DRINKING ENOUGH WATER ?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.04,
+                            )),
+                        Text("Know the Benefits.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: screenWidth * 0.04,
+                            )),
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    "assets/man.png",
+                    fit: BoxFit.contain,
+                    height: screenWidth * 1.5,
+                    width: screenWidth * 0.3,
                   ),
                 ],
               )),
@@ -821,6 +818,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints Constraints) {
       double height = Constraints.maxHeight;
+      double width = Constraints.maxWidth;
 
       return Container(
         child: GestureDetector(
@@ -839,10 +837,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     children: [
                       Text(
                         'Workout',
-                        textScaler: TextScaler.linear(2.0),
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          fontSize: width * 0.1,
                         ),
                       ),
                     ],
@@ -852,9 +851,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                       Expanded(
                         child: Text(
                           "Your body can stand almost anything. It’s your mind that you have to convince.",
-                          textScaler: TextScaler.linear(1.3),
+                          textScaler: TextScaler.linear(1.0),
                           style: TextStyle(
                             color: Colors.white,
+                            fontSize: width * 0.1,
                           ),
                         ),
                       ),
@@ -961,6 +961,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     series: <CartesianSeries>[
                       SplineSeries<WeightData, String>(
                           dataSource: weightData,
+                          width: 10,
                           dashArray: const <double>[50, 5],
                           xValueMapper: (WeightData data, _) => data.x,
                           yValueMapper: (WeightData data, _) => data.y)
@@ -1069,7 +1070,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     );
   }
 
-  Widget ptrecordswidget() {
+  Widget ptrecordswidget(double width) {
     return SizedBox(
       height: 150,
       child: GestureDetector(
@@ -1092,10 +1093,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
               ), // Space between icon and text
               Center(
                 child: Text(
-                  'PT RECORDS',
+                  textScaler: TextScaler.linear(2.0),
+                  'PT\n RECORDS',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16.0, // Text size
+                    // Text size
                     color: Colors.white, // Text color
                   ),
                 ),
@@ -1118,7 +1120,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
             currentDate.subtract(Duration(days: 1)); // Start from yesterday
 
         return SizedBox(
-          height: height * 0.3,
+          height: height * 0.4,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 5,
@@ -1253,57 +1255,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
   }
 }
 
-Future<void> fetchdata() async {
-  try {
-    // Construct SOAP request
-    String soapRequest = '''<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <LogIn xmlns="http://tempuri.org/">
-      <UserId>vr</UserId>
-      <Password>vr@123</Password>
-    </LogIn>
-  </soap:Body>
-</soap:Envelope>''';
-
-    // Calculate length of SOAP request body
-    int contentLength = utf8.encode(soapRequest).length;
-
-    // Make POST request with dynamic Content-Length header
-    print('Sending request...');
-    http.Response response = await http.post(
-      Uri.parse('http://kottaramapp.novusta.in/BillingWebService.asmx'),
-      headers: {
-        'Content-Type': 'text/xml; charset=utf-8',
-        'SOAPAction': 'https://tempuri.org/LogIn',
-        'Content-Length': '$contentLength', // Set dynamic Content-Length
-      },
-      body: soapRequest,
-    );
-
-    print('Request sent. Waiting for response...');
-    print('Response body: ${response.body}');
-
-    // Parse XML response and extract branch names and sales
-    if (response.statusCode == 200) {
-      print('Response status: ${response.reasonPhrase}');
-      print('Response body: ${response.body}');
-
-      print("Extract sales data method ....");
-      // Add code here to parse the XML response if needed
-    } else {
-      print('Error: ${response.reasonPhrase}');
-    }
-  } catch (e, stacktrace) {
-    print('Exception caught: $e');
-    print('Stacktrace: $stacktrace');
-  }
-}
-
 Widget _buildwhatNewInTheGym(BuildContext context) {
   return LayoutBuilder(
     builder: (BuildContext context, BoxConstraints Constraints) {
       double screenWidth = Constraints.maxWidth;
+      double screenheight = Constraints.maxHeight;
 
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -1346,61 +1302,86 @@ Widget _buildwhatNewInTheGym(BuildContext context) {
               height: 15,
             ),
             // Horizontal cards with flexible height
-            SizedBox(
-              height: 200,
+
+            Container(
+              height: screenWidth > 400 ? 180 : 270,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
-                  // Card 1 (Replace with your actual card widget)
-                  SizedBox(
-                    width: 160, // Adjust the width as needed
-                    child: Card(
-                      color: Color.fromARGB(
-                          35, 248, 245, 245), // Use card color from theme
-                      child: ListTile(
-                        title: Text('Title'),
-                        subtitle: Text(
-                          'Description of Card 1. Replace with a longer description to test height adjustment.',
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: SizedBox(
+                      width: screenWidth * 0.7,
+                      child: Card(
+                        color: Color.fromARGB(
+                            35, 248, 245, 245), // Use card color from theme
+                        child: ListTile(
+                          title: Text(
+                              textScaler: TextScaler.linear(1),
+                              'Get Fit for Summer with Our New Classes!',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Text(
+                              textScaler: TextScaler.linear(1),
+                              'Dive into our fresh lineup of high-energy classes tailored to help you achieve your summer fitness goals. Limited spots available—reserve yours now!'),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 2 (Replace with your actual card widget)
                   SizedBox(
-                    width: 160, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
-                        title: Text('Title'),
-                        subtitle: Text('Description of Card 2'),
+                        title: Text(
+                            ' Introducing Our State-of-the-Art Equipment!',
+                            textScaler: TextScaler.linear(1),
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle: Text(
+                          'Experience the latest in fitness technology with our newly upgraded equipment. Enjoy improved workouts and track your progress like never before.',
+                          textScaler: TextScaler.linear(1),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 3 (Replace with your actual card widget)
                   SizedBox(
-                    width: 160, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
-                        title: Text('Title'),
-                        subtitle: Text('Description of Card 3'),
+                        title: Text(
+                          'Join Our 6-Week Transformation Challenge!',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textScaler: TextScaler.linear(1),
+                        ),
+                        subtitle: Text(
+                          'Commit to a healthier you with our structured program including training, nutrition, and support. Transform your body and mind—sign up today!',
+                          textScaler: TextScaler.linear(1),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10), // Space between cards
+                  SizedBox(width: 5), // Space between cards
                   // Card 4 (Replace with your actual card widget)
                   SizedBox(
-                    width: 160, // Adjust the width as needed
+                    width: screenWidth * 0.7, // Adjust the width as needed
                     child: Card(
                       color: Color.fromARGB(
                           35, 248, 245, 245), // Use card color from theme
                       child: ListTile(
-                        title: Text('Title'),
-                        subtitle: Text('Description of Card 4'),
+                        title: Text(
+                            'Elevate Your Workout with Personal Training Specials!',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textScaler: TextScaler.linear(1)),
+                        subtitle: Text(
+                          'Take advantage of our limited-time discounts on personal training packages. Work one-on-one with expert trainers to reach your fitness goals faster.',
+                          textScaler: TextScaler.linear(1),
+                        ),
                       ),
                     ),
                   ),

@@ -11,20 +11,13 @@ import 'pages/splashsreen.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future main() async {
-
   UrlSetting urlSetting = UrlSetting();
   WidgetsFlutterBinding.ensureInitialized();
   await urlSetting.initialize();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(
-    DevicePreview(
-      enabled: true,
-      tools: const [
-        ...DevicePreview.defaultTools,
-      ],
-      builder: (context) => MyApp(),
-    ),
+    MyApp(),
   );
 }
 
@@ -46,9 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark, // This will use the system theme
-      home: HomeScreenMember(
-        usermodel: usermodel,
-      ),
+      home: SplashScreen()
     );
   }
 
