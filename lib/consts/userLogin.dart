@@ -27,9 +27,59 @@ class UserLogin {
 
   String _username = "";
   String _password = "";
-
+  String _mobile_no = "";
+  String _name = "";
+  String _memberno = "";
   String get username => _username;
   String get password => _password;
+  String get mobile_no => _mobile_no;
+  String get name => _name;
+  String get memberno => _memberno;
+
+  Future<void> setmemberno(String memberno) async {
+    _memberno = memberno;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('memberno', memberno);
+  }
+
+  Future<String> getmemberno() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? memberno = prefs.getString('memberno');
+    if (memberno != null && memberno.isNotEmpty) {
+      _memberno = memberno;
+    }
+    return memberno!;
+  }
+
+  Future<void> setname(String name) async {
+    _name = name;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', name);
+  }
+
+  Future<String> getname() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? name = prefs.getString('name');
+    if (name != null && name.isNotEmpty) {
+      _name = name;
+    }
+    return name!;
+  }
+
+  Future<void> setmobile_no(String mobile_no) async {
+    _mobile_no = mobile_no;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('mobile_no', mobile_no);
+  }
+
+  Future<String> getmobile_no() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? mobile_no = prefs.getString('mobile_no');
+    if (mobile_no != null && mobile_no.isNotEmpty) {
+      _mobile_no = mobile_no;
+    }
+    return mobile_no!;
+  }
 
   Future<void> setUsername(String username) async {
     _username = username;
@@ -64,7 +114,4 @@ class UserLogin {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
   }
-
-  String Name = "";
-  String get name => Name;
 }

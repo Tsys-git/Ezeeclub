@@ -17,7 +17,10 @@ class Healthdetailscontroller {
       Uri? uri =
           urlSetting.getHealthDetails; // Use the URL method from UrlSetting
 
-      final Map<String, String> headers = {'Content-Type': 'application/json'};
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
       final Map<String, String> data = {
         'MemberNo': memberNo,
         'BranchNo': branchNo,
@@ -43,7 +46,7 @@ class Healthdetailscontroller {
         }
       } else {
         throw Exception(
-            'Failed to fetch health details: ${response.statusCode}');
+            'Failed to fetch health details: ${response.reasonPhrase}');
       }
     } catch (e) {
       // Exception caught during the request

@@ -1,12 +1,14 @@
 import 'package:ezeeclub/models/PTSessionModel.dart';
 import 'package:ezeeclub/models/User.dart';
+import 'package:ezeeclub/pages/Features/slotBooking.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../controllers/ptsessionController.dart';
 
 class PTRecords extends StatefulWidget {
   final UserModel userModel;
-  const PTRecords( {super.key, required this.userModel});
+  const PTRecords({super.key, required this.userModel});
 
   @override
   State<PTRecords> createState() => _PTRecordsState();
@@ -46,11 +48,31 @@ class _PTRecordsState extends State<PTRecords> {
       appBar: AppBar(
         title: Text('PT Records'),
       ),
-      body: ListView.builder(
-        itemCount: ptSessions.length,
-        itemBuilder: (context, index) {
-          return _buildPTSessionCard(ptSessions[index]);
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: ptSessions.length,
+              itemBuilder: (context, index) {
+                return _buildPTSessionCard(ptSessions[index]);
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.to(() => SlotBooking());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: Text("Slot Booking"),
+          ),
+        ],
       ),
     );
   }
@@ -66,21 +88,13 @@ class _PTRecordsState extends State<PTRecords> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Plan: ${session.planName ?? 'No Plan'}'),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Text('Trainer: ${session.trainerName ?? 'No Trainer'}'),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Text('Sessions: ${session.noOfSessions ?? "0"}'),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Text('Session Date: ${session.sessionDate ?? 'Not Mentioned'}'),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Text('RecNo: ${session.recNo}'),
             ],
           ),

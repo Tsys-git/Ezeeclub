@@ -112,17 +112,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  FlipCard(
-                    direction:
-                        FlipDirection.VERTICAL, // Set the direction of flip
-                    front: _buildBasicCard(fontSize),
-                    back: _plan?.endDt != "null"
-                        ? _buildPlanDetailsCard(fontSize)
-                        : SizedBox(
-                            height: 100,
-                            child: _buildNoPlanDetailsCard(fontSize)),
-                  ),
-                  _buildmeasurementCard(fontSize),
+                  _buildBasicCard(fontSize),
+                  _buildPlanDetailsCard(fontSize),
                   SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
@@ -145,6 +136,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             title: "Mobile Number",
                             value:
                                 widget.userModel.phoneNumber ?? "Not Available",
+                            fontSize: fontSize,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ProfileDetail(
+                            title: "Location",
+                            value: widget.userModel.location ?? "Not Available",
                             fontSize: fontSize,
                           ),
                         ],
@@ -216,11 +223,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Colors.purple.shade800,
                 ],
               ),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                    color: Colors.black,
-                    blurRadius: 16,
-                    offset: Offset.zero)
+                    color: Colors.black, blurRadius: 16, offset: Offset.zero)
               ]),
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -336,11 +341,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 12),
                 Row(
                   children: [
                     Expanded(
@@ -379,6 +383,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   value: _plan?.paidAmount ?? "Not Available",
                   fontSize: fontSize,
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Program',
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
+                          Text(
+                            _plan?.programName ?? "Not Available",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Plan',
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
+                          Text(
+                            _plan?.planName ?? "Not Available",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -387,214 +436,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildmeasurementCard(double fontSize) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Colors.orange,
-                Colors.red.shade800,
-              ],
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Program',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        Text(
-                          _plan?.programName ?? "Not Available",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Plan',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        Text(
-                          _plan?.planName ?? "Not Available",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Weight',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        Text(
-                          "65 Kg",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Height',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        Text(
-                          "170 Cm",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-            ],
-          ),
-        ),
-      ),
-    );
+ 
   }
-
-  Widget _buildmeasurementCardBack(double fontSize) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Colors.orange,
-                Colors.red.shade800,
-              ],
-            ),
-          ),
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Measurement Card',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 14),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Weight',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                      Text(
-                        "65 Kg",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Height',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                      Text(
-                        "170 Cm",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class ProfileDetail extends StatelessWidget {
   final String title;

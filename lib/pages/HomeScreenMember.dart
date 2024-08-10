@@ -1,25 +1,37 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:ezeeclub/HomeScreen.dart';
 import 'package:ezeeclub/models/StepsData.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Auth/login.dart';
 import 'package:ezeeclub/pages/Features/PTRecords.dart';
+import 'package:ezeeclub/pages/Features/calender.dart';
 import 'package:ezeeclub/pages/Features/caloriesBurn.dart';
 import 'package:ezeeclub/pages/Features/dietPlan.dart';
 import 'package:ezeeclub/pages/Features/notifications.dart';
+import 'package:ezeeclub/pages/Features/planDetails.dart';
 import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
+import 'package:pedometer/pedometer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../whatto.dart';
+import 'Features/heathDetails.dart';
 import 'common/drawer.dart';
+import 'steps/stepController.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
+
+import 'what to do/whattodotoday.dart';
 
 class WeightData {
   WeightData(this.x, this.y);
@@ -58,11 +70,14 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
   late Animation<Offset> _slideAnimation;
   int? stepsGoal;
   int caloriesGoal = 0;
+  int _selectedIndex = 0;
+  DateTime _startDate = DateTime.now();
 
   bool _isLoading = true;
   @override
   void initState() {
     super.initState();
+
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000), // Duration of the animation
@@ -78,6 +93,30 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
     fetchQuotes();
     _loadGoals();
+    _loadStartDate();
+  }
+
+  Future<void> _loadStartDate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String startDateStr = prefs.getString('startDate') ??
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
+        print(startDateStr);
+    setState(() {
+      _startDate = DateTime.parse(startDateStr);
+    });
+  }
+
+  Future<void> _updateStartDate(DateTime newStartDate) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'startDate', DateFormat('yyyy-MM-dd').format(newStartDate));
+    setState(() {
+      _startDate = newStartDate;
+    });
+  }
+
+  DateTime _getDateAtIndex(int index) {
+    return _startDate.add(Duration(days: index));
   }
 
   Future<void> _loadGoals() async {
@@ -226,11 +265,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             )),
                         IconButton(
                             onPressed: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return LoginScreen();
+                                    return workoutScreen(userModel: widget.usermodel,);
                                   },
                                 ),
                               );
@@ -246,14 +285,18 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 ),
                 isBirthday
                     ? _buildBirthdayCard(height)
-                    : SlideTransition(
-                        position: _slideAnimation,
-                        child: _buildCalendarScrollView()),
+                    : _buildCalendarScrollView(),
 
                 SizedBox(height: screenWidth * 0.02),
-                SizedBox(
-                    height: screenWidth * 0.7,
-                    child: _whatToDoToday(screenWidth, scrrenheight, context)),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => GymListScreen());
+                  },
+                  child: Container(
+                      height: screenWidth * 0.7,
+                      child:
+                          _whatToDoToday(screenWidth, scrrenheight, context)),
+                ),
                 SizedBox(height: screenWidth * 0.02),
 
                 Card(
@@ -302,12 +345,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Align(
-                          alignment: Alignment.topLeft,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => WaterBenefitsScreen());
+                          },
                           child: Container(
                             height: screenWidth * 0.5,
                             decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: _buildWaterDrinkingCard(context),
@@ -391,12 +435,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
   }
 
   Widget _buildCaloriesCard(BuildContext context) {
-    //final StepController stepController = Get.put(StepController());
+    final StepController stepController = Get.put(StepController());
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       double screenWidth = constraints.maxWidth;
       double scrrenHeight = constraints.maxHeight;
-      double progress =100* 0.063;
+      double progress = stepController.stepCount.value * 0.063;
 
       return Container(
         decoration: BoxDecoration(
@@ -471,7 +515,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _buildInfoCard(BuildContext context, String title, String value,
       String unit, IconData icon, String img) {
-    //final StepController stepController = Get.put(StepController());
+    final StepController stepController = Get.put(StepController());
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       double screenWidth = constraints.maxWidth;
@@ -514,13 +558,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                     style: TextStyle(
                                         fontSize: screenWidth * 0.13,
                                         color: Colors.white)),
-                                // Obx(() => Text(
-                                //       '${stepController.stepCount.value}',
-                                //       style: TextStyle(
-                                //         fontSize: screenWidth * 0.13,
-                                //         fontWeight: FontWeight.bold,
-                                //       ),
-                                //     )),
+                                Obx(() => Text(
+                                      '${stepController.stepCount.value}',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )),
                               ],
                             ),
                           ),
@@ -579,13 +623,13 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                 style: TextStyle(
                                     fontSize: screenWidth * 0.13,
                                     color: Colors.white)),
-                            // Obx(() => Text(
-                            //       '${stepController.stepCount.value}',
-                            //       style: TextStyle(
-                            //         fontSize: screenWidth * 0.13,
-                            //         fontWeight: FontWeight.bold,
-                            //       ),
-                            //     )),
+                            Obx(() => Text(
+                                  '${stepController.stepCount.value}',
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )),
                           ],
                         ),
                       ),
@@ -719,29 +763,37 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       builder: (BuildContext context, BoxConstraints constraints) {
         double screenWidth = constraints.maxWidth;
 
-        return GestureDetector(
-          onTap: () {
-            Get.to(() => WaterBenefitsScreen());
-          },
-          child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text("ARE YOU DRINKING ENOUGH WATER ?",
-                      textScaler: TextScaler.linear(1.4),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.1,
-                      )),
-                  Text(
-                    "Benefits of it's.",
-                    textScaler: TextScaler.linear(1),
+        return Padding(
+            padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("ARE YOU DRINKING ENOUGH WATER ?",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenWidth * 0.06,
+                          )),
+                      Text("Know the Benefits.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: screenWidth * 0.05,
+                          )),
+                    ],
                   ),
-                ],
-              )),
-        );
+                ),
+                // Image.asset(
+                //   fit: BoxFit.cover,
+                //   "assets/wdc.jpg",
+                //   height: screenWidth * 5,
+                //   width: screenWidth * 0.2,
+                // ),
+              ],
+            ));
       },
     );
   }
@@ -1030,7 +1082,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Center(
-        child: Text("$quote.",
+        child: Text("${quote}.",
             textAlign: TextAlign.center,
             textScaler: TextScaler.linear(1.4),
             style: TextStyle(
@@ -1087,52 +1139,63 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         double height = constraints.maxWidth;
 
         DateTime currentDate = DateTime.now();
-        DateTime startDate =
-            currentDate.subtract(Duration(days: 1)); // Start from yesterday
 
         return SizedBox(
           height: height * 0.4,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 5,
+            itemCount: 4,
             itemBuilder: (context, index) {
-              DateTime today = startDate.add(Duration(days: index));
-              bool isCurrentDate = DateFormat('yyyy-MM-dd').format(today) ==
+              DateTime dayDate = _getDateAtIndex(index);
+              bool isCurrentDate = DateFormat('yyyy-MM-dd').format(dayDate) ==
                   DateFormat('yyyy-MM-dd').format(currentDate);
-              bool isPastDate = today.isBefore(currentDate);
+              bool isPastDate = dayDate.isBefore(currentDate);
 
               return Container(
                 width: width * 0.2,
                 margin: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  gradient: isCurrentDate
-                      ? LinearGradient(
-                          colors: const [
-                            Colors.amber,
-                            Colors.yellow,
-                          ],
+                  gradient: _selectedIndex == index
+                      ? 
+                      (isCurrentDate ?
+                        LinearGradient(
+                          colors: [Colors.amber, Colors.yellow],
                           begin: Alignment.bottomLeft,
-                        )
+                        ):LinearGradient(
+                        
+                          colors: [Colors.grey, Colors.white],
+                          begin: Alignment.bottomLeft,
+                        ))
                       : (isPastDate
-                          ? LinearGradient(
-                              colors: const [Colors.grey, Colors.grey],
-                            )
+                          ? LinearGradient(colors: [Colors.grey, Colors.grey])
                           : LinearGradient(
-                              colors: const [Colors.white, Colors.white])),
+                              colors: [Colors.white, Colors.white])),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: GestureDetector(
-                  onTap: isCurrentDate
-                      ? () {
-                          // Navigate to TodayScreen
-                          Get.to(() => TodayScreen());
-                        }
-                      : null,
+                  onTap: () async {
+                    if (!isPastDate) {
+                      int newIndex = (index + 1) % 4;
+                      setState(() {
+                        _selectedIndex = newIndex;
+                      });
+                      DateTime newStartDate = _startDate!
+                          .add(Duration(days: newIndex - _selectedIndex));
+                      await _updateStartDate(newStartDate);
+                      if (isCurrentDate) {
+                        // Navigate to TodayScreen
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TodayScreen()));
+                      }
+                    }
+                  },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        today.day.toString(),
+                        dayDate.day.toString(),
                         style: TextStyle(
                           fontSize: width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -1142,7 +1205,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         ),
                       ),
                       Text(
-                        DateFormat.MMM().format(today),
+                        DateFormat.MMM().format(dayDate),
                         style: TextStyle(
                           fontSize: width * 0.05,
                           color: isCurrentDate
@@ -1151,7 +1214,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         ),
                       ),
                       Text(
-                        DateFormat.E().format(today).toUpperCase(),
+                        DateFormat.E().format(dayDate).toUpperCase(),
                         style: TextStyle(
                           fontSize: width * 0.05,
                           color: isCurrentDate
@@ -1274,7 +1337,7 @@ Widget _buildwhatNewInTheGym(BuildContext context) {
             ),
             // Horizontal cards with flexible height
 
-            SizedBox(
+            Container(
               height: screenWidth > 400 ? 180 : 270,
               child: ListView(
                 scrollDirection: Axis.horizontal,

@@ -1,4 +1,5 @@
 import 'package:ezeeclub/models/User.dart';
+import 'package:ezeeclub/pages/Features/memberMeasurement.dart';
 import 'package:ezeeclub/pages/att/att.dart';
 import 'package:ezeeclub/pages/drawer/help.dart';
 import 'package:ezeeclub/pages/drawer/profile.dart';
@@ -8,6 +9,7 @@ import 'package:ezeeclub/pages/Features/rules.dart';
 import 'package:ezeeclub/pages/drawer/about.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Features/bodypartselector.dart';
 import '../Features/calender.dart';
 import '../Features/heathDetails.dart';
 
@@ -57,37 +59,23 @@ class _AppDrawerState extends State<AppDrawer> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return ExampleApp();
+                      return AttendanceScreen();
                     },
                   ),
                 );
               }),
 
-              // buildDrawerListTile(Icons.lock, "Change Password", () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) {
-              //         return ResetPasswordMember(
-              //           memberNo: widget.userModel.member_no,
-              //           BranchNo: widget.userModel.BranchNo,
-              //         );
-              //       },
-              //     ),
-              //   );
-              // }),
-              // buildDrawerListTile(Icons.receipt_long, "Plan Details", () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) {
-              //         return PlanDetailsPage(
-              //             member_no: widget.userModel.member_no,
-              //             branchNo: widget.userModel.BranchNo);
-              //       },
-              //     ),
-              //   );
-              // }),
+              buildDrawerListTile(Icons.history, "Measurements", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MeasurementView();
+                    },
+                  ),
+                );
+              }),
+              
               buildDrawerListTile(Icons.health_and_safety, "Health Details",
                   () {
                 Navigator.push(
@@ -172,7 +160,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 );
               }),
-              buildDrawerListTile(Icons.feedback, "Feedback", () {}),
+             
+              //buildDrawerListTile(Icons.feedback, "Feedback", () {}),
               buildDrawerListTile(Icons.exit_to_app, "Logout", () {
                 Navigator.pushReplacement(
                   context,
@@ -199,7 +188,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   void _showRateUsBottomSheet(BuildContext context) {
-    var rating = 4;
+    var _rating = 4;
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -223,12 +212,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 children: List.generate(5, (index) {
                   return IconButton(
                     icon: Icon(
-                      index < rating ? Icons.star : Icons.star_border,
+                      index < _rating ? Icons.star : Icons.star_border,
                       color: Colors.amber,
                     ),
                     onPressed: () {
                       setState(() {
-                        rating = index + 1;
+                        _rating = index + 1;
                       });
                     },
                   );

@@ -58,6 +58,7 @@ dependencies:
   
 
   wifi_info_flutter: any
+  body_part_selector: ^0.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

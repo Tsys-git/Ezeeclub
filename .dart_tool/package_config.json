@@ -14,6 +14,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "body_part_selector",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/body_part_selector-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -150,6 +156,12 @@
       "rootUri": "file:///Users/apple/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "flutter_svg",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/flutter_svg-1.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_test",
@@ -296,6 +308,18 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "path_drawing",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/path_drawing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/path_parsing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path_provider_linux",
       "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1",
       "packageUri": "lib/",
@@ -378,6 +402,12 @@
       "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "rotation_stage",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/rotation_stage-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "sensors",
@@ -494,6 +524,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "touchable",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/touchable-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
@@ -602,7 +638,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2024-08-09T11:00:33.539817Z",
+  "generated": "2024-08-10T08:20:49.928666Z",
   "generator": "pub",
   "generatorVersion": "3.4.4",
   "flutterRoot": "file:///Users/apple/flutter",

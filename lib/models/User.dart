@@ -7,6 +7,7 @@ class UserModel {
   final String member_no;
   final String mem_status;
   final String BranchNo;
+  final String location;
 
   UserModel( {
     required this.BranchNo,
@@ -17,5 +18,6 @@ class UserModel {
     required this.fullName,
     required this.phoneNumber,
     required this.email,
+    required this.location
   });
 }

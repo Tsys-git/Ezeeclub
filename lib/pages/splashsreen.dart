@@ -9,8 +9,6 @@ import '../seturlScreen.dart';
 import 'Auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -26,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getUrl();
 
     // Print the initial URL value
-    print('Current URL value: $storedUrl');
+    print('Current URL value: ${storedUrl}');
 
     // Load URL from SharedPreferences and navigate after delay
     _loadAndNavigate();
@@ -53,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     storedUrl = prefs.getString('app_url');
-    print('Current URL value: $storedUrl');
+    print('Current URL value: ${storedUrl}');
   }
 
   // Method to load URL from SharedPreferences and navigate

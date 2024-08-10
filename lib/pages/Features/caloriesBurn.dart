@@ -59,37 +59,37 @@ class CalorieBurningTipsScreen extends StatelessWidget {
 
   final List<Gradient> gradients = [
     LinearGradient(
-      colors: const [Colors.teal, Colors.teal],
+      colors: [Colors.teal, Colors.teal],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.red, Colors.red],
+      colors: [Colors.red, Colors.red],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.green, Colors.green],
+      colors: [Colors.green, Colors.green],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.purple, Colors.purple],
+      colors: [Colors.purple, Colors.purple],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.cyan, Colors.cyan],
+      colors: [Colors.cyan, Colors.cyan],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.orange, Colors.orange],
+      colors: [Colors.orange, Colors.orange],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
     LinearGradient(
-      colors: const [Colors.blue, Colors.blue],
+      colors: [Colors.blue, Colors.blue],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
     ),
@@ -101,7 +101,7 @@ class CalorieBurningTipsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calorie Burning Tips',style:TextStyle(fontSize: 24)),
+        title: Text('Calorie Burning Tips'),
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -122,7 +122,6 @@ class CalorieBurningTipsScreen extends StatelessWidget {
   Widget _buildTipCard(
       BuildContext context, CalorieBurningTip tip, Gradient gradient) {
     return Card(
-      elevation: 6.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -131,7 +130,7 @@ class CalorieBurningTipsScreen extends StatelessWidget {
           gradient: gradient,
           borderRadius: BorderRadius.circular(15.0),
         ),
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -143,8 +142,9 @@ class CalorieBurningTipsScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(
               tip.title,
+                            textScaler: TextScaler.linear(1.0),
+
               style: TextStyle(
-                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -153,8 +153,9 @@ class CalorieBurningTipsScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(
               tip.description,
+                            textScaler: TextScaler.linear(0.9),
+
               style: TextStyle(
-                fontSize: 14,
                 color: Colors.white.withOpacity(0.9),
               ),
               textAlign: TextAlign.center,

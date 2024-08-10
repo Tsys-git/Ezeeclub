@@ -5,8 +5,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,8 +18,6 @@ class MyApp extends StatelessWidget {
 }
 
 class GymListScreen extends StatefulWidget {
-  const GymListScreen({super.key});
-
   @override
   _GymListScreenState createState() => _GymListScreenState();
 }
@@ -206,7 +202,7 @@ class _GymListScreenState extends State<GymListScreen> {
 class DetailScreen extends StatelessWidget {
   final Map<String, String> item;
 
-  const DetailScreen({super.key, required this.item});
+  const DetailScreen({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -226,13 +222,15 @@ class DetailScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: const [Colors.black, Colors.purple])),
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topLeft,
+                            colors: [Colors.purple, Colors.deepPurple,Colors.grey])),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(top:8.0),
                       child: Image.asset(
                         item['image']!,
                         fit: BoxFit.contain,
-                        height: 250,
+                        height: 250+10,
                         width: double.infinity,
                       ),
                     ),
@@ -311,7 +309,7 @@ class DetailScreen extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 30, color: Colors.blueGrey),
+        Icon(icon, size: 30, color: Colors.white),
         SizedBox(width: 10),
         Expanded(
           child: Column(

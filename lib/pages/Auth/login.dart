@@ -12,8 +12,6 @@ import '../../consts/userLogin.dart';
 import '../splashsreen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -60,7 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     storedUrl = prefs.getString('app_url');
 
-    final Uri url = Uri.parse('http://$storedUrl/UserLogin');
+    final Uri url =
+        Uri.parse('http://${storedUrl}/MobileAppService.svc/UserLogin');
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -89,23 +88,26 @@ class _LoginScreenState extends State<LoginScreen> {
           final String memberNo = userData['MemberNo'] ?? 'Not Available';
           final String memStatus =
               userData['Membershipstatus'] ?? 'Not Available';
-          final String branchNo = userData['BranchNo'] ?? '1';
-          print(branchNo);
+          final String location = userData['Location'] ?? 'Not Available';
+          final String branchNo = userData['Branchno'] ?? '1';
 
-          print(fullName);
           final UserModel userModel = UserModel(
-            fullName: fullName,
-            email: email,
-            phoneNumber: phoneNumber,
-            dob: dob,
-            br_name: brName,
-            member_no: memberNo,
-            mem_status: memStatus,
-            BranchNo: branchNo,
-          );
+              fullName: fullName,
+              email: email,
+              phoneNumber: phoneNumber,
+              dob: dob,
+              br_name: brName,
+              member_no: memberNo,
+              mem_status: memStatus,
+              BranchNo: branchNo,
+              location: location);
           if (fullName != "Not Available") {
             Get.off(() => HomeScreenMember(usermodel: userModel));
             showSnackBar(context, 'Member Login successful', Colors.green);
+            // shared pref value setup
+            UserLogin().setmobile_no(phoneNumber);
+            UserLogin().setname(fullName);
+            UserLogin().setmemberno(memberNo);
           }
         } else {
           showSnackBar(
@@ -168,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: Row(
-                    children: const [
+                    children: [
                       // Image.asset(
                       //   "assets/confirm.png",
                       //   height: 30,
@@ -211,15 +213,12 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 10),
                 Text(
                   'Welcome To EZEE CLUB',
-                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
-
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),
@@ -260,6 +259,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: isLoading ? null : () => login(context),
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.black),
+                        ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                     padding:
@@ -268,12 +273,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: isLoading
-                      ? CircularProgressIndicator()
-                      : Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.black),
-                        ),
                 ),
               ],
             ),

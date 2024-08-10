@@ -37,4 +37,31 @@ class AttendanceController {
       rethrow; // Rethrow the exception to propagate it further if needed
     }
   }
+
+  Future<bool> saveAttendace(String MemberNo) async {
+    try {
+      await urlSetting.initialize();
+      Uri? uri = urlSetting.saveAttendance;
+
+      final Map<String, String> headers = {"Content-Type": "application/json"};
+      final Map<String, String> data = {"MemberNo": MemberNo};
+
+      final http.Response response =
+          await http.post(uri!, headers: headers, body: json.encode(data));
+
+      if (response.statusCode == 200) {
+        print(' save attendance successfully');
+
+        final jsonResponse = json.decode(response.body);
+        print(jsonResponse);
+        return true;
+      } else {
+        return false;
+        //throw Exception('Failed to save attendance: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error while save attendance: $e');
+      rethrow;
+    }
+  }
 }
