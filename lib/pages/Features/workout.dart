@@ -44,7 +44,7 @@ class _workoutScreenState extends State<workoutScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Workout Details Screen",
+          "Workout Details ",
           style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
@@ -52,6 +52,7 @@ class _workoutScreenState extends State<workoutScreen> {
         child: workoutDetails != null
             ? SingleChildScrollView(
                 child: Card(
+                  color:Colors.grey.withOpacity(0.1),
                   elevation: 4,
                   margin: EdgeInsets.all(16),
                   child: Padding(

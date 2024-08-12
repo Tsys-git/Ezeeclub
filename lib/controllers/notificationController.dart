@@ -6,7 +6,11 @@ import 'package:http/http.dart' as http;
 class NotificationController {
   UrlSetting urlSetting = UrlSetting();
   Future<void> fetchNotification(memberNo, branchNo) async {
-    final Uri? url = urlSetting.getNotification;
+    
+
+    try {
+      urlSetting.initialize();
+      final Uri? url = urlSetting.getNotification;
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -14,8 +18,6 @@ class NotificationController {
       "MemberNo": memberNo,
       "BranchNo": branchNo,
     };
-
-    try {
       final http.Response response = await http.post(
         url!,
         headers: headers,

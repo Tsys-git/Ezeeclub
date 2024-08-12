@@ -10,6 +10,12 @@ import 'package:get/get.dart';
 import 'pages/splashsreen.dart';
 import 'package:device_preview/device_preview.dart';
 
+
+
+//Error (Xcode): ../../.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-26.1.42/lib/src/charts/common/core_tooltip.dart:168:22: Error: The method 'markNeedsBuild' isn't defined for the class 'RenderConstrainedLayoutBuilder<Constraints, RenderObject>'.
+//this error can be resolved by changing markneedsbuild to markneedspaint and markneedslayout.
+//ran flutter pub cache repair in terminal 
+
 Future main() async {
   UrlSetting urlSetting = UrlSetting();
   WidgetsFlutterBinding.ensureInitialized();

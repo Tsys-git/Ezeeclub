@@ -26,7 +26,6 @@ import '../whatto.dart';
 import 'Features/heathDetails.dart';
 import 'common/drawer.dart';
 import 'steps/stepController.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:card_swiper/card_swiper.dart';
@@ -100,7 +99,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String startDateStr = prefs.getString('startDate') ??
         DateFormat('yyyy-MM-dd').format(DateTime.now());
-        print(startDateStr);
+    print(startDateStr);
     setState(() {
       _startDate = DateTime.parse(startDateStr);
     });
@@ -226,25 +225,30 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                         ),
                       );
                     }),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(widget.usermodel.fullName,
-                            selectionColor: Colors.white,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenWidth * 0.05)
-                            // style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                        Text(widget.usermodel.member_no,
-                            selectionColor: Colors.white,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenWidth * 0.05)
-                            // style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                     //   Scaffold.of(context).openDrawer();
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(widget.usermodel.fullName,
+                              selectionColor: Colors.white,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: screenWidth * 0.05)
+                              // style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                          Text(widget.usermodel.member_no,
+                              selectionColor: Colors.white,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: screenWidth * 0.05)
+                              // style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [
@@ -269,12 +273,14 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return workoutScreen(userModel: widget.usermodel,);
+                                    return workoutScreen(
+                                      userModel: widget.usermodel,
+                                    );
                                   },
                                 ),
                               );
                             },
-                            icon: Icon(Icons.exit_to_app,
+                            icon: Icon(Icons.sports_gymnastics,
                                 size: screenWidth * 0.05)),
                       ],
                     )
@@ -350,7 +356,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             Get.to(() => WaterBenefitsScreen());
                           },
                           child: Container(
-                            height: screenWidth * 0.5,
+                            height: screenWidth * 0.4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16.0),
                             ),
@@ -971,28 +977,36 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 ),
                 SizedBox(
                   height: 200,
-                  child: SfCartesianChart(
-                    primaryXAxis: CategoryAxis(
-                      majorGridLines: MajorGridLines(width: 0.2),
-                      // Hides vertical gridlines
-                    ),
-                    primaryYAxis: NumericAxis(
-                      minimum: minValue! - 5,
-                      maximum: maxValue! + 5,
-                      majorGridLines: MajorGridLines(width: 0.2),
-                    ),
-                    series: <CartesianSeries>[
-                      SplineSeries<WeightData, String>(
-                          dataSource: weightData,
-                          width: 10,
-                          dashArray: const <double>[50, 5],
-                          xValueMapper: (WeightData data, _) => data.x,
-                          yValueMapper: (WeightData data, _) => data.y)
-                    ],
-                    tooltipBehavior: TooltipBehavior(
-                      enable: true,
-                      header: "Weight",
-                      tooltipPosition: TooltipPosition.auto,
+                  child: LineChart(
+                    LineChartData(
+                      gridData: FlGridData(show: true),
+                      titlesData: FlTitlesData(show: false),
+                      borderData: FlBorderData(
+                        border: Border.all(
+                          color: const Color(0xff37434d),
+                          width: 2,
+                        ),
+                      ),
+
+                      minY: 40, // Minimum Y value
+                      maxY: 100, // Maximum Y value
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: [
+                            FlSpot(0, 45), //  april
+                            FlSpot(1, 50), // April
+                            FlSpot(2, 75), // May
+                            FlSpot(3, 80), // June
+                            FlSpot(4, 70), // July
+                          ],
+                          isStepLineChart: false,
+                          isCurved: true,
+                          color: Colors.amber,
+                          dotData:
+                              FlDotData(show: true), // Show dots at each point
+                          belowBarData: BarAreaData(show: true),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -1151,21 +1165,21 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                   DateFormat('yyyy-MM-dd').format(currentDate);
               bool isPastDate = dayDate.isBefore(currentDate);
 
+
               return Container(
                 width: width * 0.2,
                 margin: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   gradient: _selectedIndex == index
-                      ? 
-                      (isCurrentDate ?
-                        LinearGradient(
-                          colors: [Colors.amber, Colors.yellow],
-                          begin: Alignment.bottomLeft,
-                        ):LinearGradient(
-                        
-                          colors: [Colors.grey, Colors.white],
-                          begin: Alignment.bottomLeft,
-                        ))
+                      ? (isCurrentDate
+                          ? LinearGradient(
+                              colors: [Colors.amber, Colors.yellow],
+                              begin: Alignment.bottomLeft,
+                            )
+                          : LinearGradient(
+                              colors: [Colors.grey, Colors.white],
+                              begin: Alignment.bottomLeft,
+                            ))
                       : (isPastDate
                           ? LinearGradient(colors: [Colors.grey, Colors.grey])
                           : LinearGradient(
@@ -1250,7 +1264,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 children: [
                   Expanded(
                     child: Text(
-                      'Wish You Many Many Returns Of The Day.',
+                      'Wish You Many Many Happy Returns Of The Day.',
                       textScaler: TextScaler.linear(1.2),
                       style: TextStyle(
                         fontSize: 20,

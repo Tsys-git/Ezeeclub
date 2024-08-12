@@ -101,16 +101,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Center(
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.white,
-                      child: Image.asset(
-                        "assets/man.png",
-                        fit: BoxFit.contain,
-                      ),
+                  Image.asset(
+                      "assets/user123.png",
+                      color:Colors.white,
+                      fit: BoxFit.contain,
                     ),
-                  ),
+                  
                   SizedBox(height: 20),
                   _buildBasicCard(fontSize),
                   _buildPlanDetailsCard(fontSize),
@@ -345,6 +341,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ProfileDetail(
+                    title: "Program",
+                    value: _plan?.programName ?? "Not Available",
+                    fontSize: fontSize,
+                                            ),
+                   
+                  ],
+                ),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ProfileDetail(
+                    title: "Plan",
+                    value: _plan?.planName ?? "Not Available",
+                    fontSize: fontSize,
+                                            ),
+                   
+                  ],
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -383,51 +401,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   value: _plan?.paidAmount ?? "Not Available",
                   fontSize: fontSize,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Program',
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                          ),
-                          Text(
-                            _plan?.programName ?? "Not Available",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Plan',
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                          ),
-                          Text(
-                            _plan?.planName ?? "Not Available",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              
               ],
             ),
           ),

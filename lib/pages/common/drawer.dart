@@ -247,7 +247,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   void _openRatingPage() async {
     const url =
-        'https://play.google.com/store/apps/details'; // Replace with your app's store URL
+        'https://play.google.com/store/apps/'; // Replace with your app's store URL
     if (await canLaunch(url)) {
       await launch(url);
     } else {

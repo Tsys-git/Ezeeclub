@@ -51,6 +51,7 @@ class _PTRecordsState extends State<PTRecords> {
       body: Column(
         children: [
           Expanded(
+            flex: 2,
             child: ListView.builder(
               itemCount: ptSessions.length,
               itemBuilder: (context, index) {
@@ -58,19 +59,22 @@ class _PTRecordsState extends State<PTRecords> {
               },
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Get.to(() => SlotBooking());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 40),
+            child: ElevatedButton(
+              onPressed: () {
+                Get.to(() => SlotBooking());
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
+              child: Text("Slot Booking"),
             ),
-            child: Text("Slot Booking"),
           ),
         ],
       ),

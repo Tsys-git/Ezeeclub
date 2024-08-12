@@ -14,7 +14,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notification"),
+      title: Text("Notification",style:TextStyle(fontSize: 24)),
       ),
       body: Center(
         child: Column(
@@ -24,13 +24,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
               "assets/notifications.png",
               width: double.infinity,
               height: 200,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
             TextButton(
                 onPressed: () {
-                  nc.fetchNotification("12345", "1");
+                  nc.fetchNotification("6400","2");
                 },
-                child: Text("fetch Notifications ")),
+                child: Text("fetch Notifications ",style:TextStyle(fontSize: 24))),
           ],
         ),
       ),
