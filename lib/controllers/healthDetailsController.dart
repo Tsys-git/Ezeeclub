@@ -33,7 +33,7 @@ class Healthdetailscontroller {
         headers: headers,
         body: json.encode(data),
       );
-
+      print(response.body);
       if (response.statusCode == 200) {
         // Request was successful
         final List<dynamic> responseData = json.decode(response.body);

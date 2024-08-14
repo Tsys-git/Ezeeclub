@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -42,9 +41,6 @@ class AboutUsPage extends StatelessWidget {
               title: Text('Contact us'),
               onTap: () {
                 // Implement your contact functionality here
-
-              openwebsite("https://tsysinfo.com/contact.html");
-
               },
             ),
             ListTile(
@@ -52,8 +48,6 @@ class AboutUsPage extends StatelessWidget {
               title: Text('Visit our website'),
               onTap: () {
                 // Implement your website navigation functionality here
-                              openwebsite("https://tsysinfo.com/");
-
               },
             ),
             ListTile(
@@ -61,17 +55,13 @@ class AboutUsPage extends StatelessWidget {
               title: Text('Like us on Facebook'),
               onTap: () {
                 // Implement your Facebook navigation functionality here
-                openwebsite("www.fb.com");
               },
             ),
             ListTile(
               leading: Icon(Icons.star),
               title: Text('Rate us on the Play Store'),
-              
               onTap: () {
                 // Implement your Play Store rating functionality here
-                              openwebsite("www.google.com");
-
               },
             ),
             Expanded(child: Container()), // To push the following text to the bottom
@@ -97,12 +87,3 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 }
-
-void openwebsite(String url) async {
-    // Replace with your app's store URL
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }

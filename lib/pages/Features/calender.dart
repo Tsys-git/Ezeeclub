@@ -1,18 +1,13 @@
+import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart'; // Import for date formatting
 
 import '../../controllers/calenderController.dart';
 import '../../models/calender.dart';
 
 class CalendarScreen extends StatefulWidget {
-  final String memberNo;
-  final String branchNo;
-
-  const CalendarScreen({
-    super.key,
-    required this.memberNo,
-    required this.branchNo,
-  });
+  const CalendarScreen({Key? key}) : super(key: key);
 
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
@@ -24,28 +19,66 @@ class _CalendarScreenState extends State<CalendarScreen> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  String member_no = "";
+  String branchno = "";
 
   @override
   void initState() {
     super.initState();
-    fetchCalendarEvents();
+    loaddata();
   }
 
-  Future<void> fetchCalendarEvents() async {
+  Future<void> loaddata() async {
+    UserLogin userLogin = UserLogin();
+    String? memberNo = await userLogin.getMemberNo();
+    String? branchNo = await userLogin.getBranchNo();
+    setState(() {
+      member_no = memberNo ?? "";
+      branchno = branchNo ?? "";
+    });
+    fetchCalendarEvents(member_no, branchno);
+  }
+
+  Future<void> fetchCalendarEvents(String memberNo, String branchNo) async {
     try {
+      // Determine the month and year based on the selected date, or use the current date if none is selected
+      final selectedMonth = _selectedDay != null
+          ? DateFormat('M').format(_selectedDay!)
+          : DateFormat('M').format(DateTime.now());
+      final selectedYear = _selectedDay != null
+          ? DateFormat('yyyy').format(_selectedDay!)
+          : DateFormat('yyyy').format(DateTime.now());
+
+      // Fetch calendar events using the selected date, month, and year
       _calendarEvents = await _calendarController.getCalendarDetails(
-        widget.memberNo,
-        widget.branchNo,
-        DateTime.now().month.toString(),
-        // "6",
-        DateTime.now().year.toString(),
-        // "2023"
+        memberNo,
+        branchNo,
+        selectedMonth,
+        selectedYear,
       );
       setState(() {}); // Update UI after fetching events
     } catch (e) {
       print('Error fetching calendar events: $e');
-      // Handle error as needed
     }
+  }
+
+  List<CalendarEvent> getEventsForDay(DateTime day) {
+    print(day);
+
+    final DateFormat dateFormat =
+        DateFormat("M/d/yyyy h:mm:ss a"); // Adjust format if needed
+    return _calendarEvents.where((event) {
+      if (event.messageNo == null || event.messageNo!.isEmpty) return false;
+      try {
+        //DateTime eventDate = dateFormat.parse(event.messageNo!);
+        DateTime eventDate =
+            DateFormat("M/d/yyyy h:mm:ss a").parse(event.messageNo);
+        return isSameDay(day, eventDate);
+      } catch (e) {
+        print('Error parsing date: $e');
+        return false;
+      }
+    }).toList();
   }
 
   @override
@@ -70,6 +103,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
+                    fetchCalendarEvents(member_no,
+                        branchno); // Fetch events for the selected day
                   });
                 },
                 onFormatChanged: (format) {
@@ -87,18 +122,65 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
               SizedBox(height: 20),
               Expanded(
-                child: Card(
-                  child: ListView.builder(
-                    itemCount: _calendarEvents.length,
-                    itemBuilder: (context, index) {
+                child: Builder(
+                  builder: (context) {
+                    final eventsForSelectedDay =
+                        getEventsForDay(_selectedDay ?? DateTime.now());
+                    if (eventsForSelectedDay.isEmpty) {
                       return Center(
-                        child: ListTile(
-                          title: Text(_calendarEvents[index].attachment),
-                          subtitle: Text(_calendarEvents[index].sendDt),
+                        child: Text(
+                          'No message for this date',
+                          style: TextStyle(
+                              fontSize: 16, fontStyle: FontStyle.italic),
                         ),
                       );
-                    },
-                  ),
+                    } else {
+                      return ListView.builder(
+                        itemCount: eventsForSelectedDay.length,
+                        itemBuilder: (context, index) {
+                          final event = eventsForSelectedDay[index];
+                          return Card(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
+                            elevation: 4,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.all(16),
+                              title: Text(
+                                event.message ?? 'No message',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (event.messageNo != "")
+                                    Text(
+                                      'Date: ${formatDate(event.messageNo!)}',
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  if (event.empName != "")
+                                    Text(
+                                      'Employee Name: ${event.empName}',
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  if (event.branchNo != null)
+                                    Text(
+                                      'Branch No: ${event.branchNo}',
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  if (event.status != null)
+                                    Text(
+                                      'Status: ${event.status}',
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  // Add other fields as needed
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
                 ),
               ),
             ],
@@ -111,22 +193,32 @@ class _CalendarScreenState extends State<CalendarScreen> {
   CalendarStyle customCalendarStyle() {
     return CalendarStyle(
       todayDecoration: BoxDecoration(
-        color: Colors.orange.shade200,
+        color: Colors.green.shade200,
       ),
       selectedDecoration: BoxDecoration(
-        color: Colors.orange.shade400,
+        color: Colors.green.shade400,
       ),
-      weekendTextStyle: TextStyle(color: Colors.orange.shade800),
-      holidayTextStyle: TextStyle(color: Colors.orange.shade800),
+      weekendTextStyle: TextStyle(color: Colors.green.shade800),
+      holidayTextStyle: TextStyle(color: Colors.green.shade800),
       outsideTextStyle: TextStyle(color: Colors.grey),
       outsideDaysVisible: false,
       todayTextStyle: TextStyle(
-        color: Colors.orange.shade900,
+        color: Colors.green.shade900,
         fontWeight: FontWeight.bold,
       ),
       markerDecoration: BoxDecoration(
-        color: Colors.orange.shade600,
+        color: Colors.green.shade600,
       ),
     );
+  }
+
+  String formatDate(String dateString) {
+    try {
+      final DateTime date = DateFormat("M/d/yyyy h:mm:ss a").parse(dateString);
+      return DateFormat("MMMM d, yyyy h:mm a").format(date);
+    } catch (e) {
+      print('Error formatting date: $e');
+      return dateString;
+    }
   }
 }

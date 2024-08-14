@@ -62,28 +62,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   @override
   void initState() {
     super.initState();
-        _geofenceService.start(_geofenceList);
-
     checkAndRequestPermissions();
     _loadAttendanceData();
     _loadMemberNo();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    
-     _geofenceService.stop();
-    // _locationStreamController.close();
-    super.dispose();
-    
-  }
-
-
-
   Future<void> _loadMemberNo() async {
     UserLogin userLogin = UserLogin();
-    String? memeberno = await userLogin.getmemberno();
+    String? memeberno = await userLogin.getMemberNo();
     setState(() {
       MemberNo = memeberno ?? "";
     });
@@ -314,8 +300,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     );
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -481,5 +465,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _geofenceService.stop();
   }
 }

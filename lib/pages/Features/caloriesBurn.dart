@@ -101,7 +101,7 @@ class CalorieBurningTipsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calorie Burning Tips'),
+        title: Text('Calorie Burning Tips',style:TextStyle(fontSize: 24)),
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -122,6 +122,7 @@ class CalorieBurningTipsScreen extends StatelessWidget {
   Widget _buildTipCard(
       BuildContext context, CalorieBurningTip tip, Gradient gradient) {
     return Card(
+      elevation: 6.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -130,7 +131,7 @@ class CalorieBurningTipsScreen extends StatelessWidget {
           gradient: gradient,
           borderRadius: BorderRadius.circular(15.0),
         ),
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -142,9 +143,8 @@ class CalorieBurningTipsScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(
               tip.title,
-                            textScaler: TextScaler.linear(1.0),
-
               style: TextStyle(
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -153,9 +153,8 @@ class CalorieBurningTipsScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(
               tip.description,
-                            textScaler: TextScaler.linear(0.9),
-
               style: TextStyle(
+                fontSize: 14,
                 color: Colors.white.withOpacity(0.9),
               ),
               textAlign: TextAlign.center,

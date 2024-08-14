@@ -50,25 +50,25 @@ class UrlSetting {
     employeeLogin = Uri.parse("${baseUrl!}/EmployeeLogin");
     employeeAttendance = Uri.parse("${baseUrl!}/EmployeeAttendance");
 
-    // Print URLs for verification
-    print('Save Attendance URL: $saveAttendance');
-    print('Get Health Details URL: $getHealthDetails');
-    print('Get Plan Details URL: $getPlanDetails');
-    print('Get Measure Details URL: $getMeasureDetails');
-    print('Get Workout URL: $getWorkout');
-    print('Get Diet URL: $getDiet');
-    print('Get PT Sessions URL: $getPtSessions');
-    print('Change Password URL: $changePassword');
-    print('Forgot Password URL: $forgotPassword');
-    print('Get Notification URL: $getNotification');
-    print('Registration URL: $registration');
-    print('Get Branch Details URL: $getBranchDetails');
-    print('Save Message URL: $saveMessage');
-    print('Get Message URL: $getMessage');
-    print('Approve PT Sessions URL: $approvePtSessions');
-    print('Get Attendance Rewards URL: $getAttendanceRewards');
-    print('Get Calendar Details URL: $getCalendarDetails');
-    print('Employee Login URL: $employeeLogin');
-    print('Employee Attendance URL: $employeeAttendance');
+    // // Print URLs for verification
+    // print('Save Attendance URL: $saveAttendance');
+    // print('Get Health Details URL: $getHealthDetails');
+    // print('Get Plan Details URL: $getPlanDetails');
+    // print('Get Measure Details URL: $getMeasureDetails');
+    // print('Get Workout URL: $getWorkout');
+    // print('Get Diet URL: $getDiet');
+    // print('Get PT Sessions URL: $getPtSessions');
+    // print('Change Password URL: $changePassword');
+    // print('Forgot Password URL: $forgotPassword');
+    // print('Get Notification URL: $getNotification');
+    // print('Registration URL: $registration');
+    // print('Get Branch Details URL: $getBranchDetails');
+    // print('Save Message URL: $saveMessage');
+    // print('Get Message URL: $getMessage');
+    // print('Approve PT Sessions URL: $approvePtSessions');
+    // print('Get Attendance Rewards URL: $getAttendanceRewards');
+    // print('Get Calendar Details URL: $getCalendarDetails');
+    // print('Employee Login URL: $employeeLogin');
+    // print('Employee Attendance URL: $employeeAttendance');
   }
 }

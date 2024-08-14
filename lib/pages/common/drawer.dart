@@ -1,4 +1,3 @@
-import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/memberMeasurement.dart';
 import 'package:ezeeclub/pages/att/att.dart';
 import 'package:ezeeclub/pages/drawer/help.dart';
@@ -7,16 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:ezeeclub/pages/Auth/login.dart';
 import 'package:ezeeclub/pages/Features/rules.dart';
 import 'package:ezeeclub/pages/drawer/about.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../Features/bodypartselector.dart';
+import '../../consts/userLogin.dart';
 import '../Features/calender.dart';
 import '../Features/heathDetails.dart';
 
 class AppDrawer extends StatefulWidget {
-  final UserModel userModel;
-
-  const AppDrawer({super.key, required this.userModel});
+  const AppDrawer({
+    super.key,
+  });
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -28,151 +28,115 @@ class _AppDrawerState extends State<AppDrawer> {
     return SafeArea(
       child: Drawer(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              DrawerHeader(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/downloaded/6.png",
-                      height: 120,
-                    )
-                  ],
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Colors.deepPurple,
+              Colors.black,
+            ])),
+            child: Column(
+              children: [
+                DrawerHeader(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/user.png",
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              buildDrawerListTile(Icons.person, "Profile", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ProfileScreen(
-                        userModel: widget.userModel,
-                      );
-                    },
-                  ),
-                );
-              }),
-
-              buildDrawerListTile(Icons.date_range, "Attendance", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AttendanceScreen();
-                    },
-                  ),
-                );
-              }),
-
-              buildDrawerListTile(Icons.history, "Measurements", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return MeasurementView();
-                    },
-                  ),
-                );
-              }),
-              
-              buildDrawerListTile(Icons.health_and_safety, "Health Details",
-                  () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return HeathdetailsScreen(
-                        userModel: widget.userModel,
-                      );
-                    },
-                  ),
-                );
-              }),
-
-              buildDrawerListTile(Icons.rule_sharp, "Rules", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return RulesScreen();
-                    },
-                  ),
-                );
-              }),
-
-              buildDrawerListTile(Icons.date_range_sharp, "Calender", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return CalendarScreen(
-                        memberNo: widget.userModel.member_no,
-                        branchNo: widget.userModel.BranchNo,
-                      );
-                    },
-                  ),
-                );
-              }),
-              // buildDrawerListTile(Icons.call, "Slot Booking", () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) {
-              //         return Slotbooking();
-              //       },
-              //     ),
-              //   );
-              // }),
-
-              buildDrawerListTile(Icons.info, "About", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AboutUsPage();
-                    },
-                  ),
-                );
-              }),
-
-              // buildDrawerListTile(Icons.social_distance, "Social Media", () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) {
-              //         return SocialMedia();
-              //       },
-              //     ),
-              //   );
-              // }),
-
-              buildDrawerListTile(Icons.star, "Rate Us", () {
-                _showRateUsBottomSheet(context);
-              }),
-              buildDrawerListTile(Icons.help, "Help", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return HelpPage();
-                    },
-                  ),
-                );
-              }),
-             
-              //buildDrawerListTile(Icons.feedback, "Feedback", () {}),
-              buildDrawerListTile(Icons.exit_to_app, "Logout", () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
-              }),
-            ],
+                buildDrawerListTile(Icons.person, "Profile", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ProfileScreen();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.date_range, "Attendance", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AttendanceScreen();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.health_and_safety, "Health Details",
+                    () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return HeathdetailsScreen();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.history, "Measurements", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MeasurementView();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.date_range_sharp, "Calender", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CalendarScreen();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.rule_sharp, "Rules", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return RulesScreen();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.info, "About", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AboutUsPage();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.star, "Rate Us", () {
+                  _showRateUsBottomSheet(context);
+                }),
+                buildDrawerListTile(Icons.help, "Help", () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return HelpPage();
+                      },
+                    ),
+                  );
+                }),
+                buildDrawerListTile(Icons.exit_to_app, "Logout", () {
+                  UserLogin().logout();
+                  Get.offAll(() => LoginScreen());
+                }),
+              ],
+            ),
           ),
         ),
       ),
@@ -247,7 +211,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   void _openRatingPage() async {
     const url =
-        'https://play.google.com/store/apps/'; // Replace with your app's store URL
+        'https://play.google.com/store/apps/details'; // Replace with your app's store URL
     if (await canLaunch(url)) {
       await launch(url);
     } else {

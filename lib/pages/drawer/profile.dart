@@ -3,12 +3,11 @@ import 'package:ezeeclub/controllers/planDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/resetPasswordMember.dart';
 import 'package:flip_card/flip_card.dart'; // Import flip_card package
+import '../../consts/userLogin.dart';
 import '../../models/Plan.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final UserModel userModel;
-
-  const ProfileScreen({super.key, required this.userModel});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -18,17 +17,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Plan? _plan;
   Plandetailscontroller _planController = Plandetailscontroller();
   String endate = "20/01/2024";
-
+  String member_no = "";
+  String branchNo = "";
+  String name = "";
+  String mobileno = "";
+  String mem_status = "";
+  String location = "";
+  String email = "";
   @override
   void initState() {
     super.initState();
-    _fetchPlan();
+    loadUserData();
   }
 
-  void _fetchPlan() async {
+  Future<void> loadUserData() async {
+    UserLogin userLogin = UserLogin();
+    String? memberno = await userLogin.getMemberNo();
+    String? BranchNo = await userLogin.getBranchNo();
+    String? Name = await userLogin.getName();
+    String? mob = await userLogin.getMobileNo();
+    String? MembershipStatus = await userLogin.getMembershipStatus();
+    String? Location = await userLogin.getLocation();
+    String? Email = await userLogin.getEmail();
+    setState(() {
+      member_no = memberno!;
+      branchNo = BranchNo!;
+      name = Name!;
+      mobileno = mob!;
+      mem_status = MembershipStatus!;
+      location = Location!;
+    });
+    _fetchPlan(member_no, branchNo);
+  }
+
+  void _fetchPlan(String member_no, String branchNo) async {
     try {
-      final plan = await _planController.getPlanDetails(
-          widget.userModel.member_no, widget.userModel.BranchNo);
+      final plan = await _planController.getPlanDetails(member_no, branchNo);
       setState(() {
         _plan = plan;
         if (_plan?.endDt != null) {
@@ -43,11 +67,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } catch (e) {
       // Handle error - show snackbar or message to the user
       print('Error fetching plan: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Check Your Internet Connection....'),
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text('Something Wrong..'),
+      //   ),
+      // );
     }
 
     print(_plan?.endDt.runtimeType);
@@ -68,8 +92,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialPageRoute(
                   builder: (context) {
                     return ResetPasswordMember(
-                      memberNo: widget.userModel.member_no,
-                      BranchNo: widget.userModel.BranchNo,
+                      memberNo: member_no,
+                      BranchNo: branchNo,
                     );
                   },
                 ),
@@ -88,11 +112,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, constraints) {
           double fontSize = 18.0;
           if (constraints.maxWidth < 320) {
-            fontSize = 16.0;
+            fontSize = 14.0;
           } else if (constraints.maxWidth <= 420) {
-            fontSize = 18.0;
+            fontSize = 16.0;
           } else {
-            fontSize = 20.0;
+            fontSize = 14.0;
           }
 
           return SingleChildScrollView(
@@ -101,27 +125,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                      "assets/user123.png",
-                      color:Colors.white,
-                      fit: BoxFit.contain,
-                    ),
-                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(""),
+                      Center(
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundColor: Colors.white,
+                          child: Image.asset(
+                            "assets/man.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      Card(
+                        color: Colors.green,
+                        child: ProfileDetail(
+                          title: "Consistency Level",
+                          value: "67 %",
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 20),
                   _buildBasicCard(fontSize),
-                  _buildPlanDetailsCard(fontSize),
-                  SizedBox(height: 12),
+                  Container(
+                      child: _plan != null
+                          ? _buildPlanDetailsCard(fontSize)
+                          : null),
+                  SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
                     child: Card(
                       child: ProfileDetail(
                         title: "Email",
-                        value: widget.userModel.email ?? "Not Available",
                         fontSize: fontSize,
+                        value: email,
                       ),
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
                     child: Card(
@@ -130,15 +175,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           ProfileDetail(
                             title: "Mobile Number",
-                            value:
-                                widget.userModel.phoneNumber ?? "Not Available",
+                            value: mobileno,
                             fontSize: fontSize,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
                     child: Card(
@@ -147,22 +191,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           ProfileDetail(
                             title: "Location",
-                            value: widget.userModel.location ?? "Not Available",
+                            value: location ?? "Not Available",
                             fontSize: fontSize,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
-                    child: widget.userModel.mem_status == "Active"
+                    child: mem_status == "Active"
                         ? Card(
                             color: Colors.green,
                             child: ProfileDetail(
                               title: "Membership Status ",
-                              value: widget.userModel.mem_status,
+                              value: mem_status,
                               fontSize: fontSize,
                             ),
                           )
@@ -170,12 +214,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.red,
                             child: ProfileDetail(
                               title: "Membership Status ",
-                              value: widget.userModel.mem_status,
+                              value: mem_status,
                               fontSize: fontSize,
                             ),
                           ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
@@ -248,7 +292,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
               Text(
-                widget.userModel.fullName ?? "Not Available",
+                name,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -267,7 +311,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       Text(
-                        "***** ${widget.userModel.member_no}",
+                        "***** ${member_no}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -341,26 +385,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                  Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     ProfileDetail(
-                    title: "Program",
-                    value: _plan?.programName ?? "Not Available",
-                    fontSize: fontSize,
-                                            ),
-                   
+                      title: "Program",
+                      value: _plan?.programName ?? "Not Available",
+                      fontSize: fontSize,
+                    ),
                   ],
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     ProfileDetail(
-                    title: "Plan",
-                    value: _plan?.planName ?? "Not Available",
-                    fontSize: fontSize,
-                                            ),
-                   
+                      title: "Plan",
+                      value: _plan?.planName ?? "Not Available",
+                      fontSize: fontSize,
+                    ),
                   ],
                 ),
                 Row(
@@ -401,7 +443,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   value: _plan?.paidAmount ?? "Not Available",
                   fontSize: fontSize,
                 ),
-              
               ],
             ),
           ),
@@ -409,9 +450,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
- 
-  }
+}
 
 class ProfileDetail extends StatelessWidget {
   final String title;
@@ -434,12 +473,12 @@ class ProfileDetail extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: fontSize, color: Colors.white),
+            style: TextStyle(fontSize: 14, color: Colors.white),
           ),
           SizedBox(height: 4),
           Text(
             value.isNotEmpty ? value : "Not Available",
-            style: TextStyle(fontSize: fontSize, color: Colors.white),
+            style: TextStyle(fontSize: 16, color: Colors.white),
           ),
         ],
       ),

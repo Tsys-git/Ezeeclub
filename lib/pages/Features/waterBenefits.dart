@@ -40,11 +40,11 @@ class WaterBenefitsScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.black.withOpacity(0.9),
       body: GridView.builder(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(16.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
         ),
         itemCount: benefits.length,
         itemBuilder: (context, index) {
@@ -59,6 +59,7 @@ class WaterBenefitsScreen extends StatelessWidget {
   Widget _buildBenefitCard(String title, String description) {
     return Card(
       color: Colors.grey.withOpacity(0.9),
+      elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -69,18 +70,16 @@ class WaterBenefitsScreen extends StatelessWidget {
           children: [
             Text(
               title,
-              textScaler: TextScaler.linear(1.0),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontSize: 16.0,
               ),
             ),
             SizedBox(height: 10.0),
             Text(
               description,
-                            textScaler: TextScaler.linear(1.0),
-
               style: TextStyle(
-            
+                fontSize: 14.0,
                 color: Colors.white.withOpacity(0.7),
               ),
             ),

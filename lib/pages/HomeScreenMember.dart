@@ -1,36 +1,32 @@
 import 'dart:async';
-import 'dart:convert';
+import 'package:ezeeclub/consts/userLogin.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 
-import 'package:ezeeclub/HomeScreen.dart';
+// models.
+
 import 'package:ezeeclub/models/StepsData.dart';
-import 'package:ezeeclub/models/User.dart';
-import 'package:ezeeclub/pages/Auth/login.dart';
+
+// pages and controllers.
 import 'package:ezeeclub/pages/Features/PTRecords.dart';
-import 'package:ezeeclub/pages/Features/calender.dart';
 import 'package:ezeeclub/pages/Features/caloriesBurn.dart';
 import 'package:ezeeclub/pages/Features/dietPlan.dart';
+import 'package:ezeeclub/pages/Features/memberMeasurement.dart';
 import 'package:ezeeclub/pages/Features/notifications.dart';
-import 'package:ezeeclub/pages/Features/planDetails.dart';
 import 'package:ezeeclub/pages/Features/waterBenefits.dart';
 import 'package:ezeeclub/pages/Features/workout.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ezeeclub/pages/steps/step.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:intl/intl.dart';
-import 'package:pedometer/pedometer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../whatto.dart';
-import 'Features/heathDetails.dart';
-import 'common/drawer.dart';
-import 'steps/stepController.dart';
-import 'package:http/http.dart' as http;
+import 'package:ezeeclub/pages/common/drawer.dart';
+import 'package:ezeeclub/pages/steps/stepController.dart';
+import 'package:ezeeclub/whatto.dart';
 
-import 'package:card_swiper/card_swiper.dart';
+// package for extra task
 
-import 'what to do/whattodotoday.dart';
+import 'package:get/get.dart'; // route mgt
+import 'package:google_generative_ai/google_generative_ai.dart'; // daily quotes
+import 'package:intl/intl.dart'; // date formatting
+import 'package:shared_preferences/shared_preferences.dart'; // shared pref.
+import 'package:card_swiper/card_swiper.dart'; // daily quotes slider .
 
 class WeightData {
   WeightData(this.x, this.y);
@@ -39,16 +35,15 @@ class WeightData {
 }
 
 class HomeScreenMember extends StatefulWidget {
-  final UserModel usermodel;
-
-  const HomeScreenMember({super.key, required this.usermodel});
+  const HomeScreenMember({
+    super.key,
+  });
 
   @override
   State<HomeScreenMember> createState() => _HomeScreenMemberState();
 }
 
-class _HomeScreenMemberState extends State<HomeScreenMember>
-    with TickerProviderStateMixin {
+class _HomeScreenMemberState extends State<HomeScreenMember> {
   GenerativeModel _model = GenerativeModel(
     model: 'gemini-1.5-flash-latest',
     apiKey: "AIzaSyCJAX0v1KtTu963AME6LK3c5CG8RCNgZYs",
@@ -65,57 +60,93 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     "Success usually comes to those who are too busy to be looking for it. - Henry David Thoreau",
     "You don't have to be great to start, but you have to start to be great. - Zig Ziglar",
   ];
-  late AnimationController _animationController;
-  late Animation<Offset> _slideAnimation;
+
   int? stepsGoal;
   int caloriesGoal = 0;
   int _selectedIndex = 0;
   DateTime _startDate = DateTime.now();
 
+  String member_no = "";
+  String name = "";
+  String dob = "11/11/1971";
   bool _isLoading = true;
   @override
   void initState() {
     super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000), // Duration of the animation
-    )..forward(); // Start animation immediately
-
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(1.0, 1.0), // Start from the top
-      end: Offset.zero, // End at the original position
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.bounceInOut,
-    ));
+    // print("api key is : ${dotenv.env['apiKey'].toString()}");
 
     fetchQuotes();
     _loadGoals();
     _loadStartDate();
+    loadmembernoandname();
   }
 
+  Future<void> loadmembernoandname() async {
+    UserLogin userLogin = UserLogin();
+    String? memberno = await userLogin.getMemberNo();
+    String? Name = await userLogin.getName();
+    String? DOB = await userLogin.getDOB();
+    setState(() {
+      member_no = memberno ?? ""; // Update the state
+      name = Name ?? "";
+      dob = DOB ?? "11/11/1981";
+    });
+  }
+
+  // Load the start date from SharedPreferences
   Future<void> _loadStartDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String startDateStr = prefs.getString('startDate') ??
-        DateFormat('yyyy-MM-dd').format(DateTime.now());
-    print(startDateStr);
-    setState(() {
-      _startDate = DateTime.parse(startDateStr);
-    });
+    String? storedDate = prefs.getString('startDate');
+    DateTime currentDate = DateTime.now();
+
+    if (storedDate != null) {
+      DateTime storedDateTime = DateTime.parse(storedDate);
+
+      // print(currentDate.difference(storedDateTime).inDays);
+      if (storedDateTime.difference(currentDate).inDays < 0) {
+        // Update the stored date if it is older than 4 days
+        await _updateStartDate(currentDate);
+        setState(() {
+          _startDate = currentDate;
+        });
+      } else {
+        setState(() {
+          _startDate = storedDateTime;
+        });
+      }
+
+      if (currentDate.difference(storedDateTime).inDays >= 4) {
+        // Update the stored date if it is older than 4 days
+        await _updateStartDate(currentDate);
+        setState(() {
+          _startDate = currentDate;
+        });
+      } else {
+        setState(() {
+          _startDate = storedDateTime;
+        });
+      }
+    } else {
+      // No date found in SharedPreferences, set the current date
+      await _updateStartDate(currentDate);
+      setState(() {
+        _startDate = currentDate;
+      });
+    }
   }
 
-  Future<void> _updateStartDate(DateTime newStartDate) async {
+  // Save the start date to Shared Preferences
+  Future<void> _updateStartDate(DateTime newDate) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-        'startDate', DateFormat('yyyy-MM-dd').format(newStartDate));
-    setState(() {
-      _startDate = newStartDate;
-    });
+    await prefs.setString('startDate', newDate.toIso8601String());
   }
 
+  // Get the date at a specific index based on _startDate
   DateTime _getDateAtIndex(int index) {
-    return _startDate.add(Duration(days: index));
+    if (_startDate == null) {
+      throw StateError("Start date not loaded.");
+    }
+    return _startDate!.add(Duration(days: index));
   }
 
   Future<void> _loadGoals() async {
@@ -126,18 +157,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
     });
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
   Future<void> fetchQuotes() async {
     const prompt =
         '10 Tips about how to make your workouts effective. add # before the number .tips: always follow the same pattern';
     final content = [Content.text(prompt)];
     final response = await _model.generateContent(content);
-    print(response);
+    // print(response);
 
     setState(() {
       _quotes = response.text!.split('#').map((quote) {
@@ -158,13 +183,14 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       _isLoading = false;
     });
 
-    print(_quotes);
+    //print(_quotes);
   }
 
   @override
   Widget build(BuildContext context) {
 // Split user's date of birth string into day, month, and year parts
-    List<String> dobParts = widget.usermodel.dob.split('/');
+    print("date of birth is : ${dob}");
+    List<String> dobParts = dob.split('/');
     int day = int.parse(dobParts[0]);
     int month = int.parse(dobParts[1]);
     int year = int.parse(dobParts[2]);
@@ -178,18 +204,16 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 // Compare user's date of birth with current date
     bool isBirthday = userDob.day == now.day && userDob.month == now.month;
 
-    print('User Date of Birth: $userDob');
-    print('Current Date: $now');
-    print('Is Birthday Today? $isBirthday');
+    // print('User Date of Birth: $userDob');
+    // print('Current Date: $now');
+    // print('Is Birthday Today? $isBirthday');
 
     final double screenWidth = MediaQuery.of(context).size.width;
     final double scrrenheight = MediaQuery.of(context).size.height;
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
-      drawer: AppDrawer(
-        userModel: widget.usermodel,
-      ),
+      drawer: AppDrawer(),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -217,38 +241,34 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                           Scaffold.of(context).openDrawer();
                         },
                         child: Image.asset(
-                          'assets/downloaded/6.png', // Replace with your image asset path
+                          'assets/user.png', // Replace with your image asset path
                           width: screenWidth * 0.1,
                           height: screenWidth * 0.1,
+                          color: Colors.white,
                           fit: BoxFit
                               .cover, // Change to BoxFit.cover to fit the image inside the circle
                         ),
                       );
                     }),
-                    GestureDetector(
-                      onTap: () {
-                     //   Scaffold.of(context).openDrawer();
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(widget.usermodel.fullName,
-                              selectionColor: Colors.white,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: screenWidth * 0.05)
-                              // style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                          Text(widget.usermodel.member_no,
-                              selectionColor: Colors.white,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: screenWidth * 0.05)
-                              // style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                        ],
-                      ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(name,
+                            selectionColor: Colors.white,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.05)
+                            // style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                        Text(member_no,
+                            selectionColor: Colors.white,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.05)
+                            // style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                      ],
                     ),
                     Row(
                       children: [
@@ -267,21 +287,6 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                               Icons.notifications,
                               size: screenWidth * 0.05,
                             )),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return workoutScreen(
-                                      userModel: widget.usermodel,
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.sports_gymnastics,
-                                size: screenWidth * 0.05)),
                       ],
                     )
                   ],
@@ -296,7 +301,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 SizedBox(height: screenWidth * 0.02),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => GymListScreen());
+                    Get.to(() => workoutScreen());
                   },
                   child: Container(
                       height: screenWidth * 0.7,
@@ -344,29 +349,26 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 ),
                 SizedBox(height: screenWidth * 0.04),
 
-                SlideTransition(
-                  position: _slideAnimation,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => WaterBenefitsScreen());
-                          },
-                          child: Container(
-                            height: screenWidth * 0.4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: _buildWaterDrinkingCard(context),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(() => WaterBenefitsScreen());
+                        },
+                        child: Container(
+                          height: screenWidth * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.0),
                           ),
+                          child: _buildWaterDrinkingCard(context),
                         ),
                       ),
-                      SizedBox(width: 15.0),
-                    ],
-                  ),
+                    ),
+                    SizedBox(width: 15.0),
+                  ],
                 ),
                 SizedBox(height: screenWidth * 0.02),
 
@@ -404,9 +406,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return DietPlanScreen(
-                                    userModel: widget.usermodel,
-                                  );
+                                  return DietPlanScreen();
                                 },
                               ),
                             );
@@ -770,12 +770,12 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
         double screenWidth = constraints.maxWidth;
 
         return Padding(
-            padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+            padding: EdgeInsets.only(top: 5, right: 5, left: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -784,19 +784,25 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                             fontWeight: FontWeight.bold,
                             fontSize: screenWidth * 0.06,
                           )),
-                      Text("Know the Benefits.",
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: screenWidth * 0.05,
-                          )),
+                      Row(
+                        children: [
+                          Text("Know the Benefits.",
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: screenWidth * 0.05,
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.forward_rounded))
+                        ],
+                      ),
                     ],
                   ),
                 ),
                 // Image.asset(
                 //   fit: BoxFit.cover,
                 //   "assets/wdc.jpg",
-                //   height: screenWidth * 5,
-                //   width: screenWidth * 0.2,
+                //   height: 100,
                 // ),
               ],
             ));
@@ -852,7 +858,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       return Container(
         child: GestureDetector(
           onTap: () {
-            Get.to(() => workoutScreen(userModel: widget.usermodel));
+            Get.to(() => workoutScreen());
           },
           child: Card(
             color:
@@ -1112,7 +1118,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
       height: 150,
       child: GestureDetector(
         onTap: () {
-          Get.to(() => PTRecords(userModel: widget.usermodel));
+          Get.to(() => PTRecords());
         },
         child: Card(
           color: Color.fromARGB(35, 248, 245, 245), // Use card color from theme
@@ -1148,103 +1154,113 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
 
   Widget _buildCalendarScrollView() {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        double width = constraints.maxWidth;
-        double height = constraints.maxWidth;
+        builder: (BuildContext context, BoxConstraints constraints) {
+      double width = constraints.maxWidth;
+      double height = constraints.maxWidth;
 
-        DateTime currentDate = DateTime.now();
+      DateTime currentDate = DateTime.now();
 
-        return SizedBox(
-          height: height * 0.4,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              DateTime dayDate = _getDateAtIndex(index);
-              bool isCurrentDate = DateFormat('yyyy-MM-dd').format(dayDate) ==
-                  DateFormat('yyyy-MM-dd').format(currentDate);
-              bool isPastDate = dayDate.isBefore(currentDate);
+      return SizedBox(
+        height: height * 0.3,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            DateTime dayDate = _getDateAtIndex(index);
+            // print("${index} date from get index : ${dayDate}");
+            bool isCurrentDate = DateFormat('yyyy-MM-dd').format(dayDate) ==
+                DateFormat('yyyy-MM-dd').format(currentDate);
+            bool isPastDate = dayDate.isBefore(currentDate);
+            // bool isFutureDate = dayDate.isAfter(currentDate);
 
-
-              return Container(
-                width: width * 0.2,
-                margin: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  gradient: _selectedIndex == index
-                      ? (isCurrentDate
-                          ? LinearGradient(
-                              colors: [Colors.amber, Colors.yellow],
-                              begin: Alignment.bottomLeft,
-                            )
-                          : LinearGradient(
-                              colors: [Colors.grey, Colors.white],
-                              begin: Alignment.bottomLeft,
-                            ))
-                      : (isPastDate
-                          ? LinearGradient(colors: [Colors.grey, Colors.grey])
-                          : LinearGradient(
-                              colors: [Colors.white, Colors.white])),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: GestureDetector(
-                  onTap: () async {
-                    if (!isPastDate) {
-                      int newIndex = (index + 1) % 4;
-                      setState(() {
-                        _selectedIndex = newIndex;
-                      });
-                      DateTime newStartDate = _startDate!
-                          .add(Duration(days: newIndex - _selectedIndex));
-                      await _updateStartDate(newStartDate);
-                      if (isCurrentDate) {
-                        // Navigate to TodayScreen
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TodayScreen()));
-                      }
-                    }
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        dayDate.day.toString(),
-                        style: TextStyle(
-                          fontSize: width * 0.05,
-                          fontWeight: FontWeight.bold,
-                          color: isCurrentDate
-                              ? Colors.black
-                              : (isPastDate ? Colors.black : Colors.black),
-                        ),
-                      ),
-                      Text(
-                        DateFormat.MMM().format(dayDate),
-                        style: TextStyle(
-                          fontSize: width * 0.05,
-                          color: isCurrentDate
-                              ? Colors.black
-                              : (isPastDate ? Colors.black : Colors.black),
-                        ),
-                      ),
-                      Text(
-                        DateFormat.E().format(dayDate).toUpperCase(),
-                        style: TextStyle(
-                          fontSize: width * 0.05,
-                          color: isCurrentDate
-                              ? Colors.black
-                              : (isPastDate ? Colors.black54 : Colors.black54),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            // Determine the gradient based on the date
+            LinearGradient gradient;
+            if (isCurrentDate) {
+              gradient = LinearGradient(
+                colors: [Colors.amber, Colors.yellow],
+                begin: Alignment.bottomLeft,
               );
-            },
-          ),
-        );
-      },
-    );
+            } else if (isPastDate) {
+              gradient = LinearGradient(
+                colors: [Colors.grey, Colors.grey],
+              );
+            } else {
+              gradient = LinearGradient(
+                colors: [Colors.white, Colors.white],
+              );
+            }
+
+            return Container(
+              width: width * 0.2,
+              margin: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                gradient: gradient,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: GestureDetector(
+                onTap: () async {
+                  if (!isPastDate) {
+                    int newIndex = (index + 1) % 4;
+                    setState(() {
+                      _selectedIndex = newIndex;
+                    });
+                    DateTime newStartDate = _startDate
+                        .add(Duration(days: newIndex - _selectedIndex));
+                    await _updateStartDate(newStartDate);
+
+                    // Update shared preference date if the difference is 4 days
+                    if (currentDate.difference(_startDate).inDays == 4) {
+                      await _updateStartDate(currentDate);
+                    }
+
+                    if (isCurrentDate) {
+                      // Navigate to TodayScreen
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TodayScreen()));
+                    }
+                  }
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dayDate.day.toString(),
+                      style: TextStyle(
+                        fontSize: width * 0.05,
+                        fontWeight: FontWeight.bold,
+                        color: isCurrentDate
+                            ? Colors.black
+                            : (isPastDate ? Colors.black : Colors.black),
+                      ),
+                    ),
+                    Text(
+                      DateFormat.MMM().format(dayDate),
+                      style: TextStyle(
+                        fontSize: width * 0.05,
+                        color: isCurrentDate
+                            ? Colors.black
+                            : (isPastDate ? Colors.black : Colors.black),
+                      ),
+                    ),
+                    Text(
+                      DateFormat.E().format(dayDate).toUpperCase(),
+                      style: TextStyle(
+                        fontSize: width * 0.05,
+                        color: isCurrentDate
+                            ? Colors.black
+                            : (isPastDate ? Colors.black54 : Colors.black54),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    });
   }
 
   Widget _buildBirthdayCard(double height) {
@@ -1264,7 +1280,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember>
                 children: [
                   Expanded(
                     child: Text(
-                      'Wish You Many Many Happy Returns Of The Day.',
+                      'Wish You Many Many Returns Of The Day.',
                       textScaler: TextScaler.linear(1.2),
                       style: TextStyle(
                         fontSize: 20,

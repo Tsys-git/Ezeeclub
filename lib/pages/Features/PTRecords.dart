@@ -1,3 +1,4 @@
+import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:ezeeclub/models/PTSessionModel.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/Features/slotBooking.dart';
@@ -7,8 +8,9 @@ import 'package:get/get.dart';
 import '../../controllers/ptsessionController.dart';
 
 class PTRecords extends StatefulWidget {
-  final UserModel userModel;
-  const PTRecords({super.key, required this.userModel});
+  const PTRecords({
+    super.key,
+  });
 
   @override
   State<PTRecords> createState() => _PTRecordsState();
@@ -16,20 +18,34 @@ class PTRecords extends StatefulWidget {
 
 class _PTRecordsState extends State<PTRecords> {
   List<PTSession> ptSessions = [];
+  String member_no = "";
+  String branchno = "";
+  String name = "";
 
   @override
   void initState() {
     super.initState();
-    fetchPTSessions();
+    loaddata();
   }
 
-  void fetchPTSessions() async {
+  Future<void> loaddata() async {
+    UserLogin userLogin = UserLogin();
+    String? memberno = await userLogin.getMemberNo();
+    String? BranchNo = await userLogin.getBranchNo();
+
+    String? Name = await userLogin.getName();
+    setState(() {
+      member_no = memberno ?? ""; // Update the state
+      branchno = BranchNo ?? "";
+      name = Name ?? "";
+    });
+    fetchPTSessions(member_no, branchno);
+  }
+
+  void fetchPTSessions(String member_no, String branchno) async {
     try {
       List<PTSession> fetchedSessions =
-          await PTSessionController().getPTSessions(
-        widget.userModel.member_no,
-        widget.userModel.BranchNo,
-      );
+          await PTSessionController().getPTSessions(member_no, branchno);
       setState(() {
         ptSessions = fetchedSessions;
       });
@@ -46,35 +62,33 @@ class _PTRecordsState extends State<PTRecords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PT Records'),
+        title: Text('PT Records', style: TextStyle(fontSize: 24)),
       ),
       body: Column(
         children: [
           Expanded(
-            flex: 2,
-            child: ListView.builder(
-              itemCount: ptSessions.length,
-              itemBuilder: (context, index) {
-                return _buildPTSessionCard(ptSessions[index]);
-              },
-            ),
+            child: ptSessions.isEmpty
+                ? Container(height: 100, child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: ptSessions.length,
+                    itemBuilder: (context, index) {
+                      return _buildPTSessionCard(ptSessions[index]);
+                    },
+                  ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 40),
-            child: ElevatedButton(
-              onPressed: () {
-                Get.to(() => SlotBooking());
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+          ElevatedButton(
+            onPressed: () {
+              Get.to(() => SlotBooking());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Text("Slot Booking"),
             ),
+            child: Text("Slot Booking"),
           ),
         ],
       ),
@@ -85,7 +99,7 @@ class _PTRecordsState extends State<PTRecords> {
     return Card(
       margin: EdgeInsets.all(10),
       child: ListTile(
-        title: Text(session.memberName ?? widget.userModel.fullName),
+        title: Text(name),
         subtitle: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

@@ -1,30 +1,27 @@
 import 'dart:convert';
+import 'package:ezeeclub/consts/URL_Setting.dart';
 import 'package:ezeeclub/consts/appConsts.dart';
 import 'package:ezeeclub/models/calender.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CalendarController {
-  Future<Uri> _getStoredUrl() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? storedUrl = prefs.getString('app_url');
-    return Uri.parse(storedUrl ?? "");
-  }
-
+  UrlSetting urlSetting = UrlSetting();
   Future<List<CalendarEvent>> getCalendarDetails(
       String memberNo, String branchNo, String month, String year) async {
-    Uri uri = (await _getStoredUrl()).resolve("/GetCalendarDetails");
-    final Map<String, String> headers = {"Content-Type": "application/json"};
-    final Map<String, dynamic> data = {
-      "MemberNo": memberNo,
-      "BranchNo": branchNo,
-      "Month": month,
-      "Year": year,
-    };
+    await urlSetting.initialize();
 
     try {
+      Uri? uri = urlSetting.getCalendarDetails;
+      final Map<String, String> headers = {"Content-Type": "application/json"};
+      final Map<String, dynamic> data = {
+        "MemberNo": memberNo,
+        "BranchNo": branchNo,
+        "Month": month,
+        "Year": year,
+      };
       final http.Response response = await http.post(
-        uri,
+        uri!,
         headers: headers,
         body: json.encode(data),
       );
@@ -46,6 +43,4 @@ class CalendarController {
       rethrow; // Rethrow the exception to propagate it further if needed
     }
   }
-
- 
 }

@@ -31,8 +31,8 @@ class _SlotBookingState extends State<SlotBooking> {
 
   Future<void> loadMobileNumberandname() async {
     UserLogin userLogin = UserLogin();
-    String? mobileNumber = await userLogin.getmobile_no();
-    String? Name = await userLogin.getname();
+    String? mobileNumber = await userLogin.getMobileNo();
+    String? Name = await userLogin.getName();
     setState(() {
       mob_no = mobileNumber ?? ""; // Update the state
       name = Name ?? "";
@@ -158,8 +158,10 @@ class _SlotBookingState extends State<SlotBooking> {
                         Expanded(
                           child: TextFormField(
                             controller: _nameController,
+                            style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                               labelText: 'Name',
+                              labelStyle: TextStyle(color: Colors.white),
                               border: OutlineInputBorder(),
                               enabled: false,
                             ),
@@ -176,11 +178,12 @@ class _SlotBookingState extends State<SlotBooking> {
                     SizedBox(height: 16.0),
                     DropdownButtonFormField<String>(
                       decoration: InputDecoration(
+                        labelStyle: TextStyle(color: Colors.white),
                         focusColor: Colors.white,
                         labelText: 'Branch',
                         prefixIcon: Icon(Icons.home),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.white,)),
                       ),
                       value: _selectedBranch,
                       onChanged: (newValue) {
@@ -215,7 +218,6 @@ class _SlotBookingState extends State<SlotBooking> {
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             decoration: InputDecoration(
-                              
                               prefixIcon: Icon(Icons.alarm),
                               labelText: 'Slot',
                               border: OutlineInputBorder(),
@@ -253,9 +255,9 @@ class _SlotBookingState extends State<SlotBooking> {
                               // Process data
                               print("save data button");
                               setState(() {
-                              _selectedBranch = null;
-                              _selectedSlot = null;
-                            });
+                                _selectedBranch = null;
+                                _selectedSlot = null;
+                              });
                             }
                           },
                           style: ElevatedButton.styleFrom(

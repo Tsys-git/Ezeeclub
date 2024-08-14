@@ -1,12 +1,11 @@
+import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:ezeeclub/controllers/dietplanController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/models/dietplanmodel.dart';
 
 class DietPlanScreen extends StatefulWidget {
-  final UserModel userModel;
-
-  const DietPlanScreen({super.key, required this.userModel});
+  const DietPlanScreen({super.key});
 
   @override
   State<DietPlanScreen> createState() => _DietPlanScreenState();
@@ -14,19 +13,29 @@ class DietPlanScreen extends StatefulWidget {
 
 class _DietPlanScreenState extends State<DietPlanScreen> {
   Dietplan? dietplan;
-
+  String member_no = "";
+  String branchno = "";
   @override
   void initState() {
     super.initState();
-    getDietPlan();
+    loaddata();
   }
 
-  void getDietPlan() async {
+  Future<void> loaddata() async {
+    UserLogin userLogin = UserLogin();
+    String? memberno = await userLogin.getMemberNo();
+    String? BranchNo = await userLogin.getBranchNo();
+    setState(() {
+      member_no = memberno ?? ""; // Update the state
+      branchno = BranchNo ?? "";
+    });
+    getDietPlan(member_no, branchno);
+  }
+
+  void getDietPlan(String member_no, branchno) async {
     try {
-      Dietplan? fetchedPlan = await Dietplancontroller().getdietplan(
-        widget.userModel.member_no,
-        widget.userModel.BranchNo,
-      );
+      Dietplan? fetchedPlan =
+          await Dietplancontroller().getdietplan(member_no, branchno);
       setState(() {
         dietplan = fetchedPlan;
       });

@@ -1,35 +1,45 @@
+import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:ezeeclub/controllers/workoutDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/models/workout.dart';
 
 class workoutScreen extends StatefulWidget {
-  final UserModel userModel;
-  const workoutScreen({super.key, required this.userModel});
+  const workoutScreen({
+    super.key,
+  });
 
   @override
   State<workoutScreen> createState() => _workoutScreenState();
 }
 
 class _workoutScreenState extends State<workoutScreen> {
-
   WorkoutDetails? workoutDetails;
+  String member_no = "";
+  String branchno = "";
 
   @override
   void initState() {
     super.initState();
+    loaddata();
     workoutDetails = null;
-    fetchWorkOutDetails();
   }
 
-  
+  Future<void> loaddata() async {
+    UserLogin userLogin = UserLogin();
+    String? memberno = await userLogin.getMemberNo();
+    String? BranchNo = await userLogin.getBranchNo();
+    setState(() {
+      member_no = memberno ?? ""; // Update the state
+      branchno = BranchNo ?? "";
+    });
+    fetchWorkOutDetails(member_no, branchno);
+  }
 
-  void fetchWorkOutDetails() async {
+  void fetchWorkOutDetails(String member_no, String branchNo) async {
     try {
-      final workoutData = await WorkoutDetailsController().getWorkoutDetails(
-        widget.userModel.member_no,
-        widget.userModel.BranchNo,
-      );
+      final workoutData = await WorkoutDetailsController()
+          .getWorkoutDetails(member_no, branchno);
       setState(() {
         workoutDetails = workoutData;
       });
@@ -44,7 +54,7 @@ class _workoutScreenState extends State<workoutScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Workout Details ",
+          "Workout Details Screen",
           style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
@@ -52,7 +62,6 @@ class _workoutScreenState extends State<workoutScreen> {
         child: workoutDetails != null
             ? SingleChildScrollView(
                 child: Card(
-                  color:Colors.grey.withOpacity(0.1),
                   elevation: 4,
                   margin: EdgeInsets.all(16),
                   child: Padding(
@@ -69,14 +78,12 @@ class _workoutScreenState extends State<workoutScreen> {
                         ListTile(
                           leading: Icon(Icons.person),
                           title: Text("Member No"),
-                          subtitle: Text(workoutDetails!.branchNo ??
-                              widget.userModel.member_no.toString()),
+                          subtitle: Text(workoutDetails!.branchNo ?? member_no),
                         ),
                         ListTile(
                           leading: Icon(Icons.business_outlined),
                           title: Text("Branch No"),
-                          subtitle: Text(workoutDetails!.branchNo ??
-                              widget.userModel.BranchNo.toString()),
+                          subtitle: Text(workoutDetails!.branchNo ?? branchno),
                         ),
                         ListTile(
                           leading: Text(workoutDetails!.instructorNo ?? "NA"),

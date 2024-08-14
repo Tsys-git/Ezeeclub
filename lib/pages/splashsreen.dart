@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:ezeeclub/pages/HomeScreenMember.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import '../consts/appConsts.dart';
 import '../consts/userLogin.dart';
@@ -22,13 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     getUrl();
-
-    // Print the initial URL value
-    print('Current URL value: ${storedUrl}');
-
-    // Load URL from SharedPreferences and navigate after delay
-    _loadAndNavigate();
-
     checkLoginStatus();
   }
 
@@ -37,38 +30,32 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       isLoggedIn = UserLogin().isLoggedIn; // Update isLoggedIn state
     });
-
-    if (isLoggedIn) {
-      // If logged in, navigate to Dashboard
-      navigateToDashboard();
-    }
+    _loadAndNavigate(isLoggedIn);
   }
-
-  void navigateToDashboard() {
-     }
 
   void getUrl() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     storedUrl = prefs.getString('app_url');
-    print('Current URL value: ${storedUrl}');
+    print('Current URL value: $storedUrl');
   }
 
-  // Method to load URL from SharedPreferences and navigate
-  Future<void> _loadAndNavigate() async {
+  Future<void> _loadAndNavigate(bool isLoggedIn) async {
     await ap.loadUrlFromPrefs();
+    print("use login status : $isLoggedIn");
 
-    // Navigate to appropriate screen after 2 seconds
-    Timer(Duration(seconds: 6), () {
-      if (storedUrl != null && storedUrl!.isNotEmpty) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
+    Timer(Duration(seconds: 5), () {
+      Widget nextPage;
+
+      if (isLoggedIn) {
+        nextPage = HomeScreenMember();
+      } else if (storedUrl != null && storedUrl!.isNotEmpty) {
+        nextPage = LoginScreen();
       } else {
-        // Navigate to SetUrlScreen if storedUrl is empty
-        Get.off(() => SetUrlScreen());
+        nextPage = SetUrlScreen();
       }
+
+      Get.to(() => nextPage,
+          transition: Transition.fadeIn, duration: Duration(milliseconds: 500));
     });
   }
 
@@ -76,44 +63,41 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: <Widget>[
-          // Background image
-          Image.asset(
-            'assets/splashScreen.jpg',
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.contain,
-          ),
-          // Centered content
+        children: [
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // App name
-                Text(
-                  'Ezee Club',
-                  style: TextStyle(
-                    fontSize: 54,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
+            child: Image.asset(
+              'assets/splashscreene.png',
+              height: 250,
+              fit: BoxFit.contain,
+              color: Colors.white,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Developed By Tsysinfo Technologies',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                // Motivational message
-                Text(
-                  "Every Drop of Sweat Takes \nYou Closer to Success.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                  SizedBox(height: 4),
+                  Text(
+                    'Copyrights © 2024',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(height: 32),
-                // Progress indicator
-                LinearProgressIndicator(color: Theme.of(context).primaryColor),
-              ],
+                ],
+              ),
             ),
           ),
         ],

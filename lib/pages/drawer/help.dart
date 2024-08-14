@@ -5,7 +5,10 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help',style: TextStyle(fontSize: 24),),
+        title: Text(
+          'Help',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),
@@ -68,7 +71,7 @@ class HelpPage extends StatelessWidget {
             [
               _buildHelpItem(
                 'Need Help?',
-                'For any assistance or queries, contact our support team at support@gymapp.com.',
+                'For any assistance or queries, contact our support team at support@tsysinfo.in',
               ),
             ],
           ),
@@ -106,12 +109,13 @@ class HelpPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
-            color: Colors. white, // Text color
+            color: Colors.white, // Text color
           ),
         ),
         subtitle: Text(
           description,
-          style: TextStyle(fontSize: 14.0, color: Colors.white), // Description text color
+          style: TextStyle(
+              fontSize: 14.0, color: Colors.white), // Description text color
         ),
       ),
     );

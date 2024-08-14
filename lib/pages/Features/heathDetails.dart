@@ -1,12 +1,13 @@
+import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:ezeeclub/controllers/healthDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/models/healthRecord.dart';
 
 class HeathdetailsScreen extends StatefulWidget {
-  final UserModel userModel;
-
-  const HeathdetailsScreen({super.key, required this.userModel});
+  const HeathdetailsScreen({
+    super.key,
+  });
 
   @override
   State<HeathdetailsScreen> createState() => _HeathdetailsScreenState();
@@ -14,23 +15,48 @@ class HeathdetailsScreen extends StatefulWidget {
 
 class _HeathdetailsScreenState extends State<HeathdetailsScreen> {
   HealthDetail? healthDetail;
+  String member_no = "";
+  String branchNo = "";
 
   @override
   void initState() {
     super.initState();
-    healthDetail = null;
-    fetchHealthDetails();
+    loadUserData();
   }
 
-  void fetchHealthDetails() async {
+  Future<void> loadUserData() async {
     try {
+      UserLogin userLogin = UserLogin();
+      String? memberNo = await userLogin.getMemberNo();
+      String? branchNo = await userLogin.getBranchNo();
+
+      setState(() {
+        member_no = memberNo ?? ""; // Default to empty string if null
+        branchNo = branchNo ?? ""; // Default to empty string if null
+      });
+
+      // Fetch health details after loading user data
+      fetchHealthDetails(member_no, branchNo!);
+    } catch (e) {
+      // Handle any errors that occur during user data loading
+      print('Error loading user data: $e');
+    }
+  }
+
+  Future<void> fetchHealthDetails(String memberno, String BranchNo) async {
+    try {
+      print("Branch no: $BranchNo");
+
       final healthData = await Healthdetailscontroller().getHealthDetails(
-          widget.userModel.member_no, widget.userModel.BranchNo);
+        member_no,
+        BranchNo,
+      );
+
       setState(() {
         healthDetail = healthData;
       });
     } catch (e) {
-      // Handle error
+      // Handle any errors that occur during health details fetching
       print('Error fetching health details: $e');
     }
   }
@@ -52,11 +78,7 @@ class _HeathdetailsScreenState extends State<HeathdetailsScreen> {
                     children: [
                       _buildListTile(
                         'Member No',
-                        healthDetail!.memberNo ?? widget.userModel.member_no,
-                      ),
-                      _buildListTile(
-                        'Branch No',
-                        healthDetail!.branchNo ?? widget.userModel.BranchNo,
+                        healthDetail!.memberNo ?? member_no,
                       ),
                       _buildListTile(
                         'Health Detail No',

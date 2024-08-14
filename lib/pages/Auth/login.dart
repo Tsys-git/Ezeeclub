@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (isLoggedIn) {
-      // If logged in, navigate to Dashboard
+      Get.off(() => HomeScreenMember());
     }
   }
 
@@ -55,20 +55,26 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text;
     String? storedUrl;
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    storedUrl = prefs.getString('app_url');
-
-    final Uri url =
-        Uri.parse('http://${storedUrl}/MobileAppService.svc/UserLogin');
-    final Map<String, String> headers = {
-      'Content-Type': 'application/json',
-    };
-    final Map<String, String> data = {
-      'UserName': username,
-      'Password': password,
-    };
-
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      storedUrl = prefs.getString('app_url');
+
+      if (storedUrl == null || storedUrl.isEmpty) {
+        showSnackBar(
+            context, 'Stored URL is not available or empty', Colors.red);
+        return;
+      }
+
+      final Uri url =
+          Uri.parse('http://$storedUrl/MobileAppService.svc/UserLogin');
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+      final Map<String, String> data = {
+        'UserName': username,
+        'Password': password,
+      };
+
       final http.Response response = await http.post(
         url,
         headers: headers,
@@ -76,61 +82,71 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        final dynamic jsonResponse = json.decode(response.body);
-        print(jsonResponse);
-        if (jsonResponse != null) {
-          final Map<String, dynamic> userData = jsonResponse[0];
-          final String fullName = userData['MemberName'] ?? 'Not Available';
-          final String email = userData['Email'] ?? 'Not Available';
-          final String phoneNumber = userData['MobileNo'] ?? 'Not Available';
-          final String dob = userData['BirthDate'] ?? 'Not Available';
-          final String brName = userData['BranchName'] ?? 'Not Available';
-          final String memberNo = userData['MemberNo'] ?? 'Not Available';
-          final String memStatus =
-              userData['Membershipstatus'] ?? 'Not Available';
-          final String location = userData['Location'] ?? 'Not Available';
-          final String branchNo = userData['Branchno'] ?? '1';
+        try {
+          final dynamic jsonResponse = json.decode(response.body);
+          print(jsonResponse);
 
-          final UserModel userModel = UserModel(
-              fullName: fullName,
-              email: email,
-              phoneNumber: phoneNumber,
-              dob: dob,
-              br_name: brName,
-              member_no: memberNo,
-              mem_status: memStatus,
-              BranchNo: branchNo,
-              location: location);
-          if (fullName != "Not Available") {
-            Get.off(() => HomeScreenMember(usermodel: userModel));
-            showSnackBar(context, 'Member Login successful', Colors.green);
-            // shared pref value setup
-            UserLogin().setmobile_no(phoneNumber);
-            UserLogin().setname(fullName);
-            UserLogin().setmemberno(memberNo);
+          if (jsonResponse != null &&
+              jsonResponse is List &&
+              jsonResponse.isNotEmpty) {
+            final Map<String, dynamic> userData = jsonResponse[0];
+            final String isactive = userData['Active'] ?? "No";
+            final String fullName = userData['MemberName'] ?? 'Not Available';
+            final String email = userData['Email'] ?? 'Not Available';
+            final String phoneNumber = userData['MobileNo'] ?? 'Not Available';
+            final String dob = userData['BirthDate'] ?? 'Not Available';
+            final String brName = userData['BranchName'] ?? 'Not Available';
+            final String memberNo = userData['MemberNo'] ?? 'Not Available';
+            final String memStatus =
+                userData['Membershipstatus'] ?? 'Not Available';
+            final String location = userData['Location'] ?? 'Not Available';
+            final String branchNo = userData['Branchno'] ?? '1';
+
+            if (isactive != "No") {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setBool('isLoggedIn', true);
+              UserLogin().setMobileNo(phoneNumber);
+              UserLogin().setName(fullName);
+              UserLogin().setMemberNo(memberNo);
+              UserLogin().setBranchNo(branchNo);
+              UserLogin().setEmail(email);
+              UserLogin().setBranchNo(branchNo);
+              UserLogin().setMembershipStatus(memStatus);
+              UserLogin().setLocation(location);
+              UserLogin().setDOB(dob);
+              Get.off(() => HomeScreenMember());
+              showSnackBar(context, 'Member Login successful', Colors.green);
+              // shared pref value setup
+            } else {
+              showSnackBar(context, 'Login failed. ', Colors.red);
+            }
+          } else {
+            showSnackBar(
+                context, 'Login response is empty or invalid.', Colors.red);
           }
-        } else {
-          showSnackBar(
-            context,
-            'Login failed. Invalid credentials.',
-            Colors.red,
-          );
+        } catch (e) {
+          showSnackBar(context, 'Error parsing login response: $e', Colors.red);
+          print('Error parsing login response: $e');
         }
       } else {
-        showSnackBar(
-          context,
-          'Login failed. Status code: ${response.statusCode}',
-          Colors.red,
-        );
+        showSnackBar(context,
+            'Login failed. Status code: ${response.statusCode}', Colors.red);
         print('Login failed. Status code: ${response.statusCode}');
       }
     } on SocketException {
       showSnackBar(
         context,
-        'No Internet connection. Ensure that your internet is on.\nOr check the url setup is done properly ',
+        'No Internet connection. Ensure that your internet is on.\nOr check the URL setup is done properly.',
         Colors.red,
       );
-      throw Exception('No Internet connection');
+      print('No Internet connection');
+    } on FormatException {
+      showSnackBar(
+        context,
+        'Something is wrong, please contact admin.',
+        Colors.red,
+      );
+      print('Format Exception');
     } catch (error) {
       showSnackBar(
         context,
@@ -148,9 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message, style: TextStyle(color: Colors.white)),
+        content: Text(
+          message,
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: color,
-        duration: Duration(seconds: 3),
       ),
     );
   }
@@ -216,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 SizedBox(height: 10),
                 Text(
-                  'Welcome To EZEE CLUB',
+                  'Welcome To EzeeClub',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

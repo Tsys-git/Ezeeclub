@@ -26,7 +26,6 @@ class MeasurementController {
         headers: headers,
         body: json.encode(data),
       );
-
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
         print(jsonData);
