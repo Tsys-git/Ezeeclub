@@ -6,7 +6,6 @@ import 'package:geofence_service/geofence_service.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../permissions/permissions.dart';
 
@@ -26,6 +25,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   Location? location;
   bool inside = false;
   String MemberNo = "";
+  String branchNo = "";
+  List<Attendance> attendances = [];
 
   final DateTime now = DateTime.now();
   Map<String, bool> calendar = {};
@@ -63,20 +64,43 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   void initState() {
     super.initState();
     checkAndRequestPermissions();
-    _loadAttendanceData();
     _loadMemberNo();
   }
 
   Future<void> _loadMemberNo() async {
     UserLogin userLogin = UserLogin();
     String? memeberno = await userLogin.getMemberNo();
+    String? branchno = await userLogin.getBranchNo();
     setState(() {
       MemberNo = memeberno ?? "";
+      branchNo = branchno ?? "1";
     });
+    _fetchAttendance(MemberNo, branchNo);
+  }
+
+  Future<void> _fetchAttendance(String memberNo, String branchNo) async {
+    try {
+      // Fetch the list of attendances
+      List<Attendance> attendances =
+          await _attendanceController.GetAttendance(memberNo, branchNo);
+
+      // Process each attendance record
+      for (var attendance in attendances) {
+        // Assuming attendance.branchNo is in 'dd/MM/yyyy' format (e.g., '01/01/2024')
+        String attendanceDateString = attendance.branchNo;
+        print(attendanceDateString);
+        print(attendance.branchNo);
+        // Mark the date in the calendar as true (indicating attendance)
+        setState(() {
+          calendar[attendanceDateString] = true;
+        });
+      }
+    } catch (e) {
+      print('Error fetching attendance: $e');
+    }
   }
 
   void _onLocationChanged(Location location) {
-    print('location: ${location.toJson()}');
     _locationStreamController.sink.add(location);
   }
 
@@ -145,37 +169,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     }
   }
 
-  Future<void> _loadAttendanceData() async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String>? savedAttendance = prefs.getStringList('attendance');
-    setState(() {
-      calendar = (savedAttendance ?? [])
-          .asMap()
-          .map((index, value) => MapEntry(value, true));
-      print(calendar);
-      // Add today's date if not already present
-      String todayString = DateFormat('dd/MM/yyyy').format(DateTime.now());
-      if (!calendar.containsKey(todayString)) {
-        calendar[todayString] = false;
-      }
-    });
-  }
-
-  Future<void> _saveAttendanceData() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    // Ensure today's date is included in the attendance data
-    String todayString = DateFormat('dd/MM/yyyy').format(DateTime.now());
-    if (!calendar.containsKey(todayString)) {
-      calendar[todayString] = false;
-    }
-
-    await prefs.setStringList(
-      'attendance',
-      calendar.keys.toList(),
-    );
-  }
-
   Widget _buildCustomDialog(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -198,14 +191,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 Text(
                   'Enable Location',
                   style: TextStyle(
-                      fontSize: width * 0.1, fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
                   'We need to know your location in order to mark your attendance.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: width * 0.05),
+                 
                 ),
                 SizedBox(height: 10),
                 SizedBox(
@@ -260,27 +253,27 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 Image.asset(
                   'assets/ok.gif',
                   height: width * 0.2,
-                  width: width * 0.5,
-                  fit: BoxFit.contain,
+                  width: width * 0.2,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Well Done!',
+                  'Attendance Marked',
                   style: TextStyle(
-                      fontSize: width * 0.1, fontWeight: FontWeight.bold),
+                       fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Your attendance for ${DateFormat.yMMMMd().format(DateTime.now())} is marked successfully.',
+                  'Your attendance has been successfully marked.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: width * 0.05),
+                
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -289,7 +282,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Ok', style: TextStyle(fontSize: width * 0.05)),
+                    child: Text('OK', style: TextStyle(fontSize: 18)),
                   ),
                 ),
               ],
@@ -316,7 +309,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 child: Column(
                   children: [
                     TableCalendar(
-                      firstDay: DateTime.utc(2024, 1, 1),
+                      firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(DateTime.now().year, 12, 31),
                       focusedDay: _focusedDay,
                       calendarFormat: _calendarFormat,
@@ -348,12 +341,15 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
                           bool? isPresent = calendar[dayString];
                           Color backgroundColor;
+
                           if (isPresent == true) {
                             backgroundColor = Colors.green;
-                          } else if (isPresent == false || today != dayString) {
-                            backgroundColor = Colors.blue;
+                          } else if (today == dayString) {
+                            backgroundColor =
+                                Colors.blue; // Highlight today if not present
                           } else {
-                            backgroundColor = Colors.red;
+                            backgroundColor = Colors
+                                .blue; // Default color for days without attendance
                           }
 
                           return Container(
@@ -398,12 +394,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                     calendar[todayString] = true;
                                   });
 
-                                  bool ismarked = await _attendanceController
+                                  bool isMarked = await _attendanceController
                                       .saveAttendace(MemberNo);
+
                                   print(calendar);
 
-                                  if (ismarked) {
-                                    _saveAttendanceData();
+                                  if (isMarked) {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {

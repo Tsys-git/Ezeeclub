@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ezeeclub/pages/HomeScreenMember.dart';
+import 'package:ezeeclub/pages/MD/MDDashBoard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,8 @@ import '../seturlScreen.dart';
 import 'Auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -16,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final AppConsts ap = AppConsts();
   String? storedUrl;
+  String? whois;
   bool isLoggedIn = false;
 
   @override
@@ -41,21 +45,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _loadAndNavigate(bool isLoggedIn) async {
     await ap.loadUrlFromPrefs();
-    print("use login status : $isLoggedIn");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    whois = prefs.getString('currentuser');
+    print("user login status : $isLoggedIn with use $whois");
 
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
       Widget nextPage;
 
       if (isLoggedIn) {
-        nextPage = HomeScreenMember();
+        nextPage = whois == "md" ? DashboardScreen() : HomeScreenMember();
       } else if (storedUrl != null && storedUrl!.isNotEmpty) {
         nextPage = LoginScreen();
       } else {
         nextPage = SetUrlScreen();
       }
 
-      Get.to(() => nextPage,
-          transition: Transition.fadeIn, duration: Duration(milliseconds: 500));
+      Get.off(
+        () => nextPage,
+      );
     });
   }
 
@@ -78,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: const [
                   Text(
                     'Developed By Tsysinfo Technologies',
                     textAlign: TextAlign.center,

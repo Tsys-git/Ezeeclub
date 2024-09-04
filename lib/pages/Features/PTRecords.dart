@@ -42,13 +42,15 @@ class _PTRecordsState extends State<PTRecords> {
     fetchPTSessions(member_no, branchno);
   }
 
-  void fetchPTSessions(String member_no, String branchno) async {
+  void fetchPTSessions(String memberNo, String branchno) async {
     try {
       List<PTSession> fetchedSessions =
-          await PTSessionController().getPTSessions(member_no, branchno);
+          await PTSessionController().getPTSessions(memberNo, branchno);
       setState(() {
         ptSessions = fetchedSessions;
       });
+
+      print(ptSessions);
     } catch (e) {
       // Handle error gracefully
       print('Error fetching PT sessions: $e');
@@ -67,9 +69,8 @@ class _PTRecordsState extends State<PTRecords> {
       body: Column(
         children: [
           Expanded(
-            child: ptSessions.isEmpty
-                ? Container(height: 100, child: CircularProgressIndicator())
-                : ListView.builder(
+            child: 
+                ListView.builder(
                     itemCount: ptSessions.length,
                     itemBuilder: (context, index) {
                       return _buildPTSessionCard(ptSessions[index]);

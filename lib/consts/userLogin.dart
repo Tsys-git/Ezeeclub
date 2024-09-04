@@ -82,9 +82,9 @@ class UserLogin {
     return _dob;
   }
 
-  Future<void> setMembershipStatus(String mem_status) async {
-    _mem_status = mem_status;
-    await _setAttribute('mem_status', mem_status);
+  Future<void> setMembershipStatus(String memStatus) async {
+    _mem_status = memStatus;
+    await _setAttribute('mem_status', memStatus);
   }
 
   Future<String?> getMembershipStatus() async {

@@ -1,7 +1,6 @@
 import 'package:ezeeclub/consts/userLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:ezeeclub/controllers/dietplanController.dart';
-import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/models/dietplanmodel.dart';
 
 class DietPlanScreen extends StatefulWidget {
@@ -32,10 +31,12 @@ class _DietPlanScreenState extends State<DietPlanScreen> {
     getDietPlan(member_no, branchno);
   }
 
-  void getDietPlan(String member_no, branchno) async {
+  void getDietPlan(String memberNo, branchno) async {
     try {
+      print(memberNo);
+      print(branchno);
       Dietplan? fetchedPlan =
-          await Dietplancontroller().getdietplan(member_no, branchno);
+          await Dietplancontroller().getdietplan(memberNo, branchno);
       setState(() {
         dietplan = fetchedPlan;
       });

@@ -7,7 +7,6 @@ import '../../models/StepsData.dart';
 class StepController extends GetxController {
   RxInt stepCount = 0.obs;
   late StreamSubscription<StepCount> _stepCountSubscription;
-  late Pedometer _pedometer;
   int _previousStepCount = 0;
 
   @override
@@ -18,19 +17,21 @@ class StepController extends GetxController {
   }
 
   void _startPedometer() {
-    _pedometer = Pedometer();
-    _stepCountSubscription = Pedometer.stepCountStream.listen((StepCount event) {
+    _stepCountSubscription =
+        Pedometer.stepCountStream.listen((StepCount event) {
       // Calculate steps difference
       int steps = event.steps - _previousStepCount;
       _previousStepCount = event.steps;
       if (steps > 0) {
         stepCount.value += steps;
       }
+    }, onError: (error) {
+      print('Error in step count stream: $error');
     });
   }
 
   void _resetStepsAtMidnight() {
-    Timer.periodic(Duration(minutes: 60), (timer) async {
+    Timer.periodic(Duration(seconds: 1), (timer) async {
       DateTime now = DateTime.now();
       if (now.hour == 0 && now.minute == 0 && now.second == 0) {
         await _saveDailyStepCount();
@@ -53,7 +54,8 @@ class StepController extends GetxController {
           day = day.add(Duration(days: 1))) {
         String key = 'stepCount_${day.year}_${day.month}_${day.day}';
         int steps = prefs.getInt(key) ?? 0;
-        weeklyData.add(StepCountData(date: day.toIso8601String(), steps: steps));
+        weeklyData
+            .add(StepCountData(date: day.toIso8601String(), steps: steps));
       }
     } catch (e) {
       print('Error fetching weekly step counts: $e');

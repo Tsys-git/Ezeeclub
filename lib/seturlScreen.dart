@@ -5,36 +5,39 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/Auth/login.dart';
 
 class SetUrlScreen extends StatefulWidget {
+  const SetUrlScreen({super.key});
+
   @override
   _SetUrlScreenState createState() => _SetUrlScreenState();
 }
 
 class _SetUrlScreenState extends State<SetUrlScreen> {
-  final TextEditingController urlController = TextEditingController();
-  String savedUrl = '';
+  final List<String> urlOptions = [
+    'oneabovefit.ezeeclub.net',
+    'janorkarsgym.ezeeclub.net',
+  ];
+  String selectedUrl = '';
 
   @override
   void initState() {
     super.initState();
     _loadSavedUrl();
-    urlController.text = "";
   }
 
   // Function to load the previously saved URL from SharedPreferences
   Future<void> _loadSavedUrl() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      savedUrl = prefs.getString('apiUrl') ?? '';
-      urlController.text = savedUrl;
+      selectedUrl = prefs.getString('apiUrl') ?? '';
     });
   }
 
-  // Function to save the entered URL to SharedPreferences
+  // Function to save the selected URL to SharedPreferences
   Future<void> _saveUrl(String newUrl) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('app_url', newUrl);
     setState(() {
-      savedUrl = newUrl;
+      selectedUrl = newUrl;
     });
   }
 
@@ -57,9 +60,8 @@ class _SetUrlScreenState extends State<SetUrlScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-               
-                  TextField(
-                    controller: urlController,
+                  DropdownButtonFormField<String>(
+                    value: selectedUrl.isEmpty ? null : selectedUrl,
                     decoration: InputDecoration(
                       focusColor: Theme.of(context).primaryColor,
                       focusedBorder: OutlineInputBorder(
@@ -72,10 +74,21 @@ class _SetUrlScreenState extends State<SetUrlScreen> {
                       ),
                       prefixIcon: Icon(Icons.open_in_browser),
                       border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor)),
-                      hintText: 'Enter API URL',
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor)),
+                      hintText: 'Select API URL',
                     ),
+                    items: urlOptions.map((url) {
+                      return DropdownMenuItem<String>(
+                        value: url,
+                        child: Text(url),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedUrl = value!;
+                      });
+                    },
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -88,17 +101,16 @@ class _SetUrlScreenState extends State<SetUrlScreen> {
                       ),
                     ),
                     onPressed: () {
-                      String enteredUrl = urlController.text.trim();
-                      if (enteredUrl.isNotEmpty) {
-                        _saveUrl(enteredUrl);
+                      if (selectedUrl.isNotEmpty) {
+                        _saveUrl(selectedUrl);
                         Get.off(() => LoginScreen()); // Navigate to loginScreen
                       } else {
-                        // Show error or prompt to enter URL
+                        // Show error or prompt to select URL
                         showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: Text('Error'),
-                            content: Text('Please enter a valid URL.',
+                            content: Text('Please select a valid URL.',
                                 style: TextStyle(color: Colors.white)),
                             actions: [
                               TextButton(

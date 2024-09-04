@@ -1,0 +1,21 @@
+Target dependency graph (9 targets)
+Flutter in Pods, no dependencies
+permission_handler_apple-permission_handler_apple_privacy in Pods, no dependencies
+permission_handler_apple in Pods, depends on:
+Flutter in Pods (explicit)
+permission_handler_apple-permission_handler_apple_privacy in Pods (explicit)
+shared_preferences_foundation-shared_preferences_foundation_privacy in Pods, no dependencies
+shared_preferences_foundation in Pods, depends on:
+Flutter in Pods (explicit)
+shared_preferences_foundation-shared_preferences_foundation_privacy in Pods (explicit)
+url_launcher_ios-url_launcher_ios_privacy in Pods, no dependencies
+url_launcher_ios in Pods, depends on:
+Flutter in Pods (explicit)
+url_launcher_ios-url_launcher_ios_privacy in Pods (explicit)
+Pods-Runner in Pods, depends on:
+Flutter in Pods (explicit)
+permission_handler_apple in Pods (explicit)
+shared_preferences_foundation in Pods (explicit)
+url_launcher_ios in Pods (explicit)
+Pods-RunnerTests in Pods, depends on:
+Pods-Runner in Pods (explicit)

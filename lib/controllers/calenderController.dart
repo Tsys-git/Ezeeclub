@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:ezeeclub/consts/URL_Setting.dart';
-import 'package:ezeeclub/consts/appConsts.dart';
 import 'package:ezeeclub/models/calender.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CalendarController {
   UrlSetting urlSetting = UrlSetting();

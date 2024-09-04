@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // For date formatting
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 
-import 'package:flutter/services.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({super.key});
@@ -39,8 +37,6 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat.yMMMMd().format(DateTime.now());
-    final Map<DateTime, int> data = _generateCurrentMonthData();
-    print(data);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -75,7 +71,7 @@ class _TodayScreenState extends State<TodayScreen> {
                         Text(
                           'Good Morning!',
                           style: TextStyle(
-                              fontSize: 24,
+                            
                               fontWeight: FontWeight.bold,
                               color: Colors.black),
                         ),
@@ -87,7 +83,7 @@ class _TodayScreenState extends State<TodayScreen> {
                             Text(
                               'Sunny, 25°C',
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
+                                  TextStyle(color: Colors.black),
                             ),
                           ],
                         ),
@@ -95,7 +91,7 @@ class _TodayScreenState extends State<TodayScreen> {
                     ),
                     Text(
                       formattedDate,
-                      style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                      style: TextStyle( color: Colors.grey[700]),
                     ),
                   ],
                 ),

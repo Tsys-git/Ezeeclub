@@ -26,6 +26,7 @@ import 'package:get/get.dart'; // route mgt
 import 'package:google_generative_ai/google_generative_ai.dart'; // daily quotes
 import 'package:intl/intl.dart'; // date formatting
 import 'package:shared_preferences/shared_preferences.dart'; // shared pref.
+import 'package:syncfusion_flutter_charts/charts.dart'; // weight graph
 import 'package:card_swiper/card_swiper.dart'; // daily quotes slider .
 
 class WeightData {
@@ -98,10 +99,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? storedDate = prefs.getString('startDate');
     DateTime currentDate = DateTime.now();
+    print(storedDate);
 
     if (storedDate != null) {
       DateTime storedDateTime = DateTime.parse(storedDate);
-
       // print(currentDate.difference(storedDateTime).inDays);
       if (storedDateTime.difference(currentDate).inDays < 0) {
         // Update the stored date if it is older than 4 days
@@ -143,10 +144,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
 
   // Get the date at a specific index based on _startDate
   DateTime _getDateAtIndex(int index) {
-    if (_startDate == null) {
-      throw StateError("Start date not loaded.");
-    }
-    return _startDate!.add(Duration(days: index));
+    return _startDate.add(Duration(days: index));
   }
 
   Future<void> _loadGoals() async {
@@ -189,12 +187,15 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
   @override
   Widget build(BuildContext context) {
 // Split user's date of birth string into day, month, and year parts
-    print("date of birth is : ${dob}");
-    List<String> dobParts = dob.split('/');
-    int day = int.parse(dobParts[0]);
-    int month = int.parse(dobParts[1]);
-    int year = int.parse(dobParts[2]);
+    print("date of birth is : $dob");
+    int day, month, year;
 
+      dob = "01/01/1980";
+      List<String> dobParts = dob.split('/');
+      day = int.parse(dobParts[0]);
+      month = int.parse(dobParts[1]);
+      year = int.parse(dobParts[2]);
+    
 // Create DateTime object for user's date of birth
     DateTime userDob = DateTime(year, month, day);
 
@@ -303,7 +304,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
                   onTap: () {
                     Get.to(() => workoutScreen());
                   },
-                  child: Container(
+                  child: SizedBox(
                       height: screenWidth * 0.7,
                       child:
                           _whatToDoToday(screenWidth, scrrenheight, context)),
@@ -316,34 +317,39 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: Column(
-                      children: [
-                        trackYourProgress(context, screenWidth, ""),
-                        Divider(height: 2.0, color: Colors.white),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: _buildInfoCard(
-                                  context,
-                                  'Steps',
-                                  ' Not Found',
-                                  '0',
-                                  Icons.directions_walk,
-                                  "assets/steps.png"),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Get.to(() => CalorieBurningTipsScreen());
-                                  },
-                                  child: _buildCaloriesCard(context)),
-                            ),
-                          ],
-                        ),
-                      ],
+                    child: GestureDetector(
+                         onTap: () {
+                        Get.to(() => MeasurementView());
+                      },
+                      child: Column(
+                        children: [
+                          trackYourProgress(context, screenWidth, ""),
+                          Divider(height: 2.0, color: Colors.white),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: _buildInfoCard(
+                                    context,
+                                    'Steps',
+                                    ' Not Found',
+                                    '0',
+                                    Icons.directions_walk,
+                                    "assets/steps.png"),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => CalorieBurningTipsScreen());
+                                    },
+                                    child: _buildCaloriesCard(context)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -359,7 +365,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
                           Get.to(() => WaterBenefitsScreen());
                         },
                         child: Container(
-                          height: screenWidth * 0.3,
+                          height: screenWidth * 0.35,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
                           ),
@@ -497,11 +503,11 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
                             color: Colors.yellow, fontSize: screenWidth * 0.2),
                         textAlign: TextAlign.center,
                       ),
-                      Text(
-                        'cal...',
-                        style: TextStyle(
-                            color: Colors.yellow, fontSize: screenWidth * 0.1),
-                      ),
+                      // Text(
+                      //   'cal...',
+                      //   style: TextStyle(
+                      //       color: Colors.yellow, fontSize: screenWidth * 0.1),
+                      // ),
                     ],
                   ),
                 ],
@@ -983,70 +989,44 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
                 ),
                 SizedBox(
                   height: 200,
-                  child: LineChart(
-                    LineChartData(
-                      gridData: FlGridData(show: true),
-                      titlesData: FlTitlesData(show: false),
-                      borderData: FlBorderData(
-                        border: Border.all(
-                          color: const Color(0xff37434d),
-                          width: 2,
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => MeasurementView());
+                      },
+                    child: LineChart(
+                      LineChartData(
+                        gridData: FlGridData(show: true),
+                        titlesData: FlTitlesData(show: false),
+                        borderData: FlBorderData(
+                          border: Border.all(
+                            color: const Color(0xff37434d),
+                            width: 2,
+                          ),
                         ),
+                                    
+                        minY: 40, // Minimum Y value
+                        maxY: 100, // Maximum Y value
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: [
+                              FlSpot(0, 45), //  april
+                              FlSpot(1, 50), // April
+                              FlSpot(2, 75), // May
+                              FlSpot(3, 80), // June
+                              FlSpot(4, 70), // July
+                            ],
+                            isStepLineChart: false,
+                            isCurved: true,
+                            color: Colors.amber,
+                            dotData:
+                                FlDotData(show: true), // Show dots at each point
+                            belowBarData: BarAreaData(show: true),
+                          ),
+                        ],
                       ),
-
-                      minY: 40, // Minimum Y value
-                      maxY: 100, // Maximum Y value
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: [
-                            FlSpot(0, 45), //  april
-                            FlSpot(1, 50), // April
-                            FlSpot(2, 75), // May
-                            FlSpot(3, 80), // June
-                            FlSpot(4, 70), // July
-                          ],
-                          isStepLineChart: false,
-                          isCurved: true,
-                          color: Colors.amber,
-                          dotData:
-                              FlDotData(show: true), // Show dots at each point
-                          belowBarData: BarAreaData(show: true),
-                        ),
-                      ],
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                // Text(
-                //   "Steps Graph",
-                //   style: TextStyle(
-                //     color: Colors.white,
-                //     fontSize: width * 0.04,
-                //   ),
-                // ),
-                // Container(
-                //   height: 200,
-                //   child: SfCircularChart(
-                //     series: <CircularSeries>[
-                //       RadialBarSeries<StepCountData, String>(
-                //         dataSource: stepdata,
-                //         xValueMapper: (StepCountData stepdata, _) =>
-                //             stepdata.date,
-                //         yValueMapper: (StepCountData stepdata, _) =>
-                //             stepdata.steps,
-                //         cornerStyle: CornerStyle.bothCurve,
-                //         radius: '100%',
-                //       )
-                //     ],
-                //     tooltipBehavior: TooltipBehavior(
-                //       enable: true,
-                //       header: "Steps",
-                //       tooltipPosition: TooltipPosition.pointer,
-                //     ),
-                //   ),
-                // )
               ],
             ),
           ),
@@ -1102,7 +1082,7 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Center(
-        child: Text("${quote}.",
+        child: Text("$quote.",
             textAlign: TextAlign.center,
             textScaler: TextScaler.linear(1.4),
             style: TextStyle(
@@ -1161,13 +1141,14 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
       DateTime currentDate = DateTime.now();
 
       return SizedBox(
-        height: height * 0.3,
+        //value between 3.5 - 4.0
+        height: height * 0.37,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 4,
           itemBuilder: (context, index) {
             DateTime dayDate = _getDateAtIndex(index);
-            // print("${index} date from get index : ${dayDate}");
+            print("$index date from get index : $dayDate");
             bool isCurrentDate = DateFormat('yyyy-MM-dd').format(dayDate) ==
                 DateFormat('yyyy-MM-dd').format(currentDate);
             bool isPastDate = dayDate.isBefore(currentDate);
@@ -1177,16 +1158,16 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
             LinearGradient gradient;
             if (isCurrentDate) {
               gradient = LinearGradient(
-                colors: [Colors.amber, Colors.yellow],
+                colors: const [ Colors.amber, Colors.yellow],
                 begin: Alignment.bottomLeft,
               );
             } else if (isPastDate) {
               gradient = LinearGradient(
-                colors: [Colors.grey, Colors.grey],
+                colors: const [Colors.grey, Colors.grey],
               );
             } else {
               gradient = LinearGradient(
-                colors: [Colors.white, Colors.white],
+                colors: const [Colors.white, Colors.white],
               );
             }
 
@@ -1199,6 +1180,10 @@ class _HomeScreenMemberState extends State<HomeScreenMember> {
               ),
               child: GestureDetector(
                 onTap: () async {
+                   Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TodayScreen()));
                   if (!isPastDate) {
                     int newIndex = (index + 1) % 4;
                     setState(() {
@@ -1367,7 +1352,7 @@ Widget _buildwhatNewInTheGym(BuildContext context) {
             ),
             // Horizontal cards with flexible height
 
-            Container(
+            SizedBox(
               height: screenWidth > 400 ? 180 : 270,
               child: ListView(
                 scrollDirection: Axis.horizontal,

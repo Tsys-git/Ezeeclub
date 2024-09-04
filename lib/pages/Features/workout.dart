@@ -36,10 +36,10 @@ class _workoutScreenState extends State<workoutScreen> {
     fetchWorkOutDetails(member_no, branchno);
   }
 
-  void fetchWorkOutDetails(String member_no, String branchNo) async {
+  void fetchWorkOutDetails(String memberNo, String branchNo) async {
     try {
       final workoutData = await WorkoutDetailsController()
-          .getWorkoutDetails(member_no, branchno);
+          .getWorkoutDetails(memberNo, branchno);
       setState(() {
         workoutDetails = workoutData;
       });

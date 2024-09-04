@@ -4,7 +4,10 @@ class UrlSetting {
   final AppConsts _ac = AppConsts();
   Uri? baseUrl;
 
+  Uri? webServiceUrl;
+
   Uri? saveAttendance;
+  Uri? getAttendance;
   Uri? getHealthDetails;
   Uri? getPlanDetails;
   Uri? getMeasureDetails;
@@ -24,13 +27,20 @@ class UrlSetting {
   Uri? employeeLogin;
   Uri? employeeAttendance;
 
+  Uri? MDConversion;
+  Uri? MDSales;
+  Uri? MDDailyStatus;
+
   Future<void> initialize() async {
     Uri fetchedUrl = await _ac.getStoredUrl();
+
     baseUrl = Uri.parse("http://${fetchedUrl}/MobileAppService.svc");
     print('Base URL: $baseUrl'); // For verification
 
-    // Initialize endpoint URLs
+    //MobileAppService.svc
     saveAttendance = Uri.parse("${baseUrl!}/SaveAttendance");
+    getAttendance = Uri.parse("${baseUrl!}/GetAttendance");
+
     getHealthDetails = Uri.parse("${baseUrl!}/GetHealthDetails");
     getPlanDetails = Uri.parse("${baseUrl!}/GetPlanDetails");
     getMeasureDetails = Uri.parse("${baseUrl!}/GetMeasureDetails");
@@ -50,25 +60,14 @@ class UrlSetting {
     employeeLogin = Uri.parse("${baseUrl!}/EmployeeLogin");
     employeeAttendance = Uri.parse("${baseUrl!}/EmployeeAttendance");
 
-    // // Print URLs for verification
-    // print('Save Attendance URL: $saveAttendance');
-    // print('Get Health Details URL: $getHealthDetails');
-    // print('Get Plan Details URL: $getPlanDetails');
-    // print('Get Measure Details URL: $getMeasureDetails');
-    // print('Get Workout URL: $getWorkout');
-    // print('Get Diet URL: $getDiet');
-    // print('Get PT Sessions URL: $getPtSessions');
-    // print('Change Password URL: $changePassword');
-    // print('Forgot Password URL: $forgotPassword');
-    // print('Get Notification URL: $getNotification');
-    // print('Registration URL: $registration');
-    // print('Get Branch Details URL: $getBranchDetails');
-    // print('Save Message URL: $saveMessage');
-    // print('Get Message URL: $getMessage');
-    // print('Approve PT Sessions URL: $approvePtSessions');
-    // print('Get Attendance Rewards URL: $getAttendanceRewards');
-    // print('Get Calendar Details URL: $getCalendarDetails');
-    // print('Employee Login URL: $employeeLogin');
-    // print('Employee Attendance URL: $employeeAttendance');
+    // Web service url
+
+    webServiceUrl = Uri.parse("http://${fetchedUrl}/androidwebservice.asmx");
+    print('Webserive URL: $webServiceUrl'); // For verification
+
+    // Soap Action List
+    MDConversion = Uri.parse("MDConversion");
+    MDSales = Uri.parse("MDSales");
+    MDDailyStatus = Uri.parse("MDDailyStatus");
   }
 }

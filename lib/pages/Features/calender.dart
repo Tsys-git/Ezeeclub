@@ -7,7 +7,7 @@ import '../../controllers/calenderController.dart';
 import '../../models/calender.dart';
 
 class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+  const CalendarScreen({super.key});
 
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
@@ -68,7 +68,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final DateFormat dateFormat =
         DateFormat("M/d/yyyy h:mm:ss a"); // Adjust format if needed
     return _calendarEvents.where((event) {
-      if (event.messageNo == null || event.messageNo!.isEmpty) return false;
+      if (event.messageNo.isEmpty) return false;
       try {
         //DateTime eventDate = dateFormat.parse(event.messageNo!);
         DateTime eventDate =
@@ -154,7 +154,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 children: [
                                   if (event.messageNo != "")
                                     Text(
-                                      'Date: ${formatDate(event.messageNo!)}',
+                                      'Date: ${formatDate(event.messageNo)}',
                                       style: TextStyle(color: Colors.grey[600]),
                                     ),
                                   if (event.empName != "")
@@ -162,13 +162,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                       'Employee Name: ${event.empName}',
                                       style: TextStyle(color: Colors.grey[600]),
                                     ),
-                                  if (event.branchNo != null)
-                                    Text(
+                                  Text(
                                       'Branch No: ${event.branchNo}',
                                       style: TextStyle(color: Colors.grey[600]),
                                     ),
-                                  if (event.status != null)
-                                    Text(
+                                  Text(
                                       'Status: ${event.status}',
                                       style: TextStyle(color: Colors.grey[600]),
                                     ),

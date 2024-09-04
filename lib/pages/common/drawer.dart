@@ -28,115 +28,108 @@ class _AppDrawerState extends State<AppDrawer> {
     return SafeArea(
       child: Drawer(
         child: SingleChildScrollView(
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Colors.deepPurple,
-              Colors.black,
-            ])),
-            child: Column(
-              children: [
-                DrawerHeader(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/user.png",
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
+          child: Column(
+            children: [
+              DrawerHeader(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/user.png",
+                      color: Colors.white,
+                    )
+                  ],
                 ),
-                buildDrawerListTile(Icons.person, "Profile", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProfileScreen();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.date_range, "Attendance", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return AttendanceScreen();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.health_and_safety, "Health Details",
-                    () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return HeathdetailsScreen();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.history, "Measurements", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MeasurementView();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.date_range_sharp, "Calender", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return CalendarScreen();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.rule_sharp, "Rules", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return RulesScreen();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.info, "About", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return AboutUsPage();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.star, "Rate Us", () {
-                  _showRateUsBottomSheet(context);
-                }),
-                buildDrawerListTile(Icons.help, "Help", () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return HelpPage();
-                      },
-                    ),
-                  );
-                }),
-                buildDrawerListTile(Icons.exit_to_app, "Logout", () {
-                  UserLogin().logout();
-                  Get.offAll(() => LoginScreen());
-                }),
-              ],
-            ),
+              ),
+              buildDrawerListTile(Icons.person, "Profile", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProfileScreen();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.date_range, "Attendance", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AttendanceScreen();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.health_and_safety, "Health Details",
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HeathdetailsScreen();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.history, "Measurements", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MeasurementView();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.date_range_sharp, "Calender", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return CalendarScreen();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.rule_sharp, "Rules", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return RulesScreen();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.info, "About", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AboutUsPage();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.star, "Rate Us", () {
+                _showRateUsBottomSheet(context);
+              }),
+              buildDrawerListTile(Icons.help, "Help", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HelpPage();
+                    },
+                  ),
+                );
+              }),
+              buildDrawerListTile(Icons.exit_to_app, "Logout", () {
+                UserLogin().logout();
+                Get.offAll(() => LoginScreen());
+              }),
+            ],
           ),
         ),
       ),
@@ -152,7 +145,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   void _showRateUsBottomSheet(BuildContext context) {
-    var _rating = 4;
+    var rating = 4;
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -176,12 +169,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 children: List.generate(5, (index) {
                   return IconButton(
                     icon: Icon(
-                      index < _rating ? Icons.star : Icons.star_border,
+                      index < rating ? Icons.star : Icons.star_border,
                       color: Colors.amber,
                     ),
                     onPressed: () {
                       setState(() {
-                        _rating = index + 1;
+                        rating = index + 1;
                       });
                     },
                   );
@@ -211,7 +204,8 @@ class _AppDrawerState extends State<AppDrawer> {
 
   void _openRatingPage() async {
     const url =
-        'https://play.google.com/store/apps/details'; // Replace with your app's store URL
+        'https://play.google.com/store/apps/details?id=com.tsysinfo.ezeeclub';
+    // Replace with your app's store URL
     if (await canLaunch(url)) {
       await launch(url);
     } else {

@@ -31,6 +31,8 @@ class WaterBenefitsScreen extends StatelessWidget {
     },
   ];
 
+WaterBenefitsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +45,13 @@ class WaterBenefitsScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 2.0,
+          mainAxisSpacing: 2.0,
         ),
         itemCount: benefits.length,
         itemBuilder: (context, index) {
           final benefit = benefits[index];
-          return _buildBenefitCard(
-              benefit['title']!, benefit['description']!);
+          return _buildBenefitCard(benefit['title']!, benefit['description']!);
         },
       ),
     );
@@ -58,13 +59,12 @@ class WaterBenefitsScreen extends StatelessWidget {
 
   Widget _buildBenefitCard(String title, String description) {
     return Card(
-      color: Colors.grey.withOpacity(0.9),
-      elevation: 5,
+      color: Colors.grey.withOpacity(0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(2.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -72,15 +72,13 @@ class WaterBenefitsScreen extends StatelessWidget {
               title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16.0,
               ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 5.0),
             Text(
               description,
               style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withOpacity(0.6),
               ),
             ),
           ],

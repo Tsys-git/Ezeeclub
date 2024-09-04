@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:ezeeclub/consts/URL_Setting.dart';
-import 'package:ezeeclub/consts/appConsts.dart';
 import 'package:ezeeclub/models/workout.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WorkoutDetailsController {
   UrlSetting urlSetting = UrlSetting();
@@ -13,9 +11,11 @@ class WorkoutDetailsController {
     await urlSetting.initialize();
     Uri? uri = urlSetting.getWorkout;
 
+    print("member no and branch no : $memberNo,$branchNo and url : $uri");
+
     final Map<String, String> headers = {"Content-Type": "Application/json"};
 
-    final Map<String, dynamic> data = {
+    final Map<String, String> data = {
       "MemberNo": memberNo,
       "BranchNo": branchNo
     };
@@ -25,9 +25,6 @@ class WorkoutDetailsController {
         headers: headers,
         body: json.encode(data),
       );
-
-      print(response.body);
-      print("hello world");
 
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);

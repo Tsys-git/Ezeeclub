@@ -4,6 +4,8 @@ import '../../controllers/measurementController.dart';
 import '../../models/measurement.dart';
 
 class MeasurementView extends StatefulWidget {
+  const MeasurementView({super.key});
+
   @override
   _MeasurementViewState createState() => _MeasurementViewState();
 }
@@ -42,10 +44,11 @@ class _MeasurementViewState extends State<MeasurementView> {
     }
   }
 
-  void _fetchMeasurements(String member_no, String branchNo) async {
+  void _fetchMeasurements(String memberNo, String branchNo) async {
     try {
+      print("$memberNo : $branchNo");
       final measurements =
-          await _controller.getMeasurementDetails(member_no, branchNo);
+          await _controller.getMeasurementDetails(memberNo, branchNo);
       setState(() {
         _measurements = measurements;
         _isLoading = false;
@@ -69,16 +72,6 @@ class _MeasurementViewState extends State<MeasurementView> {
           : _errorMessage.isNotEmpty
               ? Center(child: Text('Error: $_errorMessage'))
               : Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black.withOpacity(0.5),
-                        Colors.purple.shade400.withOpacity(0.5),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                  ),
                   child: ListView(
                     children: [
                       _buildCategoryCard('Personal Information', [

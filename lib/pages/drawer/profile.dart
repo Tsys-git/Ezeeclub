@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ezeeclub/controllers/planDetailsController.dart';
 import 'package:ezeeclub/models/User.dart';
-import 'package:ezeeclub/pages/Features/resetPasswordMember.dart';
-import 'package:flip_card/flip_card.dart'; // Import flip_card package
+import 'package:ezeeclub/pages/Features/changepassword.dart';
+// Import flip_card package
 import '../../consts/userLogin.dart';
 import '../../models/Plan.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -16,6 +16,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   Plan? _plan;
   Plandetailscontroller _planController = Plandetailscontroller();
+
   String endate = "20/01/2024";
   String member_no = "";
   String branchNo = "";
@@ -50,9 +51,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _fetchPlan(member_no, branchNo);
   }
 
-  void _fetchPlan(String member_no, String branchNo) async {
+  void _fetchPlan(String memberNo, String branchNo) async {
     try {
-      final plan = await _planController.getPlanDetails(member_no, branchNo);
+      final plan = await _planController.getPlanDetails(memberNo, branchNo);
       setState(() {
         _plan = plan;
         if (_plan?.endDt != null) {
@@ -79,6 +80,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime? targetDate;
+    print("end date is :${endate.runtimeType}");
+    if (endate == "") {
+      targetDate = DateTime.tryParse(_formatDateString("20/1/2024"));
+    } else {
+      targetDate = DateTime.tryParse(_formatDateString(endate));
+    }
+
+    DateTime now = DateTime.now();
+    int differenceInDays = targetDate?.difference(now).inDays ?? 0;
+
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.9),
       appBar: AppBar(
@@ -91,10 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ResetPasswordMember(
-                      memberNo: member_no,
-                      BranchNo: branchNo,
-                    );
+                    return changepassword();
                   },
                 ),
               );
@@ -150,10 +159,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  _buildBasicCard(fontSize),
+                  _buildBasicCard(fontSize, differenceInDays),
                   Container(
                       child: _plan != null
-                          ? _buildPlanDetailsCard(fontSize)
+                          ? differenceInDays > 0
+                              ? _buildPlanDetailsCard(fontSize)
+                              : null
                           : null),
                   SizedBox(height: 10),
                   SizedBox(
@@ -234,18 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return '${parts[2]}-${parts[1]}-${parts[0]}';
   }
 
-  Widget _buildBasicCard(double fontSize) {
-    DateTime? targetDate;
-    print("end date is :${endate.runtimeType}");
-    if (endate == "") {
-      targetDate = DateTime.tryParse(_formatDateString("20/1/2024"));
-    } else {
-      targetDate = DateTime.tryParse(_formatDateString(endate));
-    }
-
-    DateTime now = DateTime.now();
-    int differenceInDays = targetDate?.difference(now).inDays ?? 0;
-
+  Widget _buildBasicCard(double fontSize, int differenceInDays) {
     return SizedBox(
       width: double.infinity,
       child: Card(
@@ -263,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Colors.purple.shade800,
                 ],
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Colors.black, blurRadius: 16, offset: Offset.zero)
               ]),
@@ -311,7 +311,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       Text(
-                        "***** ${member_no}",
+                        "***** $member_no",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -327,24 +327,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         'Expiry Date',
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
-                      Text(
-                        _plan?.endDt ?? "Not Available",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      differenceInDays < 0
+                          ? Text(
+                              _plan?.endDt ?? "Not Available",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            )
+                          : Text(
+                              _plan?.endDt ?? "Not Available",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                       differenceInDays > 0
                           ? Text(
                               "Expires in $differenceInDays Days",
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 10,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             )
-                          : SizedBox(),
+                          : Text(
+                              "Your subscription\nhas ended.",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
                     ],
                   ),
                 ],

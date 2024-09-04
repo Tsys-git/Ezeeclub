@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -15,7 +17,7 @@ class AboutUsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'assets/ezee.png', // Make sure to add your image to the assets folder and update pubspec.yaml
+              'assets/logoxtrim.png', // Make sure to add your image to the assets folder and update pubspec.yaml
               height: 100,
               width: 100,
             ),
@@ -28,43 +30,60 @@ class AboutUsPage extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
-            SizedBox(height: 24),
-            Text(
-              'Version : 1.0.0',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 24),
+
+            SizedBox(height: 10),
             ListTile(
               leading: Icon(Icons.email),
               title: Text('Contact us'),
               onTap: () {
-                // Implement your contact functionality here
+                openwebsite("https://tsysinfo.com/contact.html");
               },
             ),
             ListTile(
               leading: Icon(Icons.link),
               title: Text('Visit our website'),
               onTap: () {
-                // Implement your website navigation functionality here
+                openwebsite("https://tsysinfo.com/");
+              },
+            ),
+
+            ListTile(
+              leading: Image.asset(
+                "assets/social/instagram.png",
+                height: 25,
+                width: 25,
+              ),
+              title: Text('Instagram'),
+              onTap: () {
+                openwebsite("https://www.instagram.com/tsysinfotechnologies/");
+              },
+            ),
+
+            ListTile(
+              leading: Image.asset(
+                "assets/social/facebook.png",
+                height: 25,
+                width: 25,
+              ),
+              title: Text('Facebook'),
+              onTap: () {
+                openwebsite("https://www.facebook.com/tsysinfotechnologies/");
               },
             ),
             ListTile(
-              leading: Icon(Icons.facebook),
-              title: Text('Like us on Facebook'),
+              leading: Image.asset(
+                "assets/social/twitter.png",
+                height: 25,
+                width: 25,
+              ),
+              title: Text('Twitter'),
               onTap: () {
-                // Implement your Facebook navigation functionality here
+                openwebsite("https://twitter.com/TsysinfoL/");
               },
             ),
-            ListTile(
-              leading: Icon(Icons.star),
-              title: Text('Rate us on the Play Store'),
-              onTap: () {
-                // Implement your Play Store rating functionality here
-              },
-            ),
-            Expanded(child: Container()), // To push the following text to the bottom
+
+            Expanded(
+                child: Container()), // To push the following text to the bottom
             Text(
               'Developed By Tsysinfo Technologies',
               textAlign: TextAlign.center,
@@ -85,5 +104,14 @@ class AboutUsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void openwebsite(String url) async {
+  // Replace with your app's store URL
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

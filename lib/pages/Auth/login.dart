@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ezeeclub/models/User.dart';
 import 'package:ezeeclub/pages/HomeScreenMember.dart';
+import 'package:ezeeclub/pages/MD/MDDashBoard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -22,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool isObscureText = true;
   bool isLoggedIn = false;
+  String loginType = "member";
+  String storedUrl = "loading";
 
   void togglePasswordVisibility() {
     setState(() {
@@ -32,19 +34,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus(); // Check login status when screen initializes
+    // checkLoginStatus(); // Check login status when screen initializes
+    getUrl();
   }
 
-  Future<void> checkLoginStatus() async {
-    await UserLogin().restoreLoginState(); // Ensure login state is restored
+  void getUrl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      isLoggedIn = UserLogin().isLoggedIn; // Update isLoggedIn state
+      storedUrl = prefs.getString('app_url')!;
     });
-
-    if (isLoggedIn) {
-      Get.off(() => HomeScreenMember());
-    }
   }
+
+  // Future<void> checkLoginStatus() async {
+  //   await UserLogin().restoreLoginState(); // Ensure login state is restored
+  //   setState(() {
+  //     isLoggedIn = UserLogin().isLoggedIn; // Update isLoggedIn state
+  //   });
+
+  //   if (isLoggedIn) {
+  //     Get.off(() => HomeScreenMember());
+  //   }
+  // }
 
   void login(BuildContext context) async {
     setState(() {
@@ -53,11 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final String username = usernameController.text;
     final String password = passwordController.text;
-    String? storedUrl;
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      storedUrl = prefs.getString('app_url');
 
       if (storedUrl == null || storedUrl.isEmpty) {
         showSnackBar(
@@ -65,14 +73,33 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      final Uri url =
-          Uri.parse('http://$storedUrl/MobileAppService.svc/UserLogin');
+      // Determine the URL and data based on login type
+      String loginUrl = '';
+      Map<String, String> data;
+
+      if (!username.isAlphabetOnly) {
+        loginUrl = 'http://${storedUrl}/MobileAppService.svc/UserLogin';
+        data = {
+          'UserName': username,
+          'Password': password,
+        };
+        setState(() {
+          loginType = "member";
+        });
+      } else {
+        loginUrl = 'http://${storedUrl}/MobileAppService.svc/EmployeeLogin';
+        data = {
+          'MemberName': username,
+          'Password': password,
+        };
+        setState(() {
+          loginType = "employee";
+        });
+      }
+
+      final Uri url = Uri.parse(loginUrl);
       final Map<String, String> headers = {
         'Content-Type': 'application/json',
-      };
-      final Map<String, String> data = {
-        'UserName': username,
-        'Password': password,
       };
 
       final http.Response response = await http.post(
@@ -81,79 +108,72 @@ class _LoginScreenState extends State<LoginScreen> {
         body: json.encode(data),
       );
 
+      print(response.statusCode);
       if (response.statusCode == 200) {
-        try {
-          final dynamic jsonResponse = json.decode(response.body);
-          print(jsonResponse);
+        print(response.body);
 
-          if (jsonResponse != null &&
-              jsonResponse is List &&
-              jsonResponse.isNotEmpty) {
-            final Map<String, dynamic> userData = jsonResponse[0];
-            final String isactive = userData['Active'] ?? "No";
-            final String fullName = userData['MemberName'] ?? 'Not Available';
-            final String email = userData['Email'] ?? 'Not Available';
-            final String phoneNumber = userData['MobileNo'] ?? 'Not Available';
-            final String dob = userData['BirthDate'] ?? 'Not Available';
-            final String brName = userData['BranchName'] ?? 'Not Available';
-            final String memberNo = userData['MemberNo'] ?? 'Not Available';
-            final String memStatus =
-                userData['Membershipstatus'] ?? 'Not Available';
-            final String location = userData['Location'] ?? 'Not Available';
-            final String branchNo = userData['Branchno'] ?? '1';
+        final dynamic jsonResponse = json.decode(response.body);
+        if (jsonResponse != null &&
+            jsonResponse is List &&
+            jsonResponse.isNotEmpty) {
+          final Map<String, dynamic> userData = jsonResponse[0];
+          final String isActive = userData['Active'] ?? "No";
 
-            if (isactive != "No") {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
+          print(userData);
+
+          if (isActive.toLowerCase() == "yes") {
+            if (loginType == "employee") {
+              String designation =
+                  userData["Designation"].toString().toLowerCase();
+              if (designation == "md") {
+                prefs.setString('mdname', userData['EmpName']);
+                prefs.setBool('isLoggedIn', true);
+                prefs.setString('currentuser', "md");
+                Get.offAll(() => DashboardScreen());
+                showSnackBar(context, 'Login successful', Colors.green);
+              } else {
+                showSnackBar(context, 'Unauthorized access.', Colors.red);
+              }
+            } else {
+              // Member login processing
               prefs.setBool('isLoggedIn', true);
-              UserLogin().setMobileNo(phoneNumber);
-              UserLogin().setName(fullName);
-              UserLogin().setMemberNo(memberNo);
-              UserLogin().setBranchNo(branchNo);
-              UserLogin().setEmail(email);
-              UserLogin().setBranchNo(branchNo);
-              UserLogin().setMembershipStatus(memStatus);
-              UserLogin().setLocation(location);
-              UserLogin().setDOB(dob);
+              UserLogin().setMobileNo(userData['MobileNo']);
+              UserLogin().setName(userData['MemberName']);
+              UserLogin().setMemberNo(userData['MemberNo']);
+              UserLogin().setBranchNo(userData['Branchno']);
+              UserLogin().setEmail(userData['Email']);
+              UserLogin().setMembershipStatus(userData['Membershipstatus']);
+              UserLogin().setLocation(userData['Location']);
+              userData['BirthDate'] != null && userData['BirthDate'] != ""
+                  ? UserLogin().setDOB(userData['BirthDate'])
+                  : "01/01/1980";
+              prefs.setString('currentuser', "member");
               Get.off(() => HomeScreenMember());
               showSnackBar(context, 'Member Login successful', Colors.green);
-              // shared pref value setup
-            } else {
-              showSnackBar(context, 'Login failed. ', Colors.red);
             }
+          } else if (userData['Password'] == null) {
+            showSnackBar(context, 'Invalid credentials ', Colors.red);
           } else {
             showSnackBar(
-                context, 'Login response is empty or invalid.', Colors.red);
+                context,
+                'User is inactive, please contact the administrator.',
+                Colors.red);
           }
-        } catch (e) {
-          showSnackBar(context, 'Error parsing login response: $e', Colors.red);
-          print('Error parsing login response: $e');
+        } else {
+          showSnackBar(
+              context, 'Invalid credentials or empty response.', Colors.red);
         }
       } else {
-        showSnackBar(context,
-            'Login failed. Status code: ${response.statusCode}', Colors.red);
-        print('Login failed. Status code: ${response.statusCode}');
+        showSnackBar(context, 'Login failed.', Colors.red);
       }
     } on SocketException {
       showSnackBar(
-        context,
-        'No Internet connection. Ensure that your internet is on.\nOr check the URL setup is done properly.',
-        Colors.red,
-      );
-      print('No Internet connection');
+          context, 'No Internet connection. Check your network.', Colors.red);
     } on FormatException {
       showSnackBar(
-        context,
-        'Something is wrong, please contact admin.',
-        Colors.red,
-      );
-      print('Format Exception');
+          context, 'URL Not set properly. Please contact support.', Colors.red);
     } catch (error) {
-      showSnackBar(
-        context,
-        'Error during login: $error',
-        Colors.red,
-      );
-      print('Error during login: $error');
+      showSnackBar(context, 'Error during login:', Colors.red);
     } finally {
       setState(() {
         isLoading = false;
@@ -175,12 +195,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Login", style: TextStyle(fontSize: 24)),
+        title: ListTile(
+          leading: Image.asset(
+            "assets/splashscreene.png",
+            color: Colors.white,
+          ),
+          title: Text("Login", style: TextStyle(fontSize: 16)),
+          subtitle: Text(storedUrl.replaceAll(".ezeeclub.net", ""),
+              style: TextStyle(fontSize: 14)),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -189,12 +214,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 builder: (BuildContext context) => AlertDialog(
                   title: Row(
                     children: [
-                      // Image.asset(
-                      //   "assets/confirm.png",
-                      //   height: 30,
-                      //   width: 30,
-                      //   color: Colors.white,
-                      // ),
                       SizedBox(width: 20),
                       Text('Confirmation', style: TextStyle(fontSize: 24)),
                     ],
@@ -250,18 +269,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Theme.of(context).textTheme.bodyMedium!.color,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 5),
                 _buildTextField(
                   context,
                   usernameController,
-                  'Member Id',
+                  'Member Id  ',
                   icon: Icons.person,
                 ),
                 SizedBox(height: 10),
                 _buildTextField(
                   context,
                   passwordController,
-                  'Password',
+                  'Password ',
                   isPassword: true,
                   icon: Icons.lock,
                   suffixIcon: IconButton(

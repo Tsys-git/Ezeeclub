@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class SlotBooking extends StatefulWidget {
+  const SlotBooking({super.key});
+
   @override
   _SlotBookingState createState() => _SlotBookingState();
 }
